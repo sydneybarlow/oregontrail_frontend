@@ -26,16 +26,29 @@ class User extends Component {
     this.setState({ password: e.target.value });
   };
 
-  handleSignUpSubmit = e => {
+  handleLogInSubmit = e => {
     e.preventDefault();
     console.log(this.state);
+    let data = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    fetch(`http://localhost:3000/users/check`, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(r => r.json())
+      .then(console.log);
   };
 
   render() {
     return (
       <React.Fragment>
         <h3>Log In</h3>
-        <Form onSubmit={this.handleSignUpSubmit}>
+        <Form onSubmit={this.handleLogInSubmit}>
           <FormGroup>
             <ControlLabel>Username:</ControlLabel>
             <FormControl
