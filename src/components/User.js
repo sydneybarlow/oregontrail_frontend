@@ -5,7 +5,8 @@ import {
   FormControl,
   FormGroup,
   ControlLabel,
-  Button
+  Button,
+  Alert
 } from "react-bootstrap";
 import "../App.css";
 
@@ -28,7 +29,6 @@ class User extends Component {
 
   handleLogInSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
     let data = {
       username: this.state.username,
       password: this.state.password
@@ -41,7 +41,7 @@ class User extends Component {
       }
     })
       .then(r => r.json())
-      .then(console.log);
+      .then(userData => console.log(userData));
   };
 
   render() {
