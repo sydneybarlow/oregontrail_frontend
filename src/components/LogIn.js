@@ -33,7 +33,7 @@ class LogIn extends Component {
       username: this.state.username,
       password: this.state.password
     };
-    fetch(`http://localhost:3000/users/check`, {
+    fetch(`http://localhost:3000/users/login`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -44,7 +44,7 @@ class LogIn extends Component {
       .then(userData => {
         console.log(userData);
         localStorage.setItem("token", userData.token);
-        console.log(this.state);
+        this.props.history.push("/homepage");
       });
   };
 
