@@ -44,11 +44,13 @@ class LogIn extends Component {
       .then(userData => {
         console.log(userData);
         localStorage.setItem("token", userData.token);
-        this.props.history.push("/homepage");
+        this.props.updateUserInfo(userData.user_info);
+        this.props.props.history.push("/homepage");
       });
   };
 
   render() {
+    console.log(this.props);
     return (
       <React.Fragment>
         <h3>Log In</h3>
