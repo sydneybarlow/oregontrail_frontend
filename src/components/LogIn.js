@@ -10,7 +10,7 @@ import {
 } from "react-bootstrap";
 import "../App.css";
 
-class User extends Component {
+class LogIn extends Component {
   constructor() {
     super();
     this.state = {
@@ -41,7 +41,11 @@ class User extends Component {
       }
     })
       .then(r => r.json())
-      .then(userData => console.log(userData));
+      .then(userData => {
+        console.log(userData);
+        localStorage.setItem("token", userData.token);
+        console.log(this.state);
+      });
   };
 
   render() {
@@ -76,4 +80,4 @@ class User extends Component {
   }
 }
 
-export default User;
+export default LogIn;
