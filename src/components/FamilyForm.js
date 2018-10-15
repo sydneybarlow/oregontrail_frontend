@@ -10,13 +10,13 @@ import {
 } from "react-bootstrap";
 import "../App.css";
 
-class SignUpForm extends Component {
+class FamilyForm extends Component {
   constructor() {
     super();
     this.state = {
       name: "",
-      username: "",
-      password: ""
+      health: "good",
+      status: "alive"
     };
   }
 
@@ -24,22 +24,13 @@ class SignUpForm extends Component {
     this.setState({ name: e.target.value });
   };
 
-  handleUsername = e => {
-    this.setState({ username: e.target.value });
-  };
-
-  handlePassword = e => {
-    this.setState({ password: e.target.value });
-  };
-
   handleSignInSubmit = e => {
     e.preventDefault();
+    console.log(this.state);
     let data = {
-      name: this.state.name,
-      username: this.state.username,
-      password: this.state.password
+      name: this.state.name
     };
-    fetch(`http://localhost:3000/users`, {
+    fetch(`http://localhost:3000/family_members`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -50,16 +41,13 @@ class SignUpForm extends Component {
       .then(r => r.json())
       .then(userData => {
         console.log(userData);
-        localStorage.setItem("token", userData.token);
-        this.props.updateUserInfo(userData.user_info);
-        this.props.updateFormType("familyForm");
       });
   };
 
   render() {
     return (
       <React.Fragment>
-        <h3>Sign Up</h3>
+        <h3>Make Your Family</h3>
         <Form onSubmit={this.handleSignInSubmit}>
           <FormGroup>
             <ControlLabel>Name:</ControlLabel>
@@ -68,24 +56,6 @@ class SignUpForm extends Component {
               name="name"
               value={this.state.name}
               onChange={this.handleName}
-            />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Username:</ControlLabel>
-            <FormControl
-              type="text"
-              name="username"
-              value={this.state.username}
-              onChange={this.handleUsername}
-            />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Password:</ControlLabel>
-            <FormControl
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handlePassword}
             />
           </FormGroup>
           <Button type="submit" bsStyle="primary">
@@ -97,4 +67,4 @@ class SignUpForm extends Component {
   }
 }
 
-export default SignUpForm;
+export default FamilyForm;

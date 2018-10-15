@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import logo from "./logo.svg";
-import LogIn from "./components/LogIn";
-import Homepage from "./components/Homepage";
-import SignUpForm from "./components/SignUpForm";
+import FormContainer from "./components/FormContainer";
 
 class App extends Component {
   state = {
@@ -12,59 +9,35 @@ class App extends Component {
 
   updateUserInfo = userInfo => this.setState({ userInfo });
 
-  // componentDidMount() {
-  //   const url = "http://localhost:3000/users";
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     fetch(url, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`
-  //       }
-  //     })
-  //       .then(r => r.json())
-  //       .then(response => {
-  //         console.log(response);
-  //       });
-  //   }
-  // }
+  componentDidMount() {
+    const url = "http://localhost:3000/users/homepage";
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(r => r.json())
+        .then(response => {
+          this.updateUserInfo(response.user);
+          // this.props.history.push("/homepage");
+        });
+    }
+  }
 
   render() {
     return (
       <React.Fragment>
         <div className="App">
-          <Switch>
-            <Route
-              exact
-              path="/login"
-              render={() => (
-                <LogIn
-                  props={this.props}
-                  updateUserInfo={this.updateUserInfo}
-                />
-              )}
-            />
-
-            <Route
-              exact
-              path="/homepage"
-              render={() =>
-                this.state.userInfo ? (
-                  <Homepage
-                    name={this.state.userInfo.name}
-                    username={this.state.userInfo.username}
-                  />
-                ) : (
-                  <Redirect to="/login" />
-                )
-              }
-            />
-
-            <Route exact path="/signup" component={SignUpForm} />
-          </Switch>
+          <FormContainer
+            userInfo={this.state.userInfo}
+            updateUserInfo={this.updateUserInfo}
+          />
         </div>
       </React.Fragment>
     );
   }
 }
 
-export default withRouter(App);
+export default App;

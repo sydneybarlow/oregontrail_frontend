@@ -50,7 +50,6 @@ class LogIn extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <React.Fragment>
         <h3>Log In</h3>
@@ -75,6 +74,9 @@ class LogIn extends Component {
           </FormGroup>
           <Button type="submit" bsStyle="primary">
             Enter
+          </Button>
+          <Button type="button" bsStyle="primary" href="/signup">
+            Sign Up
           </Button>
         </Form>
       </React.Fragment>
