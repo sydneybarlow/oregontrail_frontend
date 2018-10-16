@@ -3,6 +3,8 @@ import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import LogIn from "./LogIn";
 import Homepage from "./Homepage";
 import SignUpForm from "./SignUpForm";
+import FamilyForm from "./FamilyForm";
+import SuppliesForm from "./SuppliesForm";
 
 class FormContainer extends Component {
   state = {
@@ -26,7 +28,6 @@ class FormContainer extends Component {
                 />
               )}
             />
-
             <Route
               exact
               path="/homepage"
@@ -38,20 +39,30 @@ class FormContainer extends Component {
                 )
               }
             />
-            if (this.state.form === 'null') {
-              <Route
-                exact
-                path="/signup"
-                render={() => (
+            <Route
+              exact
+              path="/signup"
+              render={() =>
+                this.state.form === null ? (
                   <SignUpForm
                     props={this.props}
                     updateFormType={this.updateFormType}
                     updateUserInfo={this.props.updateUserInfo}
-                  />)
-            } else if (this.state.form === 'familyForm') {
-              <FamilyForm />
-            }
-          }
+                  />
+                ) : this.state.form === "familyForm" ? (
+                  <FamilyForm
+                    props={this.props}
+                    updateFormType={this.updateFormType}
+                    updateUserInfo={this.props.updateUserInfo}
+                  />
+                ) : (
+                  <SuppliesForm
+                    props={this.props}
+                    updateFormType={this.updateFormType}
+                    updateUserInfo={this.props.updateUserInfo}
+                  />
+                )
+              }
             />
           </Switch>
         </div>

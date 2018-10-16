@@ -28,7 +28,9 @@ class FamilyForm extends Component {
     e.preventDefault();
     console.log(this.state);
     let data = {
-      name: this.state.name
+      name: e.target.children[0].children[1].value,
+      health: "good",
+      status: "alive"
     };
     fetch(`http://localhost:3000/family_members`, {
       method: "POST",
@@ -41,6 +43,7 @@ class FamilyForm extends Component {
       .then(r => r.json())
       .then(userData => {
         console.log(userData);
+        this.props.updateFormType("supplyForm");
       });
   };
 
