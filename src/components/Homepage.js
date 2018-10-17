@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Fragment, Grid, Button } from "react-bootstrap";
+import { Fragment, Grid, Button, Modal } from "react-bootstrap";
 import FamilyMember from "./FamilyMember";
 import Supply from "./Supply";
+import DoneModal from "./DoneModal";
 import "../App.css";
 
 class Homepage extends Component {
@@ -14,26 +15,40 @@ class Homepage extends Component {
       money: this.props.money,
       miles: this.props.miles,
       family_members: this.props.family_members,
-      supplies: this.props.supplies
+      supplies: this.props.supplies,
+      show: false,
+      intervalId: null
     };
   }
 
+  handleClose() {
+    console.log("handleClose", this);
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    this.setState({ show: true });
+  }
+
   handleGameStart = () => {
-    setInterval(this.decrementMiles, 1000);
+    const intervalId = setInterval(this.decrementMiles, 100);
+    this.setState({ intervalId: intervalId });
   };
 
   decrementMiles = () => {
-    let newMiles = this.state.miles - 20;
+    let newMiles = this.state.miles - 50;
     if (this.state.miles > 0) {
       this.setState({
         ...this.state,
         miles: newMiles
       });
+    } else {
+      clearInterval(this.state.intervalId);
+      this.handleShow();
     }
   };
 
   render() {
-    console.log("home", this.state);
     return (
       <React.Fragment>
         <h1>Oregon Trail Homepage!</h1>
@@ -47,9 +62,13 @@ class Homepage extends Component {
           ))}
         </Grid>
         <Button onClick={this.handleGameStart}>Get Goin!</Button>
+        <DoneModal
+          show={this.state.show}
+          handleShow={this.handleShow}
+          handleClose={this.handleClose.bind(this)}
+        />
       </React.Fragment>
     );
   }
 }
-
 export default Homepage;
