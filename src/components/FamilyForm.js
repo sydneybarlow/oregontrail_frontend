@@ -14,6 +14,7 @@ class FamilyForm extends Component {
   constructor() {
     super();
     this.state = {
+      user_id: null,
       name: "",
       health: "good",
       status: "alive"
@@ -26,8 +27,9 @@ class FamilyForm extends Component {
 
   handleSignInSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    console.log(this.props);
     let data = {
+      user_id: this.props.userId,
       name: e.target.children[0].children[1].value,
       health: "good",
       status: "alive"
@@ -42,7 +44,7 @@ class FamilyForm extends Component {
     })
       .then(r => r.json())
       .then(userData => {
-        console.log(userData);
+        console.log("userData", userData);
         this.props.updateFormType("supplyForm");
       });
   };

@@ -1,33 +1,44 @@
 import React, { Component } from "react";
-import { Fragment } from "react-bootstrap";
-import FamilyMembers from "./FamilyMembers";
+import { Fragment, Grid } from "react-bootstrap";
+import FamilyMember from "./FamilyMember";
+import Supply from "./Supply";
 import "../App.css";
 
 class Homepage extends Component {
   constructor() {
     super();
     this.state = {
-      familyMembers: [],
+      id: null,
+      name: "",
+      username: "",
+      family_members: [],
       supplies: []
     };
   }
 
   componentDidMount() {
-    const url = "http://localhost:3000/family_members";
-    fetch(url)
-      .then(r => r.json())
-      .then(fmData =>
-        this.setState({
-          familyMembers: [...this.state.familyMembers, fmData]
-        })
-      );
+    this.setState({
+      id: this.props.id,
+      name: this.props.name,
+      username: this.props.username,
+      family_members: this.props.family_members,
+      supplies: this.props.supplies
+    });
   }
 
   render() {
+    console.log("state.family_members", this.state.family_members);
     return (
       <React.Fragment>
-        <h3>Oregon Trail Homepage!</h3>
-        <FamilyMembers />
+        <h1>Oregon Trail Homepage!</h1>
+        <Grid>
+          {this.state.family_members.map(fm => (
+            <FamilyMember key={fm.id} fm={fm} />
+          ))}
+          {this.state.supplies.map(fm => (
+            <Supply key={fm.id} fm={fm} />
+          ))}
+        </Grid>
       </React.Fragment>
     );
   }

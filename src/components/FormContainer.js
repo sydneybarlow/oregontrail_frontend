@@ -8,12 +8,34 @@ import SuppliesForm from "./SuppliesForm";
 
 class FormContainer extends Component {
   state = {
-    form: null
+    userInfo: null,
+    form: null,
+    userId: null
   };
+
+  updateUserInfo = userInfo => this.setState({ userInfo });
 
   updateFormType = form => this.setState({ form });
 
+  componentDidMount() {
+    const url = "http://localhost:3000/users/homepage";
+    const token = localStorage.getItem("token");
+    if (token) {
+      fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then(r => r.json())
+        .then(response => {
+          this.updateUserInfo(response.user);
+          this.props.history.push("/homepage");
+        });
+    }
+  }
+
   render() {
+    // console.log("formcontainer userinfo", this.state.userInfo);
     return (
       <React.Fragment>
         <div className="App">
@@ -24,7 +46,7 @@ class FormContainer extends Component {
               render={() => (
                 <LogIn
                   props={this.props}
-                  updateUserInfo={this.props.updateUserInfo}
+                  updateUserInfo={this.updateUserInfo}
                 />
               )}
             />
@@ -32,8 +54,8 @@ class FormContainer extends Component {
               exact
               path="/homepage"
               render={() =>
-                this.props.userInfo ? (
-                  <Homepage {...this.state.userInfo} />
+                this.state.userInfo ? (
+                  <Homepage {...this.state.userInfo} props={this.props} />
                 ) : (
                   <Redirect to="/login" />
                 )
@@ -48,18 +70,19 @@ class FormContainer extends Component {
                     props={this.props}
                     updateFormType={this.updateFormType}
                     updateUserInfo={this.props.updateUserInfo}
+                    updateUserIdType={this.updateUserIdType}
                   />
                 ) : this.state.form === "familyForm" ? (
                   <FamilyForm
                     props={this.props}
                     updateFormType={this.updateFormType}
-                    updateUserInfo={this.props.updateUserInfo}
+                    userId={this.state.userId}
                   />
                 ) : (
                   <SuppliesForm
                     props={this.props}
                     updateFormType={this.updateFormType}
-                    updateUserInfo={this.props.updateUserInfo}
+                    userId={this.state.userId}
                   />
                 )
               }

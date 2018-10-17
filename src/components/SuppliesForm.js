@@ -14,27 +14,34 @@ class SuppliesForm extends Component {
   constructor() {
     super();
     this.state = {
-      money: null,
-      poundsOfFood: null,
-      boxesOfAmmo: null
+      name: "",
+      amount: null,
+      money: 1000
     };
   }
 
-  handlePoundsOfFood = e => {
-    this.setState({ poundsOfFood: e.target.value });
+  handleName = e => {
+    this.setState({ name: e.target.value });
   };
 
-  handleBoxesOfAmmo = e => {
-    this.setState({ boxesOfAmmo: e.target.value });
+  handleAmount = e => {
+    this.setState({ amount: e.target.value });
   };
 
   handleSuppliesSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    console.log(this.props);
     let data = {
-      money: null,
-      poundsOfFood: null,
-      boxesOfAmmo: null
+      supply: [
+        {
+          name: "food",
+          amount: e.target.children[0].children[3].value
+        },
+        {
+          name: "bullets",
+          amount: e.target.children[1].children[2].value
+        }
+      ]
     };
     fetch(`http://localhost:3000/supplies`, {
       method: "POST",
@@ -47,6 +54,8 @@ class SuppliesForm extends Component {
       .then(r => r.json())
       .then(userData => {
         console.log(userData);
+        localStorage.setItem("token", userData.token);
+        // this.props.props.history.push("/homepage");
       });
   };
 
@@ -54,23 +63,27 @@ class SuppliesForm extends Component {
     return (
       <React.Fragment>
         <h3>Purchase Supplies!</h3>
+        <h2>${this.state.money}</h2>
         <Form onSubmit={this.handleSuppliesSubmit}>
           <FormGroup>
+            <h4>👨‍👩‍👧‍👦 Recommended 500 pounds of food for each family member.</h4>
+            <h4>$20 per pound of food</h4>
             <ControlLabel>Pounds Of Food:</ControlLabel>
             <FormControl
               type="text"
-              name="poundsOfFood"
-              value={this.state.poundsOfFood}
-              onChange={this.handlePoundsOfFood}
+              name="name"
+              value={this.state.name}
+              onChange={this.handleName}
             />
           </FormGroup>
           <FormGroup>
+            <h4>$10 per box of ammunition</h4>
             <ControlLabel>Boxes Of Ammunition:</ControlLabel>
             <FormControl
               type="text"
-              name="boxesOfAmmo"
-              value={this.state.boxesOfFood}
-              onChange={this.handleBoxesOfAmmo}
+              name="amount"
+              value={this.state.amount}
+              onChange={this.handleAmount}
             />
           </FormGroup>
 

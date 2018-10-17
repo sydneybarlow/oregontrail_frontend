@@ -42,7 +42,6 @@ class LogIn extends Component {
     })
       .then(r => r.json())
       .then(userData => {
-        console.log(userData);
         localStorage.setItem("token", userData.token);
         this.props.updateUserInfo(userData.user_info);
         this.props.props.history.push("/homepage");

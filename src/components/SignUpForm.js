@@ -34,6 +34,7 @@ class SignUpForm extends Component {
 
   handleSignInSubmit = e => {
     e.preventDefault();
+    console.log("signupform", this.props);
     let data = {
       name: this.state.name,
       username: this.state.username,
@@ -49,8 +50,10 @@ class SignUpForm extends Component {
     })
       .then(r => r.json())
       .then(userData => {
+        console.log("signup", userData);
         localStorage.setItem("token", userData.token);
-        this.props.updateUserInfo(userData.user_info);
+        this.props.updateUserInfo(userData.user);
+        this.props.updateUserIdType(userData.user.id);
         this.props.updateFormType("familyForm");
       });
   };
