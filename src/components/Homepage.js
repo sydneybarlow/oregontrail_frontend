@@ -17,6 +17,7 @@ import DoneModal from "./Modals/DoneModal";
 import Map from "./Map";
 import WYModal from "./Modals/WYModal";
 import IDModal from "./Modals/IDModal";
+import HuntingModal from "./Modals/HuntingModal";
 import "../App.css";
 
 const filePath = process.env.PUBLIC_URL + "imgs/";
@@ -35,12 +36,13 @@ class Homepage extends Component {
       doneShow: false,
       locWYShow: false,
       locIDShow: false,
+      huntShow: false,
       intervalId: null
     };
   }
 
-  handleClose() {
-    this.setState({ show: false });
+  handleDoneClose() {
+    this.setState({ doneShow: false });
     this.props.updateFormType("familyForm");
     console.log("modal", this.props);
   }
@@ -49,13 +51,33 @@ class Homepage extends Component {
     this.setState({ doneShow: true });
   }
 
+  handleWYClose() {
+    this.setState({ locWYShow: false });
+  }
+
   handleWYShow() {
     this.setState({ locWYShow: true });
+  }
+
+  handleIDClose() {
+    this.setState({ locIDShow: false });
   }
 
   handleIDShow() {
     this.setState({ locIDShow: true });
   }
+
+  handleHuntClose() {
+    this.setState({ huntShow: false });
+  }
+
+  handleHuntShow() {
+    this.setState({ huntShow: true });
+  }
+
+  decrementFood = () => {
+    console.log("food will go down");
+  };
 
   handleGameStart = () => {
     const intervalId = setInterval(this.decrementMiles, 10);
@@ -180,17 +202,23 @@ class Homepage extends Component {
         <DoneModal
           show={this.state.doneShow}
           handleShow={this.handleDoneShow}
-          handleClose={this.handleClose.bind(this)}
+          handleClose={this.handleDoneClose.bind(this)}
         />
         <WYModal
           show={this.state.locWYShow}
           handleShow={this.handleWYShow}
-          handleClose={this.handleClose.bind(this)}
+          handleClose={this.handleWYClose.bind(this)}
         />
         <IDModal
           show={this.state.locIDShow}
           handleShow={this.handleIDShow}
-          handleClose={this.handleClose.bind(this)}
+          handleClose={this.handleIDClose.bind(this)}
+        />
+        <HuntingModal
+          show={this.state.huntShow}
+          decrementFood={this.decrementFood}
+          handleShow={this.handleHuntShow}
+          handleClose={this.handleHuntClose.bind(this)}
         />
       </React.Fragment>
     );

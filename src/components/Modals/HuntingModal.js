@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import { Fragment, Modal, Button } from "react-bootstrap";
 
-class DoneModal extends Component {
+class HuntingModal extends Component {
   render() {
     console.log(this.props);
     return (
-      <Modal show={this.props.show} onHide={this.props.handleDoneClose}>
+      <Modal show={this.props.show} onHide={this.props.handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>You made it to Oregon City, Oregon!</Modal.Title>
+          <Modal.Title>You made it to Fort Laramie, Wyoming!</Modal.Title>
         </Modal.Header>
         <Modal.Footer>
-          <Button onClick={this.props.handleClose}>Start Over</Button>
+          <Button onClick={this.props.handleClose}>Next</Button>
         </Modal.Footer>
       </Modal>
     );
   }
 }
 
-export default DoneModal;
+export default HuntingModal;
