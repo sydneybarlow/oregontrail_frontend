@@ -4,10 +4,24 @@ import "../App.css";
 
 class FamilyMember extends Component {
   render() {
-    // console.log("fm", this.props);
+    // console.log("fm", this.props.fm);
     return (
       <React.Fragment>
-        <h4>{this.props.fm.name}</h4>
+        <div />
+        <Grid>
+          <Row>
+            <Col lg={2}>avatar Img HERE!</Col>
+          </Row>
+          <Row>
+            <Col lg={2}>{this.props.fm.name}</Col>
+          </Row>
+          <Row>
+            <Col lg={2}>{this.props.fm.health}</Col>
+          </Row>
+          <Row>
+            <Col lg={2}>{this.props.fm.status}</Col>
+          </Row>
+        </Grid>
       </React.Fragment>
     );
   }

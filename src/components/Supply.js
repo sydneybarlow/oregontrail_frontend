@@ -7,8 +7,17 @@ class Supply extends Component {
     // console.log("fm", this.props);
     return (
       <React.Fragment>
-        <h4>{this.props.fm.name}</h4>
-        <h4>{this.props.fm.amount}</h4>
+        <Grid>
+          <Row>
+            <Col lg={2}>supply Img HERE!</Col>
+          </Row>
+          <Row>
+            <Col lg={2}>{this.props.fm.name}</Col>
+          </Row>
+          <Row>
+            <Col lg={2}>{this.props.fm.amount}</Col>
+          </Row>
+        </Grid>
       </React.Fragment>
     );
   }

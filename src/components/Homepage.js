@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Fragment, Grid, Button, Modal } from "react-bootstrap";
+import { Fragment, Grid, Button, Modal, Row, Col } from "react-bootstrap";
 import FamilyMember from "./FamilyMember";
 import Supply from "./Supply";
 import DoneModal from "./DoneModal";
@@ -86,6 +86,20 @@ class Homepage extends Component {
         ...this.state,
         miles: newMiles
       });
+      this.state.supplies.map(supply => {
+        if (supply.name === "food") {
+          const newAmt = supply.amount - 3;
+          this.setState({
+            ...this.state,
+            supplies: [
+              {
+                ...this.state.supplies,
+                amount: newAmt
+              }
+            ]
+          });
+        }
+      });
     }
   };
 
@@ -93,15 +107,34 @@ class Homepage extends Component {
     // console.log(this.state);
     return (
       <React.Fragment>
-        <h1>Oregon Trail Homepage!</h1>
-        <h4>{this.state.miles} miles from Oregon City</h4>
         <Grid>
-          {this.state.family_members.map(fm => (
-            <FamilyMember key={fm.id} fm={fm} />
-          ))}
-          {this.state.supplies.map(fm => (
-            <Supply key={fm.id} fm={fm} />
-          ))}
+          <Row className="show-grid">This will be userbar!!!</Row>
+        </Grid>
+        <Grid>
+          <Row className="show-grid">
+            <Col lg={12}>
+              <h1>Oregon Trail Homepage!</h1>
+              <h4>{this.state.miles} miles from Oregon City</h4>
+            </Col>
+          </Row>
+          <Row className="show-grid">
+            {this.state.family_members.map(fm => (
+              <Col lg={1}>
+                <FamilyMember key={fm.id} fm={fm} />
+              </Col>
+            ))}
+            <Col lg={1} />
+            {this.state.supplies.map(fm => (
+              <Col lg={1}>
+                <Supply key={fm.id} fm={fm} />
+              </Col>
+            ))}
+            <Col lg={1} />
+            <Col lg={4}>The trail images will go here!</Col>
+          </Row>
+          <Row>
+            <Col lg={4}>The map will go here!</Col>
+          </Row>
         </Grid>
         <Button onClick={this.handleGameStart}>Get Goin!</Button>
         <DoneModal
