@@ -44,6 +44,7 @@ class LogIn extends Component {
       .then(userData => {
         localStorage.setItem("token", userData.token);
         this.props.updateUserInfo(userData.user_info);
+        this.props.updateFormType("signUp");
         this.props.props.history.push("/homepage");
       });
   };

@@ -4,7 +4,6 @@ import "../App.css";
 
 class DoneModal extends Component {
   render() {
-    console.log("modal props", this.props);
     return (
       <React.Fragment>
         <Modal show={this.props.show}>

@@ -35,7 +35,7 @@ class FormContainer extends Component {
   }
 
   render() {
-    // console.log("formcontainer userinfo", this.state.userInfo);
+    console.log("form", this.state.form);
     return (
       <React.Fragment>
         <div className="App">
@@ -43,19 +43,37 @@ class FormContainer extends Component {
             <Route
               exact
               path="/login"
-              render={() => (
-                <LogIn
-                  props={this.props}
-                  updateUserInfo={this.updateUserInfo}
-                />
-              )}
+              render={() =>
+                this.state.form === null ? (
+                  <LogIn
+                    props={this.props}
+                    updateUserInfo={this.updateUserInfo}
+                  />
+                ) : this.state.form === "familyForm" ? (
+                  <FamilyForm
+                    props={this.props}
+                    updateFormType={this.updateFormType}
+                    userId={this.state.userId}
+                  />
+                ) : (
+                  <SuppliesForm
+                    props={this.props}
+                    updateFormType={this.updateFormType}
+                    userId={this.state.userId}
+                  />
+                )
+              }
             />
             <Route
               exact
               path="/homepage"
               render={() =>
-                this.state.userInfo ? (
-                  <Homepage {...this.state.userInfo} props={this.props} />
+                this.state.userInfo && this.state.form === null ? (
+                  <Homepage
+                    {...this.state.userInfo}
+                    props={this.props}
+                    updateFormType={this.updateFormType}
+                  />
                 ) : (
                   <Redirect to="/login" />
                 )
@@ -65,7 +83,7 @@ class FormContainer extends Component {
               exact
               path="/signup"
               render={() =>
-                this.state.form === null ? (
+                this.state.form === "signUp" ? (
                   <SignUpForm
                     props={this.props}
                     updateFormType={this.updateFormType}

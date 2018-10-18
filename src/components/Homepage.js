@@ -22,8 +22,9 @@ class Homepage extends Component {
   }
 
   handleClose() {
-    console.log("handleClose", this);
     this.setState({ show: false });
+    this.props.updateFormType("familyForm");
+    console.log("modal", this.props);
   }
 
   handleShow() {
@@ -42,6 +43,20 @@ class Homepage extends Component {
         ...this.state,
         miles: newMiles
       });
+      this.state.supplies.map(supply => {
+        if (supply.name === "food") {
+          const newAmt = supply.amount - 3;
+          this.setState({
+            ...this.state,
+            supplies: [
+              {
+                ...this.state.supplies,
+                amount: newAmt
+              }
+            ]
+          });
+        }
+      });
     } else {
       clearInterval(this.state.intervalId);
       this.handleShow();
@@ -49,6 +64,7 @@ class Homepage extends Component {
   };
 
   render() {
+    // console.log(this.state);
     return (
       <React.Fragment>
         <h1>Oregon Trail Homepage!</h1>
