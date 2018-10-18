@@ -6,7 +6,9 @@ import {
   ButtonGroup,
   Modal,
   Row,
-  Col
+  Col,
+  Table,
+  Image
 } from "react-bootstrap";
 import Userbar from "./Userbar";
 import FamilyMember from "./FamilyMember";
@@ -144,11 +146,9 @@ class Homepage extends Component {
             </Col>
           </Row>
           <Row className="show-grid">
-            {this.state.family_members.map(fm => (
-              <Col lg={1}>
-                <FamilyMember key={fm.id} fm={fm} />
-              </Col>
-            ))}
+            <Col>
+              <FamilyMember family_members={this.state.family_members} />
+            </Col>
             <Col lg={1} />
             {this.state.supplies.map(fm => (
               <Col lg={1}>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Fragment, Card, Grid, Col, Row } from "react-bootstrap";
+import { Fragment, Card, Grid, Col, Row, Image } from "react-bootstrap";
 import "../App.css";
 
 const filePath = process.env.PUBLIC_URL + "imgs/";
@@ -12,9 +12,10 @@ class Supply extends Component {
         <Grid>
           <Row>
             <Col lg={2}>
-              <img
+              <Image
                 alt="supply image"
                 src={`${filePath}${this.props.fm.name}.png`}
+                responsive
               />
             </Col>
           </Row>

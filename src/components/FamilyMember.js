@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Fragment, Card, Grid, Col, Row } from "react-bootstrap";
+import { Fragment, Card, Table, Image } from "react-bootstrap";
 import "../App.css";
 
 const filePath = process.env.PUBLIC_URL + "imgs/";
@@ -8,26 +8,43 @@ class FamilyMember extends Component {
   render() {
     return (
       <React.Fragment>
-        <div />
-        <Grid>
-          <Row>
-            <Col lg={2}>
-              <img
-                alt="family photo"
-                src={`${filePath}${this.props.fm.role}.png`}
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col lg={2}>{this.props.fm.name}</Col>
-          </Row>
-          <Row>
-            <Col lg={2}>{this.props.fm.health}</Col>
-          </Row>
-          <Row>
-            <Col lg={2}>{this.props.fm.status}</Col>
-          </Row>
-        </Grid>
+        <Table bordered>
+          <thead>
+            <tr>
+              {this.props.family_members.map(fm => (
+                <th>
+                  <Image
+                    alt="Family Member Image"
+                    src={`${filePath}${fm.role}.png`}
+                  />
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {this.props.family_members.map(fm => (
+                <td>
+                  <h4>{fm.name}</h4>
+                </td>
+              ))}
+            </tr>
+            <tr>
+              {this.props.family_members.map(fm => (
+                <td>
+                  <h5>{fm.health}</h5>
+                </td>
+              ))}
+            </tr>
+            <tr>
+              {this.props.family_members.map(fm => (
+                <td>
+                  <h5>{fm.status}</h5>
+                </td>
+              ))}
+            </tr>
+          </tbody>
+        </Table>
       </React.Fragment>
     );
   }
