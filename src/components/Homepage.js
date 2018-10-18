@@ -13,10 +13,10 @@ import {
 import Userbar from "./Userbar";
 import FamilyMember from "./FamilyMember";
 import Supply from "./Supply";
-import DoneModal from "./DoneModal";
+import DoneModal from "./Modals/DoneModal";
 import Map from "./Map";
-import WYModal from "./WYModal";
-import IDModal from "./IDModal";
+import WYModal from "./Modals/WYModal";
+import IDModal from "./Modals/IDModal";
 import "../App.css";
 
 const filePath = process.env.PUBLIC_URL + "imgs/";
