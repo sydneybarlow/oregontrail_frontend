@@ -163,7 +163,9 @@ class Homepage extends Component {
         <Grid>
           <Row>
             <Col lg={10}>
-              <Map />
+              <div className="map">
+                <Map />
+              </div>
             </Col>
             <Col lg={2} lgPush={1}>
               <ButtonGroup vertical bsSize="large">

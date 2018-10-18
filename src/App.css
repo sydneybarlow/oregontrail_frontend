@@ -30,3 +30,11 @@
     transform: rotate(360deg);
   }
 }
+
+.logoutButton {
+  margin-right: 30px;
+}
+
+.map {
+  margin-bottom: 50px;
+}
