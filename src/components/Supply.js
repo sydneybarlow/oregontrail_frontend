@@ -20,10 +20,14 @@ class Supply extends Component {
             </Col>
           </Row>
           <Row>
-            <Col lg={2}>{this.props.fm.name}</Col>
+            <Col lg={2}>
+              <h3>{this.props.fm.name}</h3>
+            </Col>
           </Row>
           <Row>
-            <Col lg={2}>{this.props.fm.amount}</Col>
+            <Col lg={2}>
+              <h4>{this.props.fm.amount}</h4>
+            </Col>
           </Row>
         </Grid>
       </React.Fragment>
