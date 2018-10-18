@@ -32,13 +32,16 @@ class Homepage extends Component {
   }
 
   handleGameStart = () => {
-    const intervalId = setInterval(this.decrementMiles, 100);
+    const intervalId = setInterval(this.decrementMiles, 10);
     this.setState({ intervalId: intervalId });
   };
 
   decrementMiles = () => {
-    let newMiles = this.state.miles - 50;
-    if (this.state.miles > 0) {
+    let newMiles = this.state.miles - 1;
+    if (this.state.miles <= 0) {
+      clearInterval(this.state.intervalId);
+      this.handleShow();
+    } else if (this.state.miles === 719) {
       this.setState({
         ...this.state,
         miles: newMiles
@@ -57,9 +60,32 @@ class Homepage extends Component {
           });
         }
       });
+      alert("Made it to Soda Springs, Idaho!");
+    } else if (this.state.miles === 1150) {
+      this.setState({
+        ...this.state,
+        miles: newMiles
+      });
+      this.state.supplies.map(supply => {
+        if (supply.name === "food") {
+          const newAmt = supply.amount - 3;
+          this.setState({
+            ...this.state,
+            supplies: [
+              {
+                ...this.state.supplies,
+                amount: newAmt
+              }
+            ]
+          });
+        }
+      });
+      alert("Made it to Fort Laramie, Wyoming!");
     } else {
-      clearInterval(this.state.intervalId);
-      this.handleShow();
+      this.setState({
+        ...this.state,
+        miles: newMiles
+      });
     }
   };
 
