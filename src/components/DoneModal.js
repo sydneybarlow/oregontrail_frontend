@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Fragment, Modal, Button } from "react-bootstrap";
-import "../App.css";
 
 class DoneModal extends Component {
   render() {
