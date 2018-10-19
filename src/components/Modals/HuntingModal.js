@@ -7,8 +7,9 @@ class HuntingModal extends Component {
     return (
       <Modal show={this.props.show} onHide={this.props.handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>You made it to Fort Laramie, Wyoming!</Modal.Title>
+          <Modal.Title>Hunting</Modal.Title>
         </Modal.Header>
+        <Modal.Body>You have gone hunting</Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.handleClose}>Next</Button>
         </Modal.Footer>

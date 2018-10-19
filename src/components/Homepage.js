@@ -44,7 +44,6 @@ class Homepage extends Component {
   handleDoneClose() {
     this.setState({ doneShow: false });
     this.props.updateFormType("familyForm");
-    console.log("modal", this.props);
   }
 
   handleDoneShow() {
@@ -67,13 +66,13 @@ class Homepage extends Component {
     this.setState({ locIDShow: true });
   }
 
-  handleHuntClose() {
+  handleHuntClose = () => {
     this.setState({ huntShow: false });
-  }
+  };
 
-  handleHuntShow() {
+  handleHuntShow = () => {
     this.setState({ huntShow: true });
-  }
+  };
 
   decrementFood = () => {
     console.log("food will go down");
@@ -152,7 +151,8 @@ class Homepage extends Component {
   };
 
   render() {
-    // console.log(this.state);
+    console.log("homepage", this);
+    console.log("homepage", this.state);
     return (
       <React.Fragment>
         <Userbar name={this.state.name} username={this.state.username} />
@@ -194,7 +194,9 @@ class Homepage extends Component {
                 <Button bsStyle="primary" onClick={this.handleGameStart}>
                   Get Goin!
                 </Button>
-                <Button bsStyle="info">Hunt</Button>
+                <Button bsStyle="info" onClick={this.handleHuntShow}>
+                  Hunt
+                </Button>
               </ButtonGroup>
             </Col>
           </Row>
