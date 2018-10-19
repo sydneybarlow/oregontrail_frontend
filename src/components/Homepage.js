@@ -71,23 +71,59 @@ class Homepage extends Component {
   };
 
   handleHuntShow = () => {
+    console.log("huntshow!!!");
     this.setState({ huntShow: true });
   };
 
-  // incrementFood = () => {
-  //   return this.state.supplies.map(supply => {
-  //     if (supply.name === 'food'){
-  //       this.setState({
-  //         ...this.state.supplies,
-  //         amount: 800
-  //       })
-  //     }
-  //   }
-  // };
+  incrementFood = () => {
+    console.log("getting food");
+    this.setState(
+      {
+        ...this.state,
+        supplies: this.state.supplies.map(supply => {
+          if (supply.name === "food") {
+            let newFoodAmount = supply.amount + 4;
+            return {
+              ...supply,
+              amount: newFoodAmount
+            };
+          } else {
+            return supply;
+          }
+        })
+      },
+      this.decrementBullets
+    );
+  };
+
+  decrementBullets = () => {
+    console.log("lossing bullets");
+    this.setState({
+      ...this.state,
+      supplies: this.state.supplies.map(supply => {
+        if (supply.name === "bullets") {
+          let newBulletAmount = supply.amount - 4;
+          return {
+            ...supply,
+            amount: newBulletAmount
+          };
+        } else {
+          return supply;
+        }
+      })
+    });
+  };
 
   handleGameStart = () => {
     const intervalId = setInterval(this.decrementMiles, 10);
     this.setState({ intervalId: intervalId });
+  };
+
+  allHuntFunctions = () => {
+    console.log("HUNTING!!");
+    this.incrementFood();
+    // this.decrementBullets();
+    this.handleHuntShow();
   };
 
   decrementMiles = () => {
@@ -157,6 +193,11 @@ class Homepage extends Component {
     }
   };
 
+  handleRest = () => {
+    console.log("RESTING!!!!");
+    clearInterval(this.state.intervalId);
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -165,7 +206,7 @@ class Homepage extends Component {
           <Row className="show-grid">
             <Col lg={12}>
               <h1>
-                <img
+                <Image
                   alt="oregon trail logo"
                   src={`${filePath}OregonTrailLogo.png`}
                 />
@@ -176,14 +217,17 @@ class Homepage extends Component {
             <Col>
               <FamilyMember family_members={this.state.family_members} />
             </Col>
-            <Col lg={1} />
             {this.state.supplies.map(fm => (
               <Col lg={1}>
                 <Supply key={fm.id} fm={fm} />
               </Col>
             ))}
-            <Col lg={1} />
-            <Col lg={4}>The trail images will go here!</Col>
+            <Col lg={10} lgPush={3}>
+              <Image
+                alt="oregon ox and plains"
+                src={`${filePath}placeholder.png`}
+              />
+            </Col>
           </Row>
         </Grid>
         <h2>{this.state.miles} miles from Oregon City</h2>
@@ -199,12 +243,11 @@ class Homepage extends Component {
                 <Button bsStyle="primary" onClick={this.handleGameStart}>
                   Get Goin!
                 </Button>
-                <Button
-                  bsStyle="info"
-                  onClick={this.handleHuntShow}
-                  onClick={this.incrementFood}
-                >
+                <Button bsStyle="info" onClick={this.allHuntFunctions}>
                   Hunt
+                </Button>
+                <Button bsStyle="success" onClick={this.handleRest}>
+                  Rest
                 </Button>
               </ButtonGroup>
             </Col>

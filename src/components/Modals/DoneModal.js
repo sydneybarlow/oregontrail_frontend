@@ -3,7 +3,6 @@ import { Fragment, Modal, Button } from "react-bootstrap";
 
 class DoneModal extends Component {
   render() {
-    console.log("donemodal", this.props);
     let { show, handleShow, handleClose } = this.props;
     return (
       <Modal show={show} onHide={handleClose}>

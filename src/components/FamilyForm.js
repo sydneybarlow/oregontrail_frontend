@@ -27,7 +27,6 @@ class FamilyForm extends Component {
 
   handleSignInSubmit = e => {
     e.preventDefault();
-    console.log(this.props);
     let data = {
       user_id: this.props.userId,
       name: e.target.children[0].children[1].value,
@@ -44,7 +43,6 @@ class FamilyForm extends Component {
     })
       .then(r => r.json())
       .then(userData => {
-        console.log("userData", userData);
         this.props.updateFormType("supplyForm");
       });
   };

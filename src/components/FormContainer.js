@@ -35,7 +35,6 @@ class FormContainer extends Component {
   }
 
   render() {
-    console.log("form", this.state.form);
     return (
       <React.Fragment>
         <div className="App">

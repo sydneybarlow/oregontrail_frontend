@@ -30,7 +30,6 @@ class SuppliesForm extends Component {
 
   handleSuppliesSubmit = e => {
     e.preventDefault();
-    console.log(this.props);
     let data = {
       supply: [
         {
@@ -53,7 +52,6 @@ class SuppliesForm extends Component {
     })
       .then(r => r.json())
       .then(userData => {
-        console.log(userData);
         localStorage.setItem("token", userData.token);
         // this.props.props.history.push("/homepage");
       });
