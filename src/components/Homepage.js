@@ -74,9 +74,16 @@ class Homepage extends Component {
     this.setState({ huntShow: true });
   };
 
-  decrementFood = () => {
-    console.log("food will go down");
-  };
+  // incrementFood = () => {
+  //   return this.state.supplies.map(supply => {
+  //     if (supply.name === 'food'){
+  //       this.setState({
+  //         ...this.state.supplies,
+  //         amount: 800
+  //       })
+  //     }
+  //   }
+  // };
 
   handleGameStart = () => {
     const intervalId = setInterval(this.decrementMiles, 10);
@@ -151,8 +158,6 @@ class Homepage extends Component {
   };
 
   render() {
-    console.log("homepage", this);
-    console.log("homepage", this.state);
     return (
       <React.Fragment>
         <Userbar name={this.state.name} username={this.state.username} />
@@ -194,7 +199,11 @@ class Homepage extends Component {
                 <Button bsStyle="primary" onClick={this.handleGameStart}>
                   Get Goin!
                 </Button>
-                <Button bsStyle="info" onClick={this.handleHuntShow}>
+                <Button
+                  bsStyle="info"
+                  onClick={this.handleHuntShow}
+                  onClick={this.incrementFood}
+                >
                   Hunt
                 </Button>
               </ButtonGroup>
@@ -218,7 +227,6 @@ class Homepage extends Component {
         />
         <HuntingModal
           show={this.state.huntShow}
-          decrementFood={this.decrementFood}
           handleShow={this.handleHuntShow}
           handleClose={this.handleHuntClose.bind(this)}
         />
