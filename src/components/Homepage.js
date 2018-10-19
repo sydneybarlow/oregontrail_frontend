@@ -114,11 +114,6 @@ class Homepage extends Component {
     });
   };
 
-  handleGameStart = () => {
-    const intervalId = setInterval(this.decrementMiles, 10);
-    this.setState({ intervalId: intervalId });
-  };
-
   allHuntFunctions = () => {
     console.log("HUNTING!!");
     this.incrementFood();
@@ -126,71 +121,52 @@ class Homepage extends Component {
     this.handleHuntShow();
   };
 
-  decrementMiles = () => {
-    let newMiles = this.state.miles - 1;
+  handleGameStart = () => {
+    const intervalId = setInterval(this.traveling, 100);
+    this.setState({ intervalId: intervalId });
+  };
+
+  traveling = () => {
     if (this.state.miles <= 0) {
       clearInterval(this.state.intervalId);
       this.handleDoneShow();
     } else if (this.state.miles === 719) {
-      this.setState({
-        ...this.state,
-        miles: newMiles
-      });
-      this.state.supplies.map(supply => {
-        if (supply.name === "food") {
-          const newAmt = supply.amount - 3;
-          this.setState({
-            ...this.state,
-            supplies: [
-              {
-                ...this.state.supplies,
-                amount: newAmt
-              }
-            ]
-          });
-        }
-      });
+      this.decrementMiles(this.decrementFood);
       this.setState({ locIDShow: true });
     } else if (this.state.miles === 1150) {
-      this.setState({
-        ...this.state,
-        miles: newMiles
-      });
-      this.state.supplies.map(supply => {
-        if (supply.name === "food") {
-          const newAmt = supply.amount - 3;
-          this.setState({
-            ...this.state,
-            supplies: [
-              {
-                ...this.state.supplies,
-                amount: newAmt
-              }
-            ]
-          });
-        }
-      });
+      this.decrementMiles(this.decrementFood);
       this.setState({ locWYShow: true });
     } else {
-      this.setState({
+      this.decrementMiles(this.decrementFood);
+    }
+  };
+
+  decrementMiles = () => {
+    let newMiles = this.state.miles - 11;
+    this.setState(
+      {
         ...this.state,
         miles: newMiles
-      });
-      this.state.supplies.map(supply => {
+      },
+      this.decrementFood
+    );
+  };
+
+  decrementFood = () => {
+    this.setState({
+      ...this.state,
+      supplies: this.state.supplies.map(supply => {
         if (supply.name === "food") {
-          const newAmt = supply.amount - 3;
-          this.setState({
-            ...this.state,
-            supplies: [
-              {
-                ...this.state.supplies,
-                amount: newAmt
-              }
-            ]
-          });
+          let newFoodAmount = supply.amount - 4;
+          return {
+            ...supply,
+            amount: newFoodAmount
+          };
+        } else {
+          return supply;
         }
-      });
-    }
+      })
+    });
   };
 
   handleRest = () => {
