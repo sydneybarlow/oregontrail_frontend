@@ -18,6 +18,7 @@ import Map from "./Map";
 import WYModal from "./Modals/WYModal";
 import IDModal from "./Modals/IDModal";
 import HuntingModal from "./Modals/HuntingModal";
+import EventModal from "./Modals/EventModal";
 import "../App.css";
 
 const filePath = process.env.PUBLIC_URL + "imgs/";
@@ -33,10 +34,12 @@ class Homepage extends Component {
       miles: this.props.miles,
       family_members: this.props.family_members,
       supplies: this.props.supplies,
+      events: this.props.events,
       doneShow: false,
       locWYShow: false,
       locIDShow: false,
       huntShow: false,
+      eventShow: false,
       intervalId: null
     };
   }
@@ -74,6 +77,14 @@ class Homepage extends Component {
     console.log("huntshow!!!");
     this.setState({ huntShow: true });
   };
+
+  handleEventClose() {
+    this.setState({ eventShow: false });
+  }
+
+  handleEventShow() {
+    this.setState({ eventShow: true });
+  }
 
   incrementFood = () => {
     console.log("getting food");
@@ -149,10 +160,11 @@ class Homepage extends Component {
     fetch("http://localhost:3000/events")
       .then(r => r.json())
       .then(events => {
-        console.log(events);
         events.map(event => {
           if (event.id === this.getRandomNumberEvents(0, 32)) {
-            console.log(event);
+            this.setState({
+              eventShow: true
+            });
           }
         });
       });
@@ -311,6 +323,11 @@ class Homepage extends Component {
           show={this.state.huntShow}
           handleShow={this.handleHuntShow}
           handleClose={this.handleHuntClose.bind(this)}
+        />
+        <EventModal
+          show={this.state.eventShow}
+          handleEventShow={this.handleEventShow}
+          handleEventClose={this.handleEventClose.bind(this)}
         />
       </React.Fragment>
     );
