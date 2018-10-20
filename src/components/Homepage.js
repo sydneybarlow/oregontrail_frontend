@@ -129,16 +129,39 @@ class Homepage extends Component {
   traveling = () => {
     if (this.state.miles <= 0) {
       clearInterval(this.state.intervalId);
+      this.randomEvents();
       this.handleDoneShow();
     } else if (this.state.miles === 719) {
+      this.randomEvents();
       this.decrementMiles(this.decrementFood);
       this.setState({ locIDShow: true });
     } else if (this.state.miles === 1150) {
+      this.randomEvents();
       this.decrementMiles(this.decrementFood);
       this.setState({ locWYShow: true });
     } else {
+      this.randomEvents();
       this.decrementMiles(this.decrementFood);
     }
+  };
+
+  randomEvents = () => {
+    fetch("http://localhost:3000/events")
+      .then(r => r.json())
+      .then(events => {
+        console.log(events);
+        events.map(event => {
+          if (event.id === this.getRandomNumberEvents(0, 32)) {
+            console.log(event);
+          }
+        });
+      });
+  };
+
+  getRandomNumberEvents = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
   };
 
   decrementMiles = () => {
@@ -172,6 +195,44 @@ class Homepage extends Component {
   handleRest = () => {
     console.log("RESTING!!!!");
     clearInterval(this.state.intervalId);
+  };
+
+  poorHealth = () => {
+    this.setState({
+      ...this.state,
+      family_members: this.state.family_members.map(family => {
+        if (family.health === "good") {
+          return {
+            ...family,
+            health: "fair"
+          };
+        } else if (family.health === "fair") {
+          return {
+            ...family,
+            health: "poor"
+          };
+        } else {
+          return {
+            ...family,
+            health: "bad"
+          };
+        }
+      })
+    });
+  };
+
+  deadFamilyMember = () => {
+    this.setState({
+      ...this.state,
+      family_members: this.state.family_members.map(family => {
+        if ((family.status = "alive")) {
+          return {
+            ...family,
+            status: "dead"
+          };
+        }
+      })
+    });
   };
 
   render() {
@@ -225,6 +286,8 @@ class Homepage extends Component {
                 <Button bsStyle="success" onClick={this.handleRest}>
                   Rest
                 </Button>
+                <Button onClick={this.poorHealth}>Bad Health Test</Button>
+                <Button onClick={this.deadFamilyMember}>Dead Family</Button>
               </ButtonGroup>
             </Col>
           </Row>
