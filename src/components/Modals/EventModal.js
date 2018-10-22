@@ -3,7 +3,7 @@ import { Fragment, Modal, Button } from "react-bootstrap";
 
 class EventModal extends Component {
   render() {
-    // console.log("eventmodal this.props", this.props);
+    console.log("eventmodal this.props", this.props);
     if (this.props.eventInfo === null) {
       return null;
     } else if (this.props.eventInfo.name === "dysentary") {
@@ -18,7 +18,7 @@ class EventModal extends Component {
           </Modal.Footer>
         </Modal>
       );
-    } else if (this.props.eventInfo.name === "broken arm") {
+    } else if (this.props.eventInfo.name === "broken_arm") {
       return (
         <Modal show={this.props.show} onHide={this.props.handleEventClose}>
           <Modal.Header closeButton>

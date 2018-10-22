@@ -82,13 +82,18 @@ class Homepage extends Component {
   };
 
   handleEventClose() {
-    this.setState({ eventShow: false });
+    this.setState({
+      eventShow: false,
+      eventId: null,
+      eventInfo: null
+    });
+    this.handleGameStart();
   }
 
-  handleEventShow() {
-    console.log("eventSHOW");
-    this.setState({ eventShow: true });
-  }
+  // handleEventShow() {
+  //   console.log("eventSHOW");
+  //   this.setState({ eventShow: true });
+  // }
 
   incrementFood = () => {
     console.log("getting food");
@@ -147,10 +152,10 @@ class Homepage extends Component {
   cities = () => {
     console.log("cities");
     // this.randomEvent();
-    if (this.state.eventId <= 8) {
-      this.handleRest();
-      this.handleEventShow();
-    }
+    // if (this.state.eventId <= 8) {
+    //   this.handleRest();
+    //   // this.handleEventShow();
+    // }
     if (this.state.miles <= 0) {
       clearInterval(this.state.intervalId);
       this.handleDoneShow();
@@ -207,11 +212,15 @@ class Homepage extends Component {
   getRandomNumberEvents = () => {
     console.log("random events");
     const eventIdNumber = Math.floor(Math.random() * this.state.events.length);
-    this.setState({
-      eventId: eventIdNumber,
-      eventInfo: this.state.events[eventIdNumber - 1]
-    });
-    this.handleRest();
+    // debugger;
+    if (eventIdNumber <= 8) {
+      this.setState({
+        eventId: eventIdNumber,
+        eventInfo: this.state.events[eventIdNumber - 1],
+        eventShow: true
+      });
+      this.handleRest();
+    }
   };
 
   // stopTimer = () => {
