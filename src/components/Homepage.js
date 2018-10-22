@@ -287,11 +287,9 @@ class Homepage extends Component {
             <Col>
               <FamilyMember family_members={this.state.family_members} />
             </Col>
-            {this.state.supplies.map(fm => (
-              <Col lg={1}>
-                <Supply key={fm.id} fm={fm} />
-              </Col>
-            ))}
+            <Col>
+              <Supply supplies={this.state.supplies} money={this.state.money} />
+            </Col>
           </Row>
         </Grid>
         <h2>{this.state.miles} miles from Oregon City</h2>
