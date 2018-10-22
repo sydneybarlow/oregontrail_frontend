@@ -35,6 +35,7 @@ class Homepage extends Component {
       family_members: this.props.family_members,
       supplies: this.props.supplies,
       events: this.props.events,
+      eventInfo: null,
       doneShow: false,
       locWYShow: false,
       locIDShow: false,
@@ -136,40 +137,42 @@ class Homepage extends Component {
   };
 
   handleGameStart = () => {
-    const intervalId = setInterval(this.cities, 1000);
-    this.setState({ intervalId: intervalId });
+    console.log("game start");
+    if (!this.state.intervalId) {
+      const intervalId = setInterval(this.cities, 1000);
+      this.setState({ intervalId: intervalId });
+    }
   };
 
   cities = () => {
+    console.log("cities");
+    // this.randomEvent();
+    if (this.state.eventId <= 8) {
+      this.handleRest();
+      this.handleEventShow();
+    }
     if (this.state.miles <= 0) {
       clearInterval(this.state.intervalId);
       this.handleDoneShow();
-      this.randomEvent();
     } else if (this.state.miles === 720) {
       clearInterval(this.state.intervalId);
       this.decrementMiles();
-      this.randomEvent();
       this.setState({ locIDShow: true });
     } else if (this.state.miles === 1150) {
       clearInterval(this.state.intervalId);
       this.decrementMiles();
-      this.randomEvent();
       this.setState({ locWYShow: true });
     } else {
       this.decrementMiles();
-      this.randomEvent();
     }
   };
 
   randomEvent = () => {
-    console.log("events");
-    if (this.state.eventId <= 8) {
-      return this.state.events[this.state.eventId];
-    }
+    return this.state.events.find(x => x.id === this.state.eventId);
   };
 
   decrementMiles = () => {
-    // console.log("miles");
+    console.log("miles");
     let newMiles = this.state.miles - 5;
     this.setState(
       {
@@ -181,7 +184,7 @@ class Homepage extends Component {
   };
 
   decrementFood = () => {
-    // console.log("food");
+    console.log("food");
     this.setState(
       {
         ...this.state,
@@ -202,8 +205,13 @@ class Homepage extends Component {
   };
 
   getRandomNumberEvents = () => {
+    console.log("random events");
     const eventIdNumber = Math.floor(Math.random() * this.state.events.length);
-    this.setState({ eventId: eventIdNumber });
+    this.setState({
+      eventId: eventIdNumber,
+      eventInfo: this.state.events[eventIdNumber - 1]
+    });
+    this.handleRest();
   };
 
   // stopTimer = () => {
@@ -216,6 +224,7 @@ class Homepage extends Component {
   handleRest = () => {
     console.log("RESTING!!!!");
     clearInterval(this.state.intervalId);
+    this.setState({ intervalId: null });
   };
 
   poorHealth = () => {
@@ -266,7 +275,7 @@ class Homepage extends Component {
   };
 
   render() {
-    // console.log("render state props", this.props);
+    console.log("render", this.state.eventId);
     return (
       <React.Fragment>
         <Userbar name={this.state.name} username={this.state.username} />
@@ -344,9 +353,8 @@ class Homepage extends Component {
           handleClose={this.handleHuntClose.bind(this)}
         />
         <EventModal
-          eventInfo={this.randomEvent()}
+          eventInfo={this.state.eventInfo}
           show={this.state.eventShow}
-          handleEventShow={this.handleEventShow}
           handleEventClose={this.handleEventClose.bind(this)}
         />
       </React.Fragment>
