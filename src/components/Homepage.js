@@ -90,11 +90,6 @@ class Homepage extends Component {
     this.handleGameStart();
   }
 
-  // handleEventShow() {
-  //   console.log("eventSHOW");
-  //   this.setState({ eventShow: true });
-  // }
-
   incrementFood = () => {
     console.log("getting food");
     this.setState(
@@ -196,11 +191,11 @@ class Homepage extends Component {
           }
         })
       },
-      this.getRandomNumberEvents
+      this.getRandomEvents
     );
   };
 
-  getRandomNumberEvents = () => {
+  getRandomEvents = () => {
     console.log("random events");
     const eventIdNumber =
       Math.floor(Math.random() * this.state.events.length) + 1;

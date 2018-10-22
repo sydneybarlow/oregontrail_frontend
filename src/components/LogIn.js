@@ -6,7 +6,11 @@ import {
   FormGroup,
   ControlLabel,
   Button,
-  Alert
+  ButtonGroup,
+  Alert,
+  Grid,
+  Row,
+  Col
 } from "react-bootstrap";
 import "../App.css";
 
@@ -53,32 +57,40 @@ class LogIn extends Component {
     return (
       <React.Fragment>
         <h3>Log In</h3>
-        <Form onSubmit={this.handleLogInSubmit}>
-          <FormGroup>
-            <ControlLabel>Username:</ControlLabel>
-            <FormControl
-              type="text"
-              name="username"
-              value={this.state.username}
-              onChange={this.handleUsername}
-            />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Password:</ControlLabel>
-            <FormControl
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handlePassword}
-            />
-          </FormGroup>
-          <Button type="submit" bsStyle="primary">
-            Enter
-          </Button>
-          <Button type="button" bsStyle="primary" href="/signup">
-            Sign Up
-          </Button>
-        </Form>
+        <Grid>
+          <Row>
+            <Col lg={6}>
+              <Form onSubmit={this.handleLogInSubmit}>
+                <FormGroup>
+                  <ControlLabel>Username:</ControlLabel>
+                  <FormControl
+                    type="text"
+                    name="username"
+                    value={this.state.username}
+                    onChange={this.handleUsername}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <ControlLabel>Password:</ControlLabel>
+                  <FormControl
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.handlePassword}
+                  />
+                </FormGroup>
+                <ButtonGroup>
+                  <Button type="submit" bsStyle="primary">
+                    Enter
+                  </Button>
+                  <Button type="button" bsStyle="primary" href="/signup">
+                    Sign Up
+                  </Button>
+                </ButtonGroup>
+              </Form>
+            </Col>
+          </Row>
+        </Grid>
       </React.Fragment>
     );
   }
