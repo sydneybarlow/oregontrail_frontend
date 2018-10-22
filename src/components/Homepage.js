@@ -40,9 +40,9 @@ class Homepage extends Component {
       locIDShow: false,
       huntShow: false,
       eventShow: false,
-      eventInfo: null,
       eventId: null,
-      intervalId: null
+      intervalId: null,
+      mapId: 1
     };
   }
 
@@ -85,6 +85,7 @@ class Homepage extends Component {
   }
 
   handleEventShow() {
+    console.log("eventSHOW");
     this.setState({ eventShow: true });
   }
 
@@ -135,31 +136,41 @@ class Homepage extends Component {
   };
 
   handleGameStart = () => {
-    const intervalId = setInterval(this.cities, 100);
+    const intervalId = setInterval(this.cities, 1000);
     this.setState({ intervalId: intervalId });
   };
 
   cities = () => {
     if (this.state.miles <= 0) {
       clearInterval(this.state.intervalId);
-      this.randomEvents();
       this.handleDoneShow();
-    } else if (this.state.miles === 719) {
-      this.randomEvents();
+      this.randomEvent();
+    } else if (this.state.miles === 720) {
+      clearInterval(this.state.intervalId);
       this.decrementMiles();
+      this.randomEvent();
       this.setState({ locIDShow: true });
     } else if (this.state.miles === 1150) {
-      this.randomEvents();
+      clearInterval(this.state.intervalId);
       this.decrementMiles();
+      this.randomEvent();
       this.setState({ locWYShow: true });
     } else {
-      this.randomEvents();
       this.decrementMiles();
+      this.randomEvent();
+    }
+  };
+
+  randomEvent = () => {
+    console.log("events");
+    if (this.state.eventId <= 8) {
+      return this.state.events[this.state.eventId];
     }
   };
 
   decrementMiles = () => {
-    let newMiles = this.state.miles - 1;
+    // console.log("miles");
+    let newMiles = this.state.miles - 5;
     this.setState(
       {
         ...this.state,
@@ -169,44 +180,8 @@ class Homepage extends Component {
     );
   };
 
-  randomInterval = () => {
-    console.log("randomInterval");
-    let miles = this.state.miles;
-    if (Number.isInteger(miles / 4)) {
-      clearInterval(this.state.intervalId);
-      this.getRandomNumberEvents(0, 32);
-    }
-  };
-
-  randomEvents = () => {
-    fetch("http://localhost:3000/events")
-      .then(r => r.json())
-      .then(events => {
-        events.map(event => {
-          console.log("event", event);
-          console.log("state eventId", this.state.eventId);
-          if (event.id === this.state.eventId) {
-            this.setState({
-              ...this.state,
-              eventShow: true,
-              eventInfo: event
-            });
-          }
-        });
-      });
-  };
-
-  getRandomNumberEvents = (min, max) => {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    let event_Id = Math.floor(Math.random() * (max - min)) + min;
-    this.setState({
-      eventId: event_Id
-    });
-  };
-
   decrementFood = () => {
-    console.log("food");
+    // console.log("food");
     this.setState(
       {
         ...this.state,
@@ -222,9 +197,21 @@ class Homepage extends Component {
           }
         })
       },
-      this.randomInterval
+      this.getRandomNumberEvents
     );
   };
+
+  getRandomNumberEvents = () => {
+    const eventIdNumber = Math.floor(Math.random() * this.state.events.length);
+    this.setState({ eventId: eventIdNumber });
+  };
+
+  // stopTimer = () => {
+  //   console.log("timer");
+  //   if (this.state.eventId.id <= 8) {
+  //     clearInterval(this.state.intervalId);
+  //   }
+  // };
 
   handleRest = () => {
     console.log("RESTING!!!!");
@@ -269,8 +256,17 @@ class Homepage extends Component {
     });
   };
 
+  renderMap = () => {
+    let newMap = this.state.mapId - 1;
+    if (this.state.miles === 1795 / 29) {
+      this.setState({
+        mapId: newMap
+      });
+    }
+  };
+
   render() {
-    // console.log("render", this.state);
+    // console.log("render state props", this.props);
     return (
       <React.Fragment>
         <Userbar name={this.state.name} username={this.state.username} />
@@ -348,7 +344,7 @@ class Homepage extends Component {
           handleClose={this.handleHuntClose.bind(this)}
         />
         <EventModal
-          eventInfo={this.state.eventInfo}
+          eventInfo={this.randomEvent()}
           show={this.state.eventShow}
           handleEventShow={this.handleEventShow}
           handleEventClose={this.handleEventClose.bind(this)}
