@@ -40,6 +40,8 @@ class Homepage extends Component {
       locIDShow: false,
       huntShow: false,
       eventShow: false,
+      eventInfo: null,
+      eventId: null,
       intervalId: null
     };
   }
@@ -133,51 +135,31 @@ class Homepage extends Component {
   };
 
   handleGameStart = () => {
-    const intervalId = setInterval(this.traveling, 100);
+    const intervalId = setInterval(this.cities, 100);
     this.setState({ intervalId: intervalId });
   };
 
-  traveling = () => {
+  cities = () => {
     if (this.state.miles <= 0) {
       clearInterval(this.state.intervalId);
       this.randomEvents();
       this.handleDoneShow();
     } else if (this.state.miles === 719) {
       this.randomEvents();
-      this.decrementMiles(this.decrementFood);
+      this.decrementMiles();
       this.setState({ locIDShow: true });
     } else if (this.state.miles === 1150) {
       this.randomEvents();
-      this.decrementMiles(this.decrementFood);
+      this.decrementMiles();
       this.setState({ locWYShow: true });
     } else {
       this.randomEvents();
-      this.decrementMiles(this.decrementFood);
+      this.decrementMiles();
     }
   };
 
-  randomEvents = () => {
-    fetch("http://localhost:3000/events")
-      .then(r => r.json())
-      .then(events => {
-        events.map(event => {
-          if (event.id === this.getRandomNumberEvents(0, 32)) {
-            this.setState({
-              eventShow: true
-            });
-          }
-        });
-      });
-  };
-
-  getRandomNumberEvents = (min, max) => {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min)) + min;
-  };
-
   decrementMiles = () => {
-    let newMiles = this.state.miles - 11;
+    let newMiles = this.state.miles - 1;
     this.setState(
       {
         ...this.state,
@@ -187,21 +169,61 @@ class Homepage extends Component {
     );
   };
 
-  decrementFood = () => {
+  randomInterval = () => {
+    console.log("randomInterval");
+    let miles = this.state.miles;
+    if (Number.isInteger(miles / 4)) {
+      clearInterval(this.state.intervalId);
+      this.getRandomNumberEvents(0, 32);
+    }
+  };
+
+  randomEvents = () => {
+    fetch("http://localhost:3000/events")
+      .then(r => r.json())
+      .then(events => {
+        events.map(event => {
+          console.log("event", event);
+          console.log("state eventId", this.state.eventId);
+          if (event.id === this.state.eventId) {
+            this.setState({
+              ...this.state,
+              eventShow: true,
+              eventInfo: event
+            });
+          }
+        });
+      });
+  };
+
+  getRandomNumberEvents = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    let event_Id = Math.floor(Math.random() * (max - min)) + min;
     this.setState({
-      ...this.state,
-      supplies: this.state.supplies.map(supply => {
-        if (supply.name === "food") {
-          let newFoodAmount = supply.amount - 4;
-          return {
-            ...supply,
-            amount: newFoodAmount
-          };
-        } else {
-          return supply;
-        }
-      })
+      eventId: event_Id
     });
+  };
+
+  decrementFood = () => {
+    console.log("food");
+    this.setState(
+      {
+        ...this.state,
+        supplies: this.state.supplies.map(supply => {
+          if (supply.name === "food") {
+            let newFoodAmount = supply.amount - 4;
+            return {
+              ...supply,
+              amount: newFoodAmount
+            };
+          } else {
+            return supply;
+          }
+        })
+      },
+      this.randomInterval
+    );
   };
 
   handleRest = () => {
@@ -248,6 +270,7 @@ class Homepage extends Component {
   };
 
   render() {
+    // console.log("render", this.state);
     return (
       <React.Fragment>
         <Userbar name={this.state.name} username={this.state.username} />
@@ -325,6 +348,7 @@ class Homepage extends Component {
           handleClose={this.handleHuntClose.bind(this)}
         />
         <EventModal
+          eventInfo={this.state.eventInfo}
           show={this.state.eventShow}
           handleEventShow={this.handleEventShow}
           handleEventClose={this.handleEventClose.bind(this)}
