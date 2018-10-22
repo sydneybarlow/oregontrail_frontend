@@ -151,11 +151,6 @@ class Homepage extends Component {
 
   cities = () => {
     console.log("cities");
-    // this.randomEvent();
-    // if (this.state.eventId <= 8) {
-    //   this.handleRest();
-    //   // this.handleEventShow();
-    // }
     if (this.state.miles <= 0) {
       clearInterval(this.state.intervalId);
       this.handleDoneShow();
@@ -170,10 +165,6 @@ class Homepage extends Component {
     } else {
       this.decrementMiles();
     }
-  };
-
-  randomEvent = () => {
-    return this.state.events.find(x => x.id === this.state.eventId);
   };
 
   decrementMiles = () => {
@@ -211,24 +202,17 @@ class Homepage extends Component {
 
   getRandomNumberEvents = () => {
     console.log("random events");
-    const eventIdNumber = Math.floor(Math.random() * this.state.events.length);
-    // debugger;
+    const eventIdNumber =
+      Math.floor(Math.random() * this.state.events.length) + 1;
     if (eventIdNumber <= 8) {
       this.setState({
         eventId: eventIdNumber,
-        eventInfo: this.state.events[eventIdNumber - 1],
+        eventInfo: this.state.events[eventIdNumber],
         eventShow: true
       });
       this.handleRest();
     }
   };
-
-  // stopTimer = () => {
-  //   console.log("timer");
-  //   if (this.state.eventId.id <= 8) {
-  //     clearInterval(this.state.intervalId);
-  //   }
-  // };
 
   handleRest = () => {
     console.log("RESTING!!!!");
@@ -308,12 +292,6 @@ class Homepage extends Component {
                 <Supply key={fm.id} fm={fm} />
               </Col>
             ))}
-            <Col lg={10} lgPush={3}>
-              <Image
-                alt="oregon ox and plains"
-                src={`${filePath}placeholder.png`}
-              />
-            </Col>
           </Row>
         </Grid>
         <h2>{this.state.miles} miles from Oregon City</h2>

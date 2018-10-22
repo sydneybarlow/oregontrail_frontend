@@ -6,7 +6,7 @@ class EventModal extends Component {
     console.log("eventmodal this.props", this.props);
     if (this.props.eventInfo === null) {
       return null;
-    } else if (this.props.eventInfo.name === "dysentary") {
+    } else if (this.props.eventInfo.name === "dysentery") {
       return (
         <Modal show={this.props.show} onHide={this.props.handleEventClose}>
           <Modal.Header closeButton>
@@ -87,11 +87,11 @@ class EventModal extends Component {
           </Modal.Footer>
         </Modal>
       );
-    } else if (this.props.eventInfo.name === "small pox") {
+    } else if (this.props.eventInfo.name === "small_pox") {
       return (
         <Modal show={this.props.show} onHide={this.props.handleEventClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Dysentary!</Modal.Title>
+            <Modal.Title>Small Pox!</Modal.Title>
           </Modal.Header>
           <Modal.Body>One of your family members has small pox!!!</Modal.Body>
           <Modal.Footer>
