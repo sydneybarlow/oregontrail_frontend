@@ -23,9 +23,11 @@ class EventModal extends Component {
         return (
           <Modal show={this.props.show} onHide={this.props.handleEventClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Dysentary!</Modal.Title>
+              <Modal.Title>Broken Arm!</Modal.Title>
             </Modal.Header>
-            <Modal.Body>One of your family members has dysentary!!!</Modal.Body>
+            <Modal.Body>
+              One of your family members has a brokan arm!!!
+            </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.props.handleEventClose}>Next</Button>
             </Modal.Footer>
@@ -35,9 +37,11 @@ class EventModal extends Component {
         return (
           <Modal show={this.props.show} onHide={this.props.handleEventClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Dysentary!</Modal.Title>
+              <Modal.Title>Indians attack!</Modal.Title>
             </Modal.Header>
-            <Modal.Body>One of your family members has dysentary!!!</Modal.Body>
+            <Modal.Body>
+              Your caravan has been attacked by indians!!!
+            </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.props.handleEventClose}>Next</Button>
             </Modal.Footer>
@@ -47,9 +51,11 @@ class EventModal extends Component {
         return (
           <Modal show={this.props.show} onHide={this.props.handleEventClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Dysentary!</Modal.Title>
+              <Modal.Title>Dinosaurs!</Modal.Title>
             </Modal.Header>
-            <Modal.Body>One of your family members has dysentary!!!</Modal.Body>
+            <Modal.Body>
+              One of your family members has been eaten by a dinosouar!!!
+            </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.props.handleEventClose}>Next</Button>
             </Modal.Footer>
@@ -59,9 +65,11 @@ class EventModal extends Component {
         return (
           <Modal show={this.props.show} onHide={this.props.handleEventClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Dysentary!</Modal.Title>
+              <Modal.Title>Anthrax!</Modal.Title>
             </Modal.Header>
-            <Modal.Body>One of your family members has dysentary!!!</Modal.Body>
+            <Modal.Body>
+              One of your family members received anthrax in the mail!!!
+            </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.props.handleEventClose}>Next</Button>
             </Modal.Footer>
@@ -71,9 +79,12 @@ class EventModal extends Component {
         return (
           <Modal show={this.props.show} onHide={this.props.handleEventClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Dysentary!</Modal.Title>
+              <Modal.Title>Flight!</Modal.Title>
             </Modal.Header>
-            <Modal.Body>One of your family members has dysentary!!!</Modal.Body>
+            <Modal.Body>
+              One of your family members decided that walking was a waste of
+              time and hopped on a flight!!!
+            </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.props.handleEventClose}>Next</Button>
             </Modal.Footer>
@@ -85,7 +96,7 @@ class EventModal extends Component {
             <Modal.Header closeButton>
               <Modal.Title>Dysentary!</Modal.Title>
             </Modal.Header>
-            <Modal.Body>One of your family members has dysentary!!!</Modal.Body>
+            <Modal.Body>One of your family members has small pox!!!</Modal.Body>
             <Modal.Footer>
               <Button onClick={this.props.handleEventClose}>Next</Button>
             </Modal.Footer>
@@ -97,7 +108,9 @@ class EventModal extends Component {
             <Modal.Header closeButton>
               <Modal.Title>Dysentary!</Modal.Title>
             </Modal.Header>
-            <Modal.Body>One of your family members has dysentary!!!</Modal.Body>
+            <Modal.Body>
+              One of your family members got eatten by a zombie hoard!!!
+            </Modal.Body>
             <Modal.Footer>
               <Button onClick={this.props.handleEventClose}>Next</Button>
             </Modal.Footer>
