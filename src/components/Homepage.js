@@ -41,7 +41,7 @@ class Homepage extends Component {
       locIDShow: false,
       huntShow: false,
       eventShow: false,
-      eventId: null,
+      eventIndex: null,
       intervalId: null,
       mapId: 1
     };
@@ -137,7 +137,7 @@ class Homepage extends Component {
   };
 
   handleGameStart = () => {
-    console.log("game start");
+    // console.log("game start");
     if (!this.state.intervalId) {
       const intervalId = setInterval(this.cities, 1000);
       this.setState({ intervalId: intervalId });
@@ -145,7 +145,7 @@ class Homepage extends Component {
   };
 
   cities = () => {
-    console.log("cities");
+    // console.log("cities");
     if (this.state.miles <= 0) {
       clearInterval(this.state.intervalId);
       this.handleDoneShow();
@@ -163,7 +163,7 @@ class Homepage extends Component {
   };
 
   decrementMiles = () => {
-    console.log("miles");
+    // console.log("miles");
     let newMiles = this.state.miles - 5;
     this.setState(
       {
@@ -175,7 +175,7 @@ class Homepage extends Component {
   };
 
   decrementFood = () => {
-    console.log("food");
+    // console.log("food");
     this.setState(
       {
         ...this.state,
@@ -196,21 +196,26 @@ class Homepage extends Component {
   };
 
   getRandomEvents = () => {
-    console.log("random events");
-    const eventIdNumber =
+    // console.log("random events");
+    const eventIndexNumber =
       Math.floor(Math.random() * this.state.events.length) + 1;
-    if (eventIdNumber <= 8) {
+    if (eventIndexNumber <= 8) {
       this.setState({
-        eventId: eventIdNumber,
-        eventInfo: this.state.events[eventIdNumber],
+        eventIndex: eventIndexNumber,
+        eventInfo: this.state.events[eventIndexNumber],
         eventShow: true
       });
       this.handleRest();
+      this.eventLogic(eventIndexNumber);
     }
   };
 
+  eventLogic = eventId => {
+    console.log("here");
+  };
+
   handleRest = () => {
-    console.log("RESTING!!!!");
+    // console.log("RESTING!!!!");
     clearInterval(this.state.intervalId);
     this.setState({ intervalId: null });
   };
@@ -263,7 +268,7 @@ class Homepage extends Component {
   };
 
   render() {
-    console.log("render", this.state.eventId);
+    // console.log("render", this.state.eventId);
     return (
       <React.Fragment>
         <Userbar name={this.state.name} username={this.state.username} />

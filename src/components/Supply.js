@@ -6,7 +6,7 @@ const filePath = process.env.PUBLIC_URL + "imgs/";
 
 class Supply extends Component {
   render() {
-    console.log("supplies", this.props.supplies);
+    // console.log("supplies", this.props.supplies);
     return (
       <React.Fragment>
         <Grid>
