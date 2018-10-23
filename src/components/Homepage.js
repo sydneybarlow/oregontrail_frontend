@@ -212,7 +212,7 @@ class Homepage extends Component {
         },
         this.eventLogic(eventIndexNumber)
       );
-      this.handleRest();
+      this.rest();
     }
   };
 
@@ -233,14 +233,14 @@ class Homepage extends Component {
       // debugger;
       this.setState({
         ...this.state,
-        family_members: this.state.family_members.map(fammem => {
-          if (fammem.id === randAliveFamObj.id) {
+        family_members: this.state.family_members.map(famMem => {
+          if (famMem.id === randAliveFamObj.id) {
             return {
-              ...fammem,
+              ...famMem,
               health: "bad"
             };
           } else {
-            return fammem;
+            return famMem;
             this.handleGameStart();
           }
         })
@@ -265,7 +265,7 @@ class Homepage extends Component {
       console.log("3: indians");
       this.setState({
         ...this.state,
-        family_members: this.state.supplies.map(supply => {
+        supplies: this.state.supplies.map(supply => {
           let newFoodAmount = supply.amount - 400;
           if (supply.name === "food") {
             return {
@@ -370,34 +370,61 @@ class Homepage extends Component {
   incrementDays = () => {
     let newDays = this.state.days + 1;
     this.setState({
+      ...this.state,
       days: newDays
     });
+  };
+
+  rest = () => {
+    clearInterval(this.state.intervalId);
+    this.setState({ intervalId: null });
   };
 
   handleRest = () => {
     // console.log("RESTING!!!!");
     clearInterval(this.state.intervalId);
-    this.setState({ intervalId: null });
+    this.setState({ intervalId: null }, this.daysToRest());
   };
 
-  poorHealth = () => {
+  daysToRest = () => {
+    // console.log("sick Fam Mem ===>", sickFamMember);
+    let daysToRest = this.state.days + 4;
+    this.betterHealth();
+    this.setState({
+      ...this.state,
+      days: daysToRest,
+      supplies: this.state.supplies.map(supply => {
+        let newAmount = supply.amount - 400;
+        if (supply.name === "food") {
+          return {
+            ...supply,
+            amount: newAmount
+          };
+        } else {
+          return supply;
+        }
+      })
+    });
+  };
+
+  betterHealth = () => {
     this.setState({
       ...this.state,
       family_members: this.state.family_members.map(family => {
-        if (family.health === "good") {
-          return {
-            ...family,
-            health: "fair"
-          };
-        } else if (family.health === "fair") {
+        if (family.health === "bad") {
           return {
             ...family,
             health: "poor"
           };
+        } else if (family.health === "poor") {
+          return {
+            ...family,
+            health: "fair"
+          };
         } else {
           return {
             ...family,
-            health: "bad"
+            health: "good"
           };
         }
       })
@@ -435,7 +462,7 @@ class Homepage extends Component {
   };
 
   render() {
-    console.log("render", this.state);
+    // console.log("render", this.state);
     return (
       <React.Fragment>
         <Userbar name={this.state.name} username={this.state.username} />
@@ -482,8 +509,6 @@ class Homepage extends Component {
                 <Button bsStyle="success" onClick={this.handleRest}>
                   Rest
                 </Button>
-                <Button onClick={this.poorHealth}>Bad Health Test</Button>
-                <Button onClick={this.deadFamilyMember}>Dead Family</Button>
               </ButtonGroup>
             </Col>
           </Row>
