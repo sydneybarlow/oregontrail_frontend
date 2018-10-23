@@ -537,7 +537,7 @@ class Homepage extends Component {
             </Col>
           </Row>
         </Grid>
-        <h2>{this.state.miles} miles from Oregon City</h2>
+        <h1>{this.state.miles} miles from Oregon City</h1>
         <Grid>
           <Row>
             <Col lg={10}>
