@@ -153,13 +153,16 @@ class Homepage extends Component {
     } else if (this.state.miles === 720) {
       clearInterval(this.state.intervalId);
       this.decrementMiles();
+      this.incrementDays();
       this.setState({ locIDShow: true });
     } else if (this.state.miles === 1150) {
       clearInterval(this.state.intervalId);
       this.decrementMiles();
+      this.incrementDays();
       this.setState({ locWYShow: true });
     } else {
       this.decrementMiles();
+      this.incrementDays();
     }
   };
 
@@ -364,8 +367,11 @@ class Homepage extends Component {
     }
   };
 
-  decrementDays = () => {
-    this.setState({});
+  incrementDays = () => {
+    let newDays = this.state.days + 1;
+    this.setState({
+      days: newDays
+    });
   };
 
   handleRest = () => {
