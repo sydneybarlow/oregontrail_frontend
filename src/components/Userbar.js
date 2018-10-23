@@ -6,13 +6,15 @@ const filePath = process.env.PUBLIC_URL + "imgs/";
 
 class Userbar extends Component {
   render() {
-    // console.log("fm", this.props);
+    console.log("user", this.props);
     return (
       <React.Fragment>
         <PageHeader>
           User: {this.props.username}
           <div className="logoutButton" style={{ float: "right" }}>
-            <Button bsStyle="primary">Logout</Button>
+            <Button bsStyle="primary" onclick={() => this.props.logout}>
+              Logout
+            </Button>
           </div>
         </PageHeader>
       </React.Fragment>

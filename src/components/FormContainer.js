@@ -34,6 +34,11 @@ class FormContainer extends Component {
     }
   }
 
+  logout = () => {
+    localStorage.clear();
+    this.setState({ userInfo: null });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -70,6 +75,7 @@ class FormContainer extends Component {
                 this.state.userInfo && this.state.form === null ? (
                   <Homepage
                     {...this.state.userInfo}
+                    logout={this.logout}
                     props={this.props}
                     updateFormType={this.updateFormType}
                   />

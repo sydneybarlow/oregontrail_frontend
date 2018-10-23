@@ -496,10 +496,14 @@ class Homepage extends Component {
   };
 
   render() {
-    // console.log("render", this.state);
+    console.log("render", this.props);
     return (
       <React.Fragment>
-        <Userbar name={this.state.name} username={this.state.username} />
+        <Userbar
+          name={this.state.name}
+          username={this.state.username}
+          logout={this.props.logout}
+        />
         <Grid>
           <Row className="show-grid">
             <Col lg={12}>
@@ -542,9 +546,6 @@ class Homepage extends Component {
                 </Button>
                 <Button bsStyle="success" onClick={this.handleRest}>
                   Rest
-                </Button>
-                <Button bsStyle="danger" onClick={this.gameOver}>
-                  Game Over
                 </Button>
                 <Button bsStyle="danger" onClick={this.badTooLong}>
                   Bad Too Long
