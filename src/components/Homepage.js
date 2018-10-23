@@ -44,6 +44,7 @@ class Homepage extends Component {
       huntShow: false,
       eventShow: false,
       gameShow: false,
+      deadShow: false,
       eventIndex: null,
       intervalId: null,
       mapNum: 1
@@ -118,6 +119,15 @@ class Homepage extends Component {
       this.setState({ intervalId: intervalId });
     }
   };
+
+  handleDeadClose() {
+    this.setState({ deadShow: false });
+    this.props.updateFormType("familyForm");
+  }
+
+  handleDeadShow() {
+    this.setState({ deadShow: true });
+  }
 
   incrementFood = () => {
     console.log("getting food");
@@ -439,19 +449,43 @@ class Homepage extends Component {
     });
   };
 
+  badTooLong = () => {
+    console.log("bad too long");
+    // let counter = 0;
+    // let allBadHealth = this.state.family_members.filter(
+    //   fm => fm.health === "bad"
+    // );
+    // console.log("===>", allBadHealth);
+    // debugger;
+    // if (allBadHealth.length != 0 && counter < 11) {
+    //   return (
+    //     counter++,
+    //     this.setState({
+    //       ...this.state,
+    //       family_members: this.state.family_members.map(fm => {
+    //         if (fm.id === allBadHealth.id)
+    //           return {
+    //             ...fm,
+    //             role: "dead"
+    //           };
+    //       })
+    //     })
+    //   );
+    // }
+  };
+
   allDead = () => {
     let allAliveFam = this.state.family_members.filter(
       fm => fm.status === "alive"
     );
-    debugger;
     if (allAliveFam.length === 0) {
       this.gameOver();
     }
   };
 
   renderMap = () => {
-    let newMap = this.state.mapId - 1;
-    if (this.state.miles === 1795 / 29) {
+    let newMap = this.state.mapId + 1;
+    if (this.state.miles === 1795 - 62) {
       this.setState({
         mapNum: newMap
       });
@@ -482,10 +516,10 @@ class Homepage extends Component {
             </Col>
           </Row>
           <Row className="show-grid">
-            <Col>
+            <Col lg={4} lgPull={3}>
               <FamilyMember family_members={this.state.family_members} />
             </Col>
-            <Col lg={2}>
+            <Col lg={6} lgOffset={2}>
               <Supply
                 supplies={this.state.supplies}
                 money={this.state.money}
@@ -516,8 +550,8 @@ class Homepage extends Component {
                 <Button bsStyle="danger" onClick={this.gameOver}>
                   Game Over
                 </Button>
-                <Button bsStyle="danger" onClick={this.allDead}>
-                  Alive Fam
+                <Button bsStyle="danger" onClick={this.badTooLong}>
+                  Bad Too Long
                 </Button>
               </ButtonGroup>
             </Col>
@@ -547,6 +581,10 @@ class Homepage extends Component {
         <GameOver
           show={this.state.gameShow}
           handleClose={this.handleGameClose.bind(this)}
+        />
+        <GameOver
+          show={this.state.deadShow}
+          handleClose={this.handleDeadClose.bind(this)}
         />
       </React.Fragment>
     );

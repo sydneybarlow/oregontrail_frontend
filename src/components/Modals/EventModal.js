@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Fragment, Modal, Button } from "react-bootstrap";
+import { Fragment, Modal, Button, Image } from "react-bootstrap";
+
+const filePath = process.env.PUBLIC_URL + "imgs/";
 
 class EventModal extends Component {
   render() {
@@ -12,7 +14,13 @@ class EventModal extends Component {
           <Modal.Header closeButton>
             <Modal.Title>Dysentary!</Modal.Title>
           </Modal.Header>
-          <Modal.Body>One of your family members has dysentary!!!</Modal.Body>
+          <Modal.Body>
+            <Image
+              alt="emoji"
+              src={`${filePath}${this.props.eventInfo.name}.png`}
+            />
+            One of your family members has dysentary!!!
+          </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleEventClose}>Next</Button>
           </Modal.Footer>
@@ -25,6 +33,10 @@ class EventModal extends Component {
             <Modal.Title>Broken Arm!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <Image
+              alt="emoji"
+              src={`${filePath}${this.props.eventInfo.name}.png`}
+            />
             One of your family members has a brokan arm!!!
           </Modal.Body>
           <Modal.Footer>
@@ -38,7 +50,13 @@ class EventModal extends Component {
           <Modal.Header closeButton>
             <Modal.Title>Indians attack!</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Your caravan has been attacked by indians!!!</Modal.Body>
+          <Modal.Body>
+            <Image
+              alt="emoji"
+              src={`${filePath}${this.props.eventInfo.name}.png`}
+            />
+            Your caravan has been attacked by indians!!! Lose %% pounds of food.
+          </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleEventClose}>Next</Button>
           </Modal.Footer>
@@ -51,6 +69,10 @@ class EventModal extends Component {
             <Modal.Title>Dinosaurs!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <Image
+              alt="emoji"
+              src={`${filePath}${this.props.eventInfo.name}.png`}
+            />
             One of your family members has been eaten by a dinosouar!!!
           </Modal.Body>
           <Modal.Footer>
@@ -65,6 +87,10 @@ class EventModal extends Component {
             <Modal.Title>Anthrax!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <Image
+              alt="emoji"
+              src={`${filePath}${this.props.eventInfo.name}.png`}
+            />
             One of your family members received anthrax in the mail!!!
           </Modal.Body>
           <Modal.Footer>
@@ -79,6 +105,10 @@ class EventModal extends Component {
             <Modal.Title>Flight!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <Image
+              alt="emoji"
+              src={`${filePath}${this.props.eventInfo.name}.png`}
+            />
             One of your family members decided that walking was a waste of time
             and hopped on a flight!!!
           </Modal.Body>
@@ -93,7 +123,13 @@ class EventModal extends Component {
           <Modal.Header closeButton>
             <Modal.Title>Small Pox!</Modal.Title>
           </Modal.Header>
-          <Modal.Body>One of your family members has small pox!!!</Modal.Body>
+          <Modal.Body>
+            <Image
+              alt="emoji"
+              src={`${filePath}${this.props.eventInfo.name}.png`}
+            />
+            One of your family members has small pox!!!
+          </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleEventClose}>Next</Button>
           </Modal.Footer>
@@ -106,6 +142,10 @@ class EventModal extends Component {
             <Modal.Title>Zombies!</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            <Image
+              alt="emoji"
+              src={`${filePath}${this.props.eventInfo.name}.png`}
+            />
             One of your family members got eatten by a zombie hoard!!!
           </Modal.Body>
           <Modal.Footer>
