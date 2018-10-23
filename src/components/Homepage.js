@@ -200,15 +200,19 @@ class Homepage extends Component {
       Math.floor(Math.random() * this.state.events.length) + 1;
     if (eventIndexNumber <= 7) {
       console.log("modals");
-      this.setState({
-        eventIndex: eventIndexNumber,
-        eventInfo: this.state.events[eventIndexNumber],
-        eventShow: true
-      });
-      this.eventLogic(eventIndexNumber);
+      this.setState(
+        {
+          eventIndex: eventIndexNumber,
+          eventInfo: this.state.events[eventIndexNumber],
+          eventShow: true
+        },
+        this.eventLogic(eventIndexNumber)
+      );
       this.handleRest();
     }
   };
+
+  invokeEventModals = () => {};
 
   randomAliveFamMember = () => {
     let aliveFam = this.state.family_members.filter(
@@ -233,6 +237,7 @@ class Homepage extends Component {
             };
           } else {
             return fammem;
+            this.handleGameStart();
           }
         })
       });
@@ -277,6 +282,7 @@ class Homepage extends Component {
           if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
+              health: "bad",
               status: "dead",
               role: "dead"
             };
@@ -310,11 +316,13 @@ class Homepage extends Component {
           if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
+              health: "bad",
               status: "dead",
               role: "dead"
             };
           } else {
             return fammem;
+            this.handleGameStart();
           }
         })
       });
@@ -342,6 +350,7 @@ class Homepage extends Component {
           if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
+              health: "bad",
               status: "dead",
               role: "dead"
             };
