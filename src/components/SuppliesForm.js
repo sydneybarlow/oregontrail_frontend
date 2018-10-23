@@ -6,7 +6,10 @@ import {
   FormGroup,
   ControlLabel,
   Button,
-  Alert
+  Alert,
+  Grid,
+  Row,
+  Col
 } from "react-bootstrap";
 import "../App.css";
 
@@ -61,34 +64,42 @@ class SuppliesForm extends Component {
     return (
       <React.Fragment>
         <h3>Purchase Supplies!</h3>
-        <h2>${this.state.money}</h2>
-        <Form onSubmit={this.handleSuppliesSubmit}>
-          <FormGroup>
-            <h4>👨‍👩‍👧‍👦 Recommended 500 pounds of food for each family member.</h4>
-            <h4>$20 per pound of food</h4>
-            <ControlLabel>Pounds Of Food:</ControlLabel>
-            <FormControl
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleName}
-            />
-          </FormGroup>
-          <FormGroup>
-            <h4>$10 per box of ammunition</h4>
-            <ControlLabel>Boxes Of Ammunition:</ControlLabel>
-            <FormControl
-              type="text"
-              name="amount"
-              value={this.state.amount}
-              onChange={this.handleAmount}
-            />
-          </FormGroup>
+        <h2>You have: ${this.state.money}</h2>
+        <Grid>
+          <Row>
+            <Col lg={4} lgPush={4}>
+              <Form onSubmit={this.handleSuppliesSubmit}>
+                <FormGroup>
+                  <h5>
+                    👨‍👩‍👧‍👦 Recommended 500 pounds of food for each family member.
+                  </h5>
+                  <h4>$20 per pound of food</h4>
+                  <ControlLabel>Pounds Of Food:</ControlLabel>
+                  <FormControl
+                    type="text"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.handleName}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <h4>$10 per box of ammunition</h4>
+                  <ControlLabel>Boxes Of Ammunition:</ControlLabel>
+                  <FormControl
+                    type="text"
+                    name="amount"
+                    value={this.state.amount}
+                    onChange={this.handleAmount}
+                  />
+                </FormGroup>
 
-          <Button type="submit" bsStyle="primary">
-            Enter
-          </Button>
-        </Form>
+                <Button type="submit" bsStyle="info">
+                  Enter
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        </Grid>
       </React.Fragment>
     );
   }

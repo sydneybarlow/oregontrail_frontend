@@ -6,7 +6,10 @@ import {
   FormGroup,
   ControlLabel,
   Button,
-  Alert
+  Alert,
+  Grid,
+  Row,
+  Col
 } from "react-bootstrap";
 import "../App.css";
 
@@ -51,20 +54,26 @@ class FamilyForm extends Component {
     return (
       <React.Fragment>
         <h3>Make Your Family</h3>
-        <Form onSubmit={this.handleSignInSubmit}>
-          <FormGroup>
-            <ControlLabel>Name:</ControlLabel>
-            <FormControl
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleName}
-            />
-          </FormGroup>
-          <Button type="submit" bsStyle="primary">
-            Enter
-          </Button>
-        </Form>
+        <Grid>
+          <Row>
+            <Col>
+              <Form onSubmit={this.handleSignInSubmit}>
+                <FormGroup>
+                  <ControlLabel>Name:</ControlLabel>
+                  <FormControl
+                    type="text"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.handleName}
+                  />
+                </FormGroup>
+                <Button type="submit" bsStyle="info">
+                  Enter
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        </Grid>
       </React.Fragment>
     );
   }

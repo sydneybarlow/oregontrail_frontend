@@ -6,7 +6,10 @@ import {
   FormGroup,
   ControlLabel,
   Button,
-  Alert
+  Alert,
+  Grid,
+  Row,
+  Col
 } from "react-bootstrap";
 import "../App.css";
 
@@ -60,38 +63,44 @@ class SignUpForm extends Component {
     return (
       <React.Fragment>
         <h3>Sign Up</h3>
-        <Form onSubmit={this.handleSignInSubmit}>
-          <FormGroup>
-            <ControlLabel>Name:</ControlLabel>
-            <FormControl
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleName}
-            />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Username:</ControlLabel>
-            <FormControl
-              type="text"
-              name="username"
-              value={this.state.username}
-              onChange={this.handleUsername}
-            />
-          </FormGroup>
-          <FormGroup>
-            <ControlLabel>Password:</ControlLabel>
-            <FormControl
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handlePassword}
-            />
-          </FormGroup>
-          <Button type="submit" bsStyle="primary">
-            Enter
-          </Button>
-        </Form>
+        <Grid>
+          <Row>
+            <Col lg={4} lgPush={4}>
+              <Form onSubmit={this.handleSignInSubmit}>
+                <FormGroup>
+                  <ControlLabel>Name:</ControlLabel>
+                  <FormControl
+                    type="text"
+                    name="name"
+                    value={this.state.name}
+                    onChange={this.handleName}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <ControlLabel>Username:</ControlLabel>
+                  <FormControl
+                    type="text"
+                    name="username"
+                    value={this.state.username}
+                    onChange={this.handleUsername}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <ControlLabel>Password:</ControlLabel>
+                  <FormControl
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.handlePassword}
+                  />
+                </FormGroup>
+                <Button type="submit" bsStyle="info">
+                  Enter
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        </Grid>
       </React.Fragment>
     );
   }

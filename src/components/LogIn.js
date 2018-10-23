@@ -59,7 +59,7 @@ class LogIn extends Component {
         <h3>Log In</h3>
         <Grid>
           <Row>
-            <Col lg={6}>
+            <Col lg={4} lgPush={4}>
               <Form onSubmit={this.handleLogInSubmit}>
                 <FormGroup>
                   <ControlLabel>Username:</ControlLabel>
@@ -80,7 +80,7 @@ class LogIn extends Component {
                   />
                 </FormGroup>
                 <ButtonGroup>
-                  <Button type="submit" bsStyle="primary">
+                  <Button type="submit" bsStyle="info">
                     Enter
                   </Button>
                   <Button type="button" bsStyle="primary" href="/signup">
