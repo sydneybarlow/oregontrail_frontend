@@ -53,7 +53,15 @@ class Homepage extends Component {
   }
 
   handleDoneClose() {
-    this.setState({ doneShow: false });
+    this.setState({
+      doneShow: false,
+      intervalId: null,
+      eventInfo: null,
+      days: 0,
+      miles: 1795,
+      milesTraveled: null,
+      mapNum: 1
+    });
     this.props.updateFormType("familyForm");
   }
 
@@ -197,8 +205,8 @@ class Homepage extends Component {
 
   decrementMiles = () => {
     // console.log("miles");
-    let newMiles = this.state.miles - 5;
-    let newMilesTraveled = this.state.milesTraveled + 5;
+    let newMiles = this.state.miles - 10;
+    let newMilesTraveled = this.state.milesTraveled + 10;
     this.setState(
       {
         ...this.state,
@@ -457,27 +465,6 @@ class Homepage extends Component {
 
   badTooLong = () => {
     console.log("bad too long");
-    // let counter = 0;
-    // let allBadHealth = this.state.family_members.filter(
-    //   fm => fm.health === "bad"
-    // );
-    // console.log("===>", allBadHealth);
-    // debugger;
-    // if (allBadHealth.length != 0 && counter < 11) {
-    //   return (
-    //     counter++,
-    //     this.setState({
-    //       ...this.state,
-    //       family_members: this.state.family_members.map(fm => {
-    //         if (fm.id === allBadHealth.id)
-    //           return {
-    //             ...fm,
-    //             role: "dead"
-    //           };
-    //       })
-    //     })
-    //   );
-    // }
   };
 
   allDead = () => {
