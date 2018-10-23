@@ -196,25 +196,33 @@ class Homepage extends Component {
   };
 
   getRandomEvents = () => {
-    // console.log("random events");
-    const eventIndexNumber = 0;
-    // Math.floor(Math.random() * this.state.events.length) + 1;
-    if (eventIndexNumber <= 8) {
+    const eventIndexNumber =
+      Math.floor(Math.random() * this.state.events.length) + 1;
+    if (eventIndexNumber <= 7) {
+      console.log("modals");
       this.setState({
         eventIndex: eventIndexNumber,
         eventInfo: this.state.events[eventIndexNumber],
         eventShow: true
       });
-      this.handleRest();
       this.eventLogic(eventIndexNumber);
+      this.handleRest();
     }
   };
 
+  randomAliveFamMember = () => {
+    let aliveFam = this.state.family_members.filter(
+      fm => fm.status === "alive"
+    );
+    return aliveFam[Math.floor(Math.random() * aliveFam.length)];
+  };
+
   eventLogic = eventIndex => {
-    console.log("eventIndex", eventIndex);
     let randAliveFamObj = this.randomAliveFamMember();
     console.log("randFam ===>", randAliveFamObj);
     if (eventIndex === 0) {
+      console.log("1: dysentery");
+      // debugger;
       this.setState({
         ...this.state,
         family_members: this.state.family_members.map(fammem => {
@@ -229,143 +237,121 @@ class Homepage extends Component {
         })
       });
     } else if (eventIndex === 1) {
-      console.log("Im in one");
-      let famMemberIndex = this.state.family_members[
-        Math.floor(Math.random() * this.state.family_members.length)
-      ];
+      console.log("2: broken arm");
       this.setState({
         ...this.state,
         family_members: this.state.family_members.map(fammem => {
-          if (
-            fammem.id === famMemberIndex.id &&
-            fammem.health != "bad" &&
-            fammem.status === "alive"
-          ) {
+          if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
               health: "bad"
             };
-          } else if (
-            fammem.id === famMemberIndex.id &&
-            fammem.health === "bad"
-          ) {
-            return {
-              ...fammem,
-              status: "dead"
-            };
           } else {
-            let famMemberIndex = this.state.family_members[
-              Math.floor(Math.random() * this.state.family_members.length)
-            ];
-            return this.eventLogic(famMemberIndex);
+            return fammem;
+            this.handleGameStart();
           }
         })
       });
     } else if (eventIndex === 2) {
-      console.log("Im in two");
+      console.log("3: indians");
+      this.setState({
+        ...this.state,
+        family_members: this.state.supplies.map(supply => {
+          let newFoodAmount = supply.amount - 400;
+          if (supply.name === "food") {
+            return {
+              ...supply,
+              amount: newFoodAmount
+            };
+          } else {
+            return supply;
+            this.handleGameStart();
+          }
+        })
+      });
     } else if (eventIndex === 3) {
-      console.log("Im in three");
-      let famMemberIndex = this.state.family_members[
-        Math.floor(Math.random() * this.state.family_members.length)
-      ];
+      console.log("4: dinosuars");
       this.setState({
         ...this.state,
         family_members: this.state.family_members.map(fammem => {
-          if (fammem.id === famMemberIndex.id && fammem.status === "alive") {
+          if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
-              health: "bad",
-              status: "dead"
+              status: "dead",
+              role: "dead"
             };
           } else {
-            let famMemberIndex2 = this.state.family_members[
-              Math.floor(Math.random() * this.state.family_members.length)
-            ];
-            this.eventLogic(famMemberIndex2);
+            return fammem;
+            this.handleGameStart();
           }
         })
       });
     } else if (eventIndex === 4) {
-      console.log("Im in four");
-    } else if (eventIndex === 5) {
-      let famMemberIndex = this.state.family_members[
-        Math.floor(Math.random() * this.state.family_members.length)
-      ];
+      console.log("5: anthrax");
       this.setState({
         ...this.state,
         family_members: this.state.family_members.map(fammem => {
-          if (
-            fammem.id === famMemberIndex.id &&
-            fammem.health != "bad" &&
-            fammem.status === "alive"
-          ) {
+          if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
               health: "bad"
             };
-          } else if (
-            fammem.id === famMemberIndex.id &&
-            fammem.health === "bad"
-          ) {
-            return {
-              ...fammem,
-              status: "dead"
-            };
           } else {
-            let famMemberIndex = this.state.family_members[
-              Math.floor(Math.random() * this.state.family_members.length)
-            ];
-            return this.eventLogic(famMemberIndex);
+            return fammem;
+            this.handleGameStart();
           }
         })
       });
-      console.log("Im in five");
-    } else if (eventIndex === 6) {
-      console.log("Im in six");
-    } else if (eventIndex === 7) {
-      console.log("Im in seven");
-      let famMemberIndex = this.state.family_members[
-        Math.floor(Math.random() * this.state.family_members.length)
-      ];
+    } else if (eventIndex === 5) {
+      console.log("6: flight");
       this.setState({
         ...this.state,
         family_members: this.state.family_members.map(fammem => {
-          if (
-            fammem.id === famMemberIndex.id &&
-            fammem.health != "bad" &&
-            fammem.status === "alive"
-          ) {
+          if (fammem.id === randAliveFamObj.id) {
+            return {
+              ...fammem,
+              status: "dead",
+              role: "dead"
+            };
+          } else {
+            return fammem;
+          }
+        })
+      });
+    } else if (eventIndex === 6) {
+      console.log("7: small pox");
+      this.setState({
+        ...this.state,
+        family_members: this.state.family_members.map(fammem => {
+          if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
               health: "bad"
             };
-          } else if (
-            fammem.id === famMemberIndex.id &&
-            fammem.health === "bad"
-          ) {
-            return {
-              ...fammem,
-              status: "dead"
-            };
           } else {
-            let famMemberIndex = this.state.family_members[
-              Math.floor(Math.random() * this.state.family_members.length)
-            ];
-            return this.eventLogic(famMemberIndex);
+            return fammem;
+            this.handleGameStart();
           }
         })
       });
     } else {
-      console.log("Im in eight");
-      this.handleGameStart();
+      console.log("8: zombie");
+      this.setState({
+        ...this.state,
+        family_members: this.state.family_members.map(fammem => {
+          if (fammem.id === randAliveFamObj.id) {
+            return {
+              ...fammem,
+              status: "dead",
+              role: "dead"
+            };
+          } else {
+            return fammem;
+            this.handleGameStart();
+          }
+        })
+      });
     }
-  };
-
-  randomAliveFamMember = () => {
-    let aliveFam = this.state.family_members.filter(
-      fm => fm.status === "alive"
-    );
-    return aliveFam[Math.floor(Math.random() * aliveFam.length)];
   };
 
   handleRest = () => {
