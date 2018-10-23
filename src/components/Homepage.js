@@ -47,6 +47,7 @@ class Homepage extends Component {
       deadShow: false,
       eventIndex: null,
       intervalId: null,
+      milesTraveled: null,
       mapNum: 1
     };
   }
@@ -108,7 +109,9 @@ class Homepage extends Component {
       eventInfo: null,
       days: 0,
       miles: 1795,
-      gameShow: false
+      gameShow: false,
+      milesTraveled: null,
+      mapNum: 1
     });
   };
 
@@ -195,13 +198,16 @@ class Homepage extends Component {
   decrementMiles = () => {
     // console.log("miles");
     let newMiles = this.state.miles - 5;
+    let newMilesTraveled = this.state.milesTraveled + 5;
     this.setState(
       {
         ...this.state,
-        miles: newMiles
+        miles: newMiles,
+        milesTraveled: newMilesTraveled
       },
       this.decrementFood
     );
+    this.renderMap();
   };
 
   decrementFood = () => {
@@ -484,10 +490,11 @@ class Homepage extends Component {
   };
 
   renderMap = () => {
-    let newMap = this.state.mapId + 1;
-    if (this.state.miles === 1795 - 62) {
+    let newMap = this.state.mapNum + 1;
+    if (this.state.milesTraveled === 60) {
       this.setState({
-        mapNum: newMap
+        mapNum: newMap,
+        milesTraveled: null
       });
     }
   };
@@ -495,7 +502,9 @@ class Homepage extends Component {
   gameOver = () => {
     // TODO: this should open modal or redirect
     console.log("game over");
-    this.setState({ gameShow: true });
+    this.setState({
+      gameShow: true
+    });
     this.rest();
   };
 
