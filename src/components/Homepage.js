@@ -81,6 +81,13 @@ class Homepage extends Component {
     this.setState({ huntShow: true });
   };
 
+  allHuntFunctions = () => {
+    console.log("HUNTING!!");
+    this.incrementFood();
+    // this.decrementBullets();
+    this.handleHuntShow();
+  };
+
   handleEventClose() {
     this.setState({
       eventShow: false,
@@ -89,6 +96,14 @@ class Homepage extends Component {
     });
     this.handleGameStart();
   }
+
+  handleGameStart = () => {
+    // console.log("game start");
+    if (!this.state.intervalId) {
+      const intervalId = setInterval(this.cities, 1000);
+      this.setState({ intervalId: intervalId });
+    }
+  };
 
   incrementFood = () => {
     console.log("getting food");
@@ -127,21 +142,6 @@ class Homepage extends Component {
         }
       })
     });
-  };
-
-  allHuntFunctions = () => {
-    console.log("HUNTING!!");
-    this.incrementFood();
-    // this.decrementBullets();
-    this.handleHuntShow();
-  };
-
-  handleGameStart = () => {
-    // console.log("game start");
-    if (!this.state.intervalId) {
-      const intervalId = setInterval(this.cities, 1000);
-      this.setState({ intervalId: intervalId });
-    }
   };
 
   cities = () => {
@@ -212,38 +212,22 @@ class Homepage extends Component {
 
   eventLogic = eventIndex => {
     console.log("eventIndex", eventIndex);
+    let randAliveFamObj = this.randomAliveFamMember();
+    console.log("randFam ===>", randAliveFamObj);
     if (eventIndex === 0) {
-      let famMemberIndex = this.state.family_members[
-        Math.floor(Math.random() * this.state.family_members.length)
-      ];
-      this.setState(
-        {
-          ...this.state,
-          family_members: this.state.family_members.map(fammem => {
-            if (
-              fammem.id === famMemberIndex.id &&
-              fammem.health != "bad" &&
-              fammem.status === "alive"
-            ) {
-              return {
-                ...fammem,
-                health: "bad"
-              };
-            } else if (
-              fammem.id === famMemberIndex.id &&
-              fammem.health === "bad"
-            ) {
-              return {
-                ...fammem,
-                status: "dead"
-              };
-            } else {
-              return fammem;
-            }
-          })
-        },
-        this.eventLogic(famMemberIndex)
-      );
+      this.setState({
+        ...this.state,
+        family_members: this.state.family_members.map(fammem => {
+          if (fammem.id === randAliveFamObj.id) {
+            return {
+              ...fammem,
+              health: "bad"
+            };
+          } else {
+            return fammem;
+          }
+        })
+      });
     } else if (eventIndex === 1) {
       console.log("Im in one");
       let famMemberIndex = this.state.family_members[
@@ -377,6 +361,13 @@ class Homepage extends Component {
     }
   };
 
+  randomAliveFamMember = () => {
+    let aliveFam = this.state.family_members.filter(
+      fm => fm.status === "alive"
+    );
+    return aliveFam[Math.floor(Math.random() * aliveFam.length)];
+  };
+
   handleRest = () => {
     // console.log("RESTING!!!!");
     clearInterval(this.state.intervalId);
@@ -414,7 +405,8 @@ class Homepage extends Component {
         if ((family.status = "alive")) {
           return {
             ...family,
-            status: "dead"
+            status: "dead",
+            role: "dead"
           };
         }
       })
@@ -428,6 +420,12 @@ class Homepage extends Component {
         mapId: newMap
       });
     }
+  };
+
+  gameOver = () => {
+    // TODO: this should open modal or redirect
+    console.log("game over");
+    this.handleRest();
   };
 
   render() {
