@@ -3,7 +3,7 @@ import { Fragment, Modal, Button } from "react-bootstrap";
 
 class EventModal extends Component {
   render() {
-    console.log("eventmodal this.props", this.props);
+    // console.log("eventmodal this.props", this.props);
     if (this.props.eventInfo === null) {
       return null;
     } else if (this.props.eventInfo.name === "dysentery") {
