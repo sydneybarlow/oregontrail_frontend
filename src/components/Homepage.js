@@ -19,6 +19,7 @@ import WYModal from "./Modals/WYModal";
 import IDModal from "./Modals/IDModal";
 import HuntingModal from "./Modals/HuntingModal";
 import EventModal from "./Modals/EventModal";
+import GameOver from "./Modals/GameOver";
 import "../App.css";
 
 const filePath = process.env.PUBLIC_URL + "imgs/";
@@ -42,9 +43,10 @@ class Homepage extends Component {
       locIDShow: false,
       huntShow: false,
       eventShow: false,
+      gameShow: false,
       eventIndex: null,
       intervalId: null,
-      mapId: 1
+      mapNum: 1
     };
   }
 
@@ -97,6 +99,17 @@ class Homepage extends Component {
     });
     this.handleGameStart();
   }
+
+  handleGameClose = () => {
+    this.setState({
+      ...this.state,
+      intervalId: null,
+      eventInfo: null,
+      days: 0,
+      miles: 1795,
+      gameShow: false
+    });
+  };
 
   handleGameStart = () => {
     // console.log("game start");
@@ -152,15 +165,18 @@ class Homepage extends Component {
       this.handleDoneShow();
     } else if (this.state.miles === 720) {
       clearInterval(this.state.intervalId);
+      this.allDead();
       this.decrementMiles();
       this.incrementDays();
       this.setState({ locIDShow: true });
     } else if (this.state.miles === 1150) {
       clearInterval(this.state.intervalId);
+      this.allDead();
       this.decrementMiles();
       this.incrementDays();
       this.setState({ locWYShow: true });
     } else {
+      this.allDead();
       this.decrementMiles();
       this.incrementDays();
     }
@@ -227,10 +243,8 @@ class Homepage extends Component {
 
   eventLogic = eventIndex => {
     let randAliveFamObj = this.randomAliveFamMember();
-    console.log("randFam ===>", randAliveFamObj);
     if (eventIndex === 0) {
       console.log("1: dysentery");
-      // debugger;
       this.setState({
         ...this.state,
         family_members: this.state.family_members.map(famMem => {
@@ -282,16 +296,16 @@ class Homepage extends Component {
       console.log("4: dinosuars");
       this.setState({
         ...this.state,
-        family_members: this.state.family_members.map(fammem => {
-          if (fammem.id === randAliveFamObj.id) {
+        family_members: this.state.family_members.map(famMem => {
+          if (famMem.id === randAliveFamObj.id) {
             return {
-              ...fammem,
+              ...famMem,
               health: "bad",
               status: "dead",
               role: "dead"
             };
           } else {
-            return fammem;
+            return famMem;
             this.handleGameStart();
           }
         })
@@ -300,14 +314,14 @@ class Homepage extends Component {
       console.log("5: anthrax");
       this.setState({
         ...this.state,
-        family_members: this.state.family_members.map(fammem => {
-          if (fammem.id === randAliveFamObj.id) {
+        family_members: this.state.family_members.map(famMem => {
+          if (famMem.id === randAliveFamObj.id) {
             return {
-              ...fammem,
+              ...famMem,
               health: "bad"
             };
           } else {
-            return fammem;
+            return famMem;
             this.handleGameStart();
           }
         })
@@ -389,7 +403,7 @@ class Homepage extends Component {
   daysToRest = () => {
     // console.log("sick Fam Mem ===>", sickFamMember);
     let daysToRest = this.state.days + 4;
-    this.betterHealth();
+    // this.betterHealth();
     this.setState({
       ...this.state,
       days: daysToRest,
@@ -403,13 +417,7 @@ class Homepage extends Component {
         } else {
           return supply;
         }
-      })
-    });
-  };
-
-  betterHealth = () => {
-    this.setState({
-      ...this.state,
+      }),
       family_members: this.state.family_members.map(family => {
         if (family.health === "bad") {
           return {
@@ -431,26 +439,21 @@ class Homepage extends Component {
     });
   };
 
-  deadFamilyMember = () => {
-    this.setState({
-      ...this.state,
-      family_members: this.state.family_members.map(family => {
-        if ((family.status = "alive")) {
-          return {
-            ...family,
-            status: "dead",
-            role: "dead"
-          };
-        }
-      })
-    });
+  allDead = () => {
+    let allAliveFam = this.state.family_members.filter(
+      fm => fm.status === "alive"
+    );
+    debugger;
+    if (allAliveFam.length === 0) {
+      this.gameOver();
+    }
   };
 
   renderMap = () => {
     let newMap = this.state.mapId - 1;
     if (this.state.miles === 1795 / 29) {
       this.setState({
-        mapId: newMap
+        mapNum: newMap
       });
     }
   };
@@ -458,7 +461,8 @@ class Homepage extends Component {
   gameOver = () => {
     // TODO: this should open modal or redirect
     console.log("game over");
-    this.handleRest();
+    this.setState({ gameShow: true });
+    this.rest();
   };
 
   render() {
@@ -495,7 +499,7 @@ class Homepage extends Component {
           <Row>
             <Col lg={10}>
               <div className="map">
-                <Map />
+                <Map mapNumber={this.state.mapNum} />
               </div>
             </Col>
             <Col lg={2} lgPush={1}>
@@ -509,34 +513,40 @@ class Homepage extends Component {
                 <Button bsStyle="success" onClick={this.handleRest}>
                   Rest
                 </Button>
+                <Button bsStyle="danger" onClick={this.gameOver}>
+                  Game Over
+                </Button>
+                <Button bsStyle="danger" onClick={this.allDead}>
+                  Alive Fam
+                </Button>
               </ButtonGroup>
             </Col>
           </Row>
         </Grid>
         <DoneModal
           show={this.state.doneShow}
-          handleShow={this.handleDoneShow}
           handleClose={this.handleDoneClose.bind(this)}
         />
         <WYModal
           show={this.state.locWYShow}
-          handleShow={this.handleWYShow}
           handleClose={this.handleWYClose.bind(this)}
         />
         <IDModal
           show={this.state.locIDShow}
-          handleShow={this.handleIDShow}
           handleClose={this.handleIDClose.bind(this)}
         />
         <HuntingModal
           show={this.state.huntShow}
-          handleShow={this.handleHuntShow}
           handleClose={this.handleHuntClose.bind(this)}
         />
         <EventModal
           eventInfo={this.state.eventInfo}
           show={this.state.eventShow}
           handleEventClose={this.handleEventClose.bind(this)}
+        />
+        <GameOver
+          show={this.state.gameShow}
+          handleClose={this.handleGameClose.bind(this)}
         />
       </React.Fragment>
     );

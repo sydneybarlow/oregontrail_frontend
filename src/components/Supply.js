@@ -8,62 +8,59 @@ class Supply extends Component {
   render() {
     // console.log("supplies", this.props.supplies);
     return (
-      // <React.Fragment>
-      <div>
-        <h3>whatever</h3>
-      </div>
-      // <Grid>
-      //   <Row>
-      //     {this.props.supplies.map(supply => (
-      //       <Col lg={3}>
-      //         <Image
-      //           alt="supply name"
-      //           src={`${filePath}${supply.name}.png`}
-      //         />
-      //       </Col>
-      //     ))}
-      //     <Col lg={3}>
-      //       <Image alt="bag of money" src={`${filePath}money.png`} />
-      //     </Col>
-      //     <Col lg={3}>
-      //       <Image alt="sun" src={`${filePath}days.png`} />
-      //     </Col>
-      //   </Row>
-      //   <Row>
-      //     {this.props.supplies.map(supply => (
-      //       <Col lg={3}>
-      //         <h3>{supply.name}</h3>
-      //       </Col>
-      //     ))}
-      //     <Col lg={3}>
-      //       <h3>money</h3>
-      //     </Col>
-      //     <Col lg={3}>
-      //       <h3>days</h3>
-      //     </Col>
-      //   </Row>
-      //   <Row>
-      //     {this.props.supplies.map(
-      //       supply =>
-      //         supply.name === "food" ? (
-      //           <Col lg={3}>
-      //             <h4>{supply.amount} lbs</h4>
-      //           </Col>
-      //         ) : (
-      //           <Col lg={3}>
-      //             <h4>{supply.amount} boxes</h4>
-      //           </Col>
-      //         )
-      //     )}
-      //     <Col lg={3}>
-      //       <h4>${this.props.money}</h4>
-      //     </Col>
-      //     <Col lg={3}>
-      //       <h4>{this.props.days}</h4>
-      //     </Col>
-      //   </Row>
-      // </Grid>
-      // </React.Fragment>
+      <React.Fragment>
+        <Grid>
+          <Row>
+            {this.props.supplies.map(supply => (
+              <Col lg={3}>
+                <Image
+                  alt="supply name"
+                  src={`${filePath}${supply.name}.png`}
+                />
+              </Col>
+            ))}
+            <Col lg={3}>
+              <Image alt="bag of money" src={`${filePath}money.png`} />
+            </Col>
+            <Col lg={3}>
+              <Image alt="sun" src={`${filePath}days.png`} />
+            </Col>
+          </Row>
+          <Row>
+            {this.props.supplies.map(supply => (
+              <Col lg={3}>
+                <h3>{supply.name}</h3>
+              </Col>
+            ))}
+            <Col lg={3}>
+              <h3>money</h3>
+            </Col>
+            <Col lg={3}>
+              <h3>days</h3>
+            </Col>
+          </Row>
+          <Row>
+            {this.props.supplies.map(
+              supply =>
+                supply.name === "food" ? (
+                  <Col lg={3}>
+                    <h4>{supply.amount} lbs</h4>
+                  </Col>
+                ) : (
+                  <Col lg={3}>
+                    <h4>{supply.amount} boxes</h4>
+                  </Col>
+                )
+            )}
+            <Col lg={3}>
+              <h4>${this.props.money}</h4>
+            </Col>
+            <Col lg={3}>
+              <h4>{this.props.days}</h4>
+            </Col>
+          </Row>
+        </Grid>
+      </React.Fragment>
     );
   }
 }

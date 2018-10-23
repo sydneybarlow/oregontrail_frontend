@@ -6,11 +6,14 @@ const filePath = process.env.PUBLIC_URL + "imgs/";
 
 class Map extends Component {
   render() {
-    // console.log("fm", this.props);
+    console.log("map", this.props);
     return (
       <React.Fragment>
         <div>
-          <img alt="Oregon map" src={`${filePath}trail_map/Trail-1.png`} />
+          <img
+            alt="Oregon map"
+            src={`${filePath}trail_map/Trail-${this.props.mapNumber}.png`}
+          />
         </div>
       </React.Fragment>
     );

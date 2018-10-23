@@ -32,7 +32,7 @@ class FamilyMember extends Component {
             <tr>
               {this.props.family_members.map(fm => (
                 <td>
-                  <h4>{fm.health}</h4>
+                  <h4>❤️ {fm.health}</h4>
                 </td>
               ))}
             </tr>
