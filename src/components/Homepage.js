@@ -31,6 +31,7 @@ class Homepage extends Component {
       name: this.props.name,
       username: this.props.username,
       money: this.props.money,
+      days: this.props.days,
       miles: this.props.miles,
       family_members: this.props.family_members,
       supplies: this.props.supplies,
@@ -363,6 +364,10 @@ class Homepage extends Component {
     }
   };
 
+  decrementDays = () => {
+    this.setState({});
+  };
+
   handleRest = () => {
     // console.log("RESTING!!!!");
     clearInterval(this.state.intervalId);
@@ -424,7 +429,7 @@ class Homepage extends Component {
   };
 
   render() {
-    // console.log("render", this.state.eventId);
+    console.log("render", this.state);
     return (
       <React.Fragment>
         <Userbar name={this.state.name} username={this.state.username} />
@@ -443,8 +448,12 @@ class Homepage extends Component {
             <Col>
               <FamilyMember family_members={this.state.family_members} />
             </Col>
-            <Col>
-              <Supply supplies={this.state.supplies} money={this.state.money} />
+            <Col lg={2}>
+              <Supply
+                supplies={this.state.supplies}
+                money={this.state.money}
+                days={this.state.days}
+              />
             </Col>
           </Row>
         </Grid>

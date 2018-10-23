@@ -19,8 +19,11 @@ class Supply extends Component {
                 />
               </Col>
             ))}
-            <Col>
+            <Col lg={3}>
               <Image alt="bag of money" src={`${filePath}money.png`} />
+            </Col>
+            <Col lg={3}>
+              <Image alt="sun" src={`${filePath}days.png`} />
             </Col>
           </Row>
           <Row>
@@ -29,8 +32,11 @@ class Supply extends Component {
                 <h3>{supply.name}</h3>
               </Col>
             ))}
-            <Col>
+            <Col lg={3}>
               <h3>money</h3>
+            </Col>
+            <Col lg={3}>
+              <h3>days</h3>
             </Col>
           </Row>
           <Row>
@@ -46,8 +52,11 @@ class Supply extends Component {
                   </Col>
                 )
             )}
-            <Col>
+            <Col lg={3}>
               <h4>${this.props.money}</h4>
+            </Col>
+            <Col lg={3}>
+              <h4>{this.props.days}</h4>
             </Col>
           </Row>
         </Grid>
