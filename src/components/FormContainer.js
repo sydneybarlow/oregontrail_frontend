@@ -13,7 +13,7 @@ class FormContainer extends Component {
     form: null,
     userId: null,
     supplies: [],
-    familyMembers: []
+    family_members: []
   };
 
   updateUserInfo = userInfo => this.setState({ userInfo });
@@ -24,7 +24,8 @@ class FormContainer extends Component {
 
   updateSupplies = supplies => this.setState({ supplies });
 
-  updateFamilyMembers = familyMembers => this.setState({ familyMembers });
+  updateFamilyMembers = familyMembers =>
+    this.setState({ family_members: familyMembers });
 
   updateFormTypeToSignUp = form => {
     this.setState({ form: "signUp" });
@@ -42,7 +43,10 @@ class FormContainer extends Component {
       })
         .then(r => r.json())
         .then(response => {
+          // console.log("homepage response", response);
           this.updateUserInfo(response.user);
+          this.updateFamilyMembers(response.user.family_members);
+          this.updateSupplies(response.user.supplies);
           this.props.history.push("/homepage");
         });
     }
@@ -56,6 +60,8 @@ class FormContainer extends Component {
   };
 
   render() {
+    // console.log("FORMS Cont state", this.state);
+    // console.log("FORMS Cont props ==>", this.props);
     return (
       <React.Fragment>
         <div className="App">
@@ -70,6 +76,8 @@ class FormContainer extends Component {
                     updateUserInfo={this.updateUserInfo}
                     updateFormType={this.updateFormType}
                     updateFormTypeToSignUp={this.updateFormTypeToSignUp}
+                    updateSupplies={this.updateSupplies}
+                    updateFamilyMembers={this.updateFamilyMembers}
                   />
                 ) : (
                   <Alert>Sorry, wrong username or password.</Alert>
@@ -86,7 +94,7 @@ class FormContainer extends Component {
                     logout={this.logout}
                     props={this.props}
                     updateFormType={this.updateFormType}
-                    famMem={this.state.familyMembers}
+                    family_members={this.state.family_members}
                     supplies={this.state.supplies}
                   />
                 ) : (

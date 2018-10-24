@@ -53,7 +53,6 @@ class FamilyForm extends Component {
   };
 
   handleAvatarOne = e => {
-    debugger;
     this.setState({
       role1: e
     });
@@ -79,7 +78,6 @@ class FamilyForm extends Component {
 
   handleSignInSubmit = e => {
     e.preventDefault();
-    debugger;
     let data = {
       family_member: [
         {
@@ -131,14 +129,13 @@ class FamilyForm extends Component {
       .then(r => r.json())
       .then(userData => {
         console.log("famForm userdata", userData);
-        debugger;
         this.props.updateFormType("supplyForm");
         this.props.updateFamilyMembers(userData);
       });
   };
 
   render() {
-    console.log("FAmily for props %%%", this.props);
+    // console.log("FAmily form props %%%", this.props)
     return (
       <React.Fragment>
         <Image alt="oregon trail logo" src={`${filePath}OregonTrailLogo.png`} />

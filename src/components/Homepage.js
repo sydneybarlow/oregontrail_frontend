@@ -34,7 +34,7 @@ class Homepage extends Component {
       money: this.props.money,
       days: this.props.days,
       miles: this.props.miles,
-      familyMem: this.props.famMem,
+      family_members: this.props.family_members,
       supplies: this.props.supplies,
       events: this.props.events,
       eventInfo: null,
@@ -259,7 +259,9 @@ class Homepage extends Component {
   invokeEventModals = () => {};
 
   randomAliveFamMember = () => {
-    let aliveFam = this.state.familyMem.filter(fm => fm.status === "alive");
+    let aliveFam = this.state.family_members.filter(
+      fm => fm.status === "alive"
+    );
     return aliveFam[Math.floor(Math.random() * aliveFam.length)];
   };
 
@@ -269,7 +271,7 @@ class Homepage extends Component {
       console.log("1: dysentery");
       this.setState({
         ...this.state,
-        familyMem: this.state.familyMem.map(famMem => {
+        family_members: this.state.family_members.map(famMem => {
           if (famMem.id === randAliveFamObj.id) {
             return {
               ...famMem,
@@ -285,7 +287,7 @@ class Homepage extends Component {
       console.log("2: broken arm");
       this.setState({
         ...this.state,
-        familyMem: this.state.familyMem.map(fammem => {
+        family_members: this.state.family_members.map(fammem => {
           if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
@@ -318,7 +320,7 @@ class Homepage extends Component {
       console.log("4: dinosuars");
       this.setState({
         ...this.state,
-        familyMem: this.state.familyMem.map(famMem => {
+        family_members: this.state.family_members.map(famMem => {
           if (famMem.id === randAliveFamObj.id) {
             return {
               ...famMem,
@@ -336,7 +338,7 @@ class Homepage extends Component {
       console.log("5: anthrax");
       this.setState({
         ...this.state,
-        familyMem: this.state.familyMem.map(famMem => {
+        family_members: this.state.family_members.map(famMem => {
           if (famMem.id === randAliveFamObj.id) {
             return {
               ...famMem,
@@ -352,7 +354,7 @@ class Homepage extends Component {
       console.log("6: flight");
       this.setState({
         ...this.state,
-        familyMem: this.state.familyMem.map(fammem => {
+        family_members: this.state.family_members.map(fammem => {
           if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
@@ -370,7 +372,7 @@ class Homepage extends Component {
       console.log("7: small pox");
       this.setState({
         ...this.state,
-        familyMem: this.state.familyMem.map(fammem => {
+        family_members: this.state.family_members.map(fammem => {
           if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
@@ -386,7 +388,7 @@ class Homepage extends Component {
       console.log("8: zombie");
       this.setState({
         ...this.state,
-        familyMem: this.state.familyMem.map(fammem => {
+        family_members: this.state.family_members.map(fammem => {
           if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
@@ -440,7 +442,7 @@ class Homepage extends Component {
           return supply;
         }
       }),
-      familyMem: this.state.familyMem.map(family => {
+      family_members: this.state.family_members.map(family => {
         if (family.health === "bad") {
           return {
             ...family,
@@ -466,7 +468,9 @@ class Homepage extends Component {
   };
 
   allDead = () => {
-    let allAliveFam = this.state.familyMem.filter(fm => fm.status === "alive");
+    let allAliveFam = this.state.family_members.filter(
+      fm => fm.status === "alive"
+    );
     if (allAliveFam.length === 0) {
       this.gameOver();
     }
@@ -492,7 +496,7 @@ class Homepage extends Component {
   };
 
   render() {
-    // console.log("homepage", this.props);
+    // console.log("homepage props ==>", this.props);
     // console.log("homepage STATE +", this.state);
     return (
       <React.Fragment>
@@ -510,7 +514,7 @@ class Homepage extends Component {
           </Row>
           <Row className="show-grid">
             <Col lg={4} lgPull={3}>
-              <FamilyMember familyMem={this.state.familyMem} />
+              <FamilyMember family_members={this.state.family_members} />
             </Col>
             <Col lg={6} lgOffset={2}>
               <Supply

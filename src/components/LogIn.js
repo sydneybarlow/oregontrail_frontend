@@ -49,6 +49,7 @@ class LogIn extends Component {
     })
       .then(r => r.json())
       .then(userData => {
+        // console.log("login userData", userData);
         localStorage.setItem("token", userData.token);
         this.props.updateUserInfo(userData.user_info);
         this.props.updateFormType("signUp");
@@ -57,7 +58,7 @@ class LogIn extends Component {
   };
 
   render() {
-    // console.log("login ==>", this.props);
+    // console.log("login props==>", this.props);
     return (
       <React.Fragment>
         <Image alt="oregon trail logo" src={`${filePath}OregonTrailLogo.png`} />

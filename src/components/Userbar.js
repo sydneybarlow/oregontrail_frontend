@@ -6,7 +6,7 @@ const filePath = process.env.PUBLIC_URL + "imgs/";
 
 class Userbar extends Component {
   render() {
-    console.log("user", this.props);
+    // console.log("user", this.props);
     return (
       <React.Fragment>
         <PageHeader>User: {this.props.username}</PageHeader>
