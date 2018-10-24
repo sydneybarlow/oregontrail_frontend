@@ -58,26 +58,27 @@ class SignUpForm extends Component {
     })
       .then(r => r.json())
       .then(userData => {
-        // console.log("SignUP ---->>>", userData);
+        console.log("SignUP ---->>>", userData);
         localStorage.setItem("token", userData.token);
         this.props.updateUserInfo(userData.user);
         this.props.updateUserIdType(userData.user.id);
         this.props.updateFormType("familyForm");
-        this.getEvents();
+        this.fetchEvents();
       });
   };
 
-  getEvents = () => {
-    console.log("get events");
+  fetchEvents = () => {
+    console.log("fetching events!!");
     fetch(`http://localhost:3000/events`)
       .then(r => r.json())
       .then(eventData => {
+        console.log("eventdata +++", eventData);
         this.props.updateEvents(eventData);
       });
   };
 
   render() {
-    // console.log("sign up props", this.props);
+    console.log("sign up props", this.props);
     return (
       <React.Fragment>
         <Image alt="oregon trail logo" src={`${filePath}OregonTrailLogo.png`} />

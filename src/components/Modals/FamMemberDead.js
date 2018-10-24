@@ -7,9 +7,13 @@ class FamMemberDead extends Component {
     return (
       <Modal show={this.props.show} onHide={this.props.handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Your family member died</Modal.Title>
+          <Modal.Title>
+            <h3>Your family member died</h3>
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>Bury the dead and move on!</Modal.Body>
+        <Modal.Body>
+          <h4>Bury the dead and move on!</h4>
+        </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.handleClose}>Keep Going</Button>
         </Modal.Footer>

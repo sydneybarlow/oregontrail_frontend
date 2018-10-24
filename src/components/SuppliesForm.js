@@ -60,7 +60,7 @@ class SuppliesForm extends Component {
     })
       .then(r => r.json())
       .then(userData => {
-        console.log(userData);
+        // console.log(userData);
         this.props.updateSupplies(userData);
         this.props.props.history.push("/homepage");
       });

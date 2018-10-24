@@ -12,14 +12,16 @@ class EventModal extends Component {
       return (
         <Modal show={this.props.show} onHide={this.props.handleEventClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Dysentary!</Modal.Title>
+            <Modal.Title>
+              <h3>Dysentary!</h3>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Image
               alt="emoji"
               src={`${filePath}${this.props.eventInfo.name}.png`}
             />
-            One of your family members has dysentary!!!
+            <h4>One of your family members has dysentary!!!</h4>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleEventClose}>Next</Button>
@@ -30,14 +32,16 @@ class EventModal extends Component {
       return (
         <Modal show={this.props.show} onHide={this.props.handleEventClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Broken Arm!</Modal.Title>
+            <Modal.Title>
+              <h3>Broken Arm!</h3>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Image
               alt="emoji"
               src={`${filePath}${this.props.eventInfo.name}.png`}
             />
-            One of your family members has a brokan arm!!!
+            <h4>One of your family members has a brokan arm!!!</h4>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleEventClose}>Next</Button>
@@ -48,14 +52,19 @@ class EventModal extends Component {
       return (
         <Modal show={this.props.show} onHide={this.props.handleEventClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Indians attack!</Modal.Title>
+            <Modal.Title>
+              <h3>Indians attack!</h3>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Image
               alt="emoji"
               src={`${filePath}${this.props.eventInfo.name}.png`}
             />
-            Your caravan has been attacked by indians!!! Lose %% pounds of food.
+            <h4>
+              Your caravan has been attacked by indians!!! Lose 400 pounds of
+              food.
+            </h4>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleEventClose}>Next</Button>
@@ -66,14 +75,16 @@ class EventModal extends Component {
       return (
         <Modal show={this.props.show} onHide={this.props.handleEventClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Dinosaurs!</Modal.Title>
+            <Modal.Title>
+              <h3>Dinosaurs!</h3>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Image
               alt="emoji"
               src={`${filePath}${this.props.eventInfo.name}.png`}
             />
-            One of your family members has been eaten by a dinosouar!!!
+            <h4>One of your family members has been eaten by a dinosouar!!!</h4>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleEventClose}>Next</Button>
@@ -84,14 +95,16 @@ class EventModal extends Component {
       return (
         <Modal show={this.props.show} onHide={this.props.handleEventClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Anthrax!</Modal.Title>
+            <Modal.Title>
+              <h3>Anthrax!</h3>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Image
               alt="emoji"
               src={`${filePath}${this.props.eventInfo.name}.png`}
             />
-            One of your family members received anthrax in the mail!!!
+            <h4>One of your family members received anthrax in the mail!!!</h4>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleEventClose}>Next</Button>
@@ -102,15 +115,19 @@ class EventModal extends Component {
       return (
         <Modal show={this.props.show} onHide={this.props.handleEventClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Flight!</Modal.Title>
+            <Modal.Title>
+              <h3>Flight!</h3>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Image
               alt="emoji"
               src={`${filePath}${this.props.eventInfo.name}.png`}
             />
-            One of your family members decided that walking was a waste of time
-            and hopped on a flight!!!
+            <h4>
+              One of your family members decided that walking was a waste of
+              time and hopped on a flight!!!
+            </h4>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleEventClose}>Next</Button>
@@ -121,14 +138,16 @@ class EventModal extends Component {
       return (
         <Modal show={this.props.show} onHide={this.props.handleEventClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Small Pox!</Modal.Title>
+            <Modal.Title>
+              <h3>Small Pox!</h3>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Image
               alt="emoji"
               src={`${filePath}${this.props.eventInfo.name}.png`}
             />
-            One of your family members has small pox!!!
+            <h4>One of your family members has small pox!!!</h4>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleEventClose}>Next</Button>
@@ -139,14 +158,16 @@ class EventModal extends Component {
       return (
         <Modal show={this.props.show} onHide={this.props.handleEventClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Zombies!</Modal.Title>
+            <Modal.Title>
+              <h3>Zombies!</h3>
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Image
               alt="emoji"
               src={`${filePath}${this.props.eventInfo.name}.png`}
             />
-            One of your family members got eatten by a zombie hoard!!!
+            <h4>One of your family members got eatten by a zombie hoard!!!</h4>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleEventClose}>Next</Button>

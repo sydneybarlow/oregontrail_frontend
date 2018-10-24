@@ -46,10 +46,11 @@ class FormContainer extends Component {
       })
         .then(r => r.json())
         .then(response => {
-          // console.log("homepage response", response);
+          console.log("homepage response", response);
           this.updateUserInfo(response.user);
           this.updateFamilyMembers(response.user.family_members);
           this.updateSupplies(response.user.supplies);
+          this.updateEvents(response.user.events);
           this.props.history.push("/homepage");
         });
     }

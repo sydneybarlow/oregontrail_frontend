@@ -128,7 +128,7 @@ class Homepage extends Component {
   handleGameStart = () => {
     // console.log("game start");
     if (!this.state.intervalId) {
-      const intervalId = setInterval(this.cities, 1000);
+      const intervalId = setInterval(this.travelingWithCityStops, 1000);
       this.setState({ intervalId: intervalId });
     }
   };
@@ -203,19 +203,21 @@ class Homepage extends Component {
     });
   };
 
-  cities = () => {
+  travelingWithCityStops = () => {
     // console.log("cities");
     if (this.state.miles <= 0) {
       clearInterval(this.state.intervalId);
       this.handleDoneShow();
     } else if (this.state.miles === 720) {
       clearInterval(this.state.intervalId);
+      this.tooManyDays();
       this.allDead();
       this.decrementMiles();
       this.incrementDays();
       this.setState({ locIDShow: true });
     } else if (this.state.miles === 1150) {
       clearInterval(this.state.intervalId);
+      this.tooManyDays();
       this.allDead();
       this.decrementMiles();
       this.incrementDays();
@@ -430,7 +432,7 @@ class Homepage extends Component {
   };
 
   incrementDays = () => {
-    let newDays = this.state.days + 1;
+    let newDays = this.state.days + 50;
     this.setState({
       ...this.state,
       days: newDays
@@ -496,6 +498,12 @@ class Homepage extends Component {
       fm => fm.status === "alive"
     );
     if (allAliveFam.length === 0) {
+      this.gameOver();
+    }
+  };
+
+  tooManyDays = () => {
+    if (this.state.days > 260) {
       this.gameOver();
     }
   };
