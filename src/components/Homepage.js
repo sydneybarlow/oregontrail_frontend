@@ -278,7 +278,7 @@ class Homepage extends Component {
         },
         this.eventLogic(eventIndexNumber)
       );
-      this.rest();
+      this.stopIntervalOnly();
     }
   };
 
@@ -439,7 +439,7 @@ class Homepage extends Component {
     });
   };
 
-  rest = () => {
+  stopIntervalOnly = () => {
     clearInterval(this.state.intervalId);
     this.setState({ intervalId: null });
   };
@@ -524,7 +524,7 @@ class Homepage extends Component {
     this.setState({
       gameShow: true
     });
-    this.rest();
+    this.stopIntervalOnly();
   };
 
   render() {
@@ -534,16 +534,6 @@ class Homepage extends Component {
       <React.Fragment>
         <Userbar username={this.state.username} />
         <Grid>
-          <Row className="show-grid">
-            <Col lg={12}>
-              <h1>
-                <Image
-                  alt="oregon trail logo"
-                  src={`${filePath}OregonTrailLogo.png`}
-                />
-              </h1>
-            </Col>
-          </Row>
           <Row className="show-grid">
             <Col lg={4} lgPull={3}>
               <FamilyMember family_members={this.state.family_members} />

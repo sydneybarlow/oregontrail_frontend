@@ -64,7 +64,7 @@ class FormContainer extends Component {
   };
 
   render() {
-    // console.log("FORMS Cont state", this.state);
+    console.log("FORMS Cont state", this.state);
     // console.log("FORMS Cont props ==>", this.props);
     return (
       <React.Fragment>
