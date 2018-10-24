@@ -34,7 +34,7 @@ class Homepage extends Component {
       money: this.props.money,
       days: this.props.days,
       miles: this.props.miles,
-      family_members: this.props.family_members,
+      familyMem: this.props.famMem,
       supplies: this.props.supplies,
       events: this.props.events,
       eventInfo: null,
@@ -496,14 +496,11 @@ class Homepage extends Component {
   };
 
   render() {
-    console.log("render", this.props);
+    // console.log("homepage", this.props);
+    // console.log("homepage STATE +", this.state);
     return (
       <React.Fragment>
-        <Userbar
-          name={this.state.name}
-          username={this.state.username}
-          logout={this.props.logout}
-        />
+        <Userbar username={this.state.username} />
         <Grid>
           <Row className="show-grid">
             <Col lg={12}>
@@ -517,7 +514,7 @@ class Homepage extends Component {
           </Row>
           <Row className="show-grid">
             <Col lg={4} lgPull={3}>
-              <FamilyMember family_members={this.state.family_members} />
+              <FamilyMember familyMem={this.state.familyMem} />
             </Col>
             <Col lg={6} lgOffset={2}>
               <Supply
@@ -547,8 +544,8 @@ class Homepage extends Component {
                 <Button bsStyle="success" onClick={this.handleRest}>
                   Rest
                 </Button>
-                <Button bsStyle="danger" onClick={this.badTooLong}>
-                  Bad Too Long
+                <Button bsStyle="default" onClick={this.props.logout}>
+                  Logout
                 </Button>
               </ButtonGroup>
             </Col>

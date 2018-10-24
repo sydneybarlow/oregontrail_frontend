@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import { Alert } from "react-bootstrap";
 import LogIn from "./LogIn";
 import Homepage from "./Homepage";
 import SignUpForm from "./SignUpForm";
@@ -10,12 +11,25 @@ class FormContainer extends Component {
   state = {
     userInfo: null,
     form: null,
-    userId: null
+    userId: null,
+    supplies: [],
+    familyMembers: []
   };
 
   updateUserInfo = userInfo => this.setState({ userInfo });
 
   updateFormType = form => this.setState({ form });
+
+  updateUserIdType = userId => this.setState({ userId });
+
+  updateSupplies = supplies => this.setState({ supplies });
+
+  updateFamilyMembers = familyMembers => this.setState({ familyMembers });
+
+  updateFormTypeToSignUp = form => {
+    this.setState({ form: "signUp" });
+    this.props.history.push("/signup");
+  };
 
   componentDidMount() {
     const url = "http://localhost:3000/users/homepage";
@@ -35,7 +49,9 @@ class FormContainer extends Component {
   }
 
   logout = () => {
+    console.log("logout");
     localStorage.clear();
+    this.props.history.push("/login");
     this.setState({ userInfo: null });
   };
 
@@ -52,19 +68,11 @@ class FormContainer extends Component {
                   <LogIn
                     props={this.props}
                     updateUserInfo={this.updateUserInfo}
-                  />
-                ) : this.state.form === "familyForm" ? (
-                  <FamilyForm
-                    props={this.props}
                     updateFormType={this.updateFormType}
-                    userId={this.state.userId}
+                    updateFormTypeToSignUp={this.updateFormTypeToSignUp}
                   />
                 ) : (
-                  <SuppliesForm
-                    props={this.props}
-                    updateFormType={this.updateFormType}
-                    userId={this.state.userId}
-                  />
+                  <Alert>Sorry, wrong username or password.</Alert>
                 )
               }
             />
@@ -72,12 +80,14 @@ class FormContainer extends Component {
               exact
               path="/homepage"
               render={() =>
-                this.state.userInfo && this.state.form === null ? (
+                this.state.userInfo ? (
                   <Homepage
                     {...this.state.userInfo}
                     logout={this.logout}
                     props={this.props}
                     updateFormType={this.updateFormType}
+                    famMem={this.state.familyMembers}
+                    supplies={this.state.supplies}
                   />
                 ) : (
                   <Redirect to="/login" />
@@ -92,7 +102,7 @@ class FormContainer extends Component {
                   <SignUpForm
                     props={this.props}
                     updateFormType={this.updateFormType}
-                    updateUserInfo={this.props.updateUserInfo}
+                    updateUserInfo={this.updateUserInfo}
                     updateUserIdType={this.updateUserIdType}
                   />
                 ) : this.state.form === "familyForm" ? (
@@ -100,14 +110,16 @@ class FormContainer extends Component {
                     props={this.props}
                     updateFormType={this.updateFormType}
                     userId={this.state.userId}
+                    updateFamilyMembers={this.updateFamilyMembers}
                   />
-                ) : (
+                ) : this.state.form === "supplyForm" ? (
                   <SuppliesForm
                     props={this.props}
                     updateFormType={this.updateFormType}
                     userId={this.state.userId}
+                    updateSupplies={this.updateSupplies}
                   />
-                )
+                ) : null
               }
             />
           </Switch>

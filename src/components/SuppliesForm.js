@@ -9,9 +9,12 @@ import {
   Alert,
   Grid,
   Row,
-  Col
+  Col,
+  Image
 } from "react-bootstrap";
 import "../App.css";
+
+const filePath = process.env.PUBLIC_URL + "imgs/";
 
 class SuppliesForm extends Component {
   constructor() {
@@ -37,11 +40,13 @@ class SuppliesForm extends Component {
       supply: [
         {
           name: "food",
-          amount: e.target.children[0].children[3].value
+          amount: e.target.children[0].children[3].value,
+          user_id: this.props.userId
         },
         {
           name: "bullets",
-          amount: e.target.children[1].children[2].value
+          amount: e.target.children[1].children[3].value,
+          user_id: this.props.userId
         }
       ]
     };
@@ -55,14 +60,17 @@ class SuppliesForm extends Component {
     })
       .then(r => r.json())
       .then(userData => {
-        localStorage.setItem("token", userData.token);
-        // this.props.props.history.push("/homepage");
+        this.props.updateSupplies(userData);
+        this.props.props.history.push("/homepage");
       });
   };
 
   render() {
+    console.log("sign up PROPS &&&", this.props);
+    console.log("sign up USERID", this.props.userId);
     return (
       <React.Fragment>
+        <Image alt="oregon trail logo" src={`${filePath}OregonTrailLogo.png`} />
         <h3>Purchase Supplies!</h3>
         <h2>You have: ${this.state.money}</h2>
         <Grid>
@@ -71,7 +79,7 @@ class SuppliesForm extends Component {
               <Form onSubmit={this.handleSuppliesSubmit}>
                 <FormGroup>
                   <h5>
-                    👨‍👩‍👧‍👦 Recommended 500 pounds of food for each family member.
+                    🍞 Recommended 200 pounds of food for each family member.
                   </h5>
                   <h4>$20 per pound of food</h4>
                   <ControlLabel>Pounds Of Food:</ControlLabel>
@@ -83,7 +91,8 @@ class SuppliesForm extends Component {
                   />
                 </FormGroup>
                 <FormGroup>
-                  <h4>$10 per box of ammunition</h4>
+                  <h5>🔫 Each box of ammunition has 20 bullets inside.</h5>
+                  <h4>$25 per box of ammunition</h4>
                   <ControlLabel>Boxes Of Ammunition:</ControlLabel>
                   <FormControl
                     type="text"

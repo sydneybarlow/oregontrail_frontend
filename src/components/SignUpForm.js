@@ -9,9 +9,12 @@ import {
   Alert,
   Grid,
   Row,
-  Col
+  Col,
+  Image
 } from "react-bootstrap";
 import "../App.css";
+
+const filePath = process.env.PUBLIC_URL + "imgs/";
 
 class SignUpForm extends Component {
   constructor() {
@@ -40,7 +43,10 @@ class SignUpForm extends Component {
     let data = {
       name: this.state.name,
       username: this.state.username,
-      password: this.state.password
+      password: this.state.password,
+      money: 1000,
+      miles: 1795,
+      days: 0
     };
     fetch(`http://localhost:3000/users`, {
       method: "POST",
@@ -60,8 +66,10 @@ class SignUpForm extends Component {
   };
 
   render() {
+    // console.log("sign up props", this.props);
     return (
       <React.Fragment>
+        <Image alt="oregon trail logo" src={`${filePath}OregonTrailLogo.png`} />
         <h3>Sign Up</h3>
         <Grid>
           <Row>

@@ -10,9 +10,12 @@ import {
   Alert,
   Grid,
   Row,
-  Col
+  Col,
+  Image
 } from "react-bootstrap";
 import "../App.css";
+
+const filePath = process.env.PUBLIC_URL + "imgs/";
 
 class LogIn extends Component {
   constructor() {
@@ -54,8 +57,10 @@ class LogIn extends Component {
   };
 
   render() {
+    // console.log("login ==>", this.props);
     return (
       <React.Fragment>
+        <Image alt="oregon trail logo" src={`${filePath}OregonTrailLogo.png`} />
         <h3>Log In</h3>
         <Grid>
           <Row>
@@ -83,7 +88,11 @@ class LogIn extends Component {
                   <Button type="submit" bsStyle="info">
                     Enter
                   </Button>
-                  <Button type="button" bsStyle="primary" href="/signup">
+                  <Button
+                    type="button"
+                    bsStyle="primary"
+                    onClick={() => this.props.updateFormTypeToSignUp()}
+                  >
                     Sign Up
                   </Button>
                 </ButtonGroup>

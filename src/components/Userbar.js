@@ -9,14 +9,7 @@ class Userbar extends Component {
     console.log("user", this.props);
     return (
       <React.Fragment>
-        <PageHeader>
-          User: {this.props.username}
-          <div className="logoutButton" style={{ float: "right" }}>
-            <Button bsStyle="primary" onclick={() => this.props.logout}>
-              Logout
-            </Button>
-          </div>
-        </PageHeader>
+        <PageHeader>User: {this.props.username}</PageHeader>
       </React.Fragment>
     );
   }
