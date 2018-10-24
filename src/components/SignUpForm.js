@@ -58,10 +58,21 @@ class SignUpForm extends Component {
     })
       .then(r => r.json())
       .then(userData => {
+        // console.log("SignUP ---->>>", userData);
         localStorage.setItem("token", userData.token);
         this.props.updateUserInfo(userData.user);
         this.props.updateUserIdType(userData.user.id);
         this.props.updateFormType("familyForm");
+        this.getEvents();
+      });
+  };
+
+  getEvents = () => {
+    console.log("get events");
+    fetch(`http://localhost:3000/events`)
+      .then(r => r.json())
+      .then(eventData => {
+        this.props.updateEvents(eventData);
       });
   };
 

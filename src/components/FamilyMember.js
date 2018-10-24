@@ -6,7 +6,7 @@ const filePath = process.env.PUBLIC_URL + "imgs/";
 
 class FamilyMember extends Component {
   render() {
-    console.log("FAM FORM $$$", this.props);
+    // console.log("FAM FORM $$$", this.props);≠
     return (
       <React.Fragment>
         <Table bordered>
@@ -31,11 +31,26 @@ class FamilyMember extends Component {
               ))}
             </tr>
             <tr>
-              {this.props.family_members.map(fm => (
-                <td>
-                  <h5>❤️ {fm.health}</h5>
-                </td>
-              ))}
+              {this.props.family_members.map(
+                fm =>
+                  fm.health === "good" ? (
+                    <td>
+                      <h5>❤️ {fm.health}</h5>
+                    </td>
+                  ) : fm.health === "fair" ? (
+                    <td>
+                      <h5>🧡 {fm.health}</h5>
+                    </td>
+                  ) : fm.health === "poor" ? (
+                    <td>
+                      <h5>💛 {fm.health}</h5>
+                    </td>
+                  ) : (
+                    <td>
+                      <h5>🖤 {fm.health}</h5>
+                    </td>
+                  )
+              )}
             </tr>
             <tr>
               {this.props.family_members.map(fm => (

@@ -61,15 +61,14 @@ class SuppliesForm extends Component {
       .then(r => r.json())
       .then(userData => {
         console.log(userData);
-        debugger;
         this.props.updateSupplies(userData);
         this.props.props.history.push("/homepage");
       });
   };
 
   render() {
-    console.log("sign up PROPS &&&", this.props);
-    console.log("sign up USERID", this.props.userId);
+    // console.log("sign up PROPS &&&", this.props);
+    // console.log("sign up USERID", this.props.userId);
     return (
       <React.Fragment>
         <Image alt="oregon trail logo" src={`${filePath}OregonTrailLogo.png`} />

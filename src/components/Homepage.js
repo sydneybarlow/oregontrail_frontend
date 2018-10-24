@@ -48,6 +48,8 @@ class Homepage extends Component {
       eventIndex: null,
       intervalId: null,
       milesTraveled: null,
+      randomFood: null,
+      randomBullets: null,
       mapNum: 1
     };
   }
@@ -95,8 +97,8 @@ class Homepage extends Component {
   };
 
   allHuntFunctions = () => {
-    console.log("HUNTING!!");
-    this.incrementFood();
+    // console.log("HUNTING!!");
+    this.randomFood();
     // this.decrementBullets();
     this.handleHuntShow();
   };
@@ -140,14 +142,25 @@ class Homepage extends Component {
     this.setState({ deadShow: true });
   }
 
+  randomFood = () => {
+    // console.log("food!!!");
+    let pounds = Math.floor(Math.random() * 100);
+    this.setState(
+      {
+        randomFood: pounds
+      },
+      this.incrementFood
+    );
+  };
+
   incrementFood = () => {
-    console.log("getting food");
+    // console.log("food STATE", this.state.randomFood);
     this.setState(
       {
         ...this.state,
         supplies: this.state.supplies.map(supply => {
           if (supply.name === "food") {
-            let newFoodAmount = supply.amount + 4;
+            let newFoodAmount = supply.amount + this.state.randomFood;
             return {
               ...supply,
               amount: newFoodAmount
@@ -157,17 +170,28 @@ class Homepage extends Component {
           }
         })
       },
+      this.randomBullets
+    );
+  };
+
+  randomBullets = () => {
+    // console.log("bullets!!!");
+    let bullets = Math.floor(Math.random() * 35);
+    this.setState(
+      {
+        randomBullets: bullets
+      },
       this.decrementBullets
     );
   };
 
   decrementBullets = () => {
-    console.log("lossing bullets");
+    // console.log("lossing bullets");
     this.setState({
       ...this.state,
       supplies: this.state.supplies.map(supply => {
         if (supply.name === "bullets") {
-          let newBulletAmount = supply.amount - 4;
+          let newBulletAmount = supply.amount - this.state.randomBullets;
           return {
             ...supply,
             amount: newBulletAmount
@@ -497,7 +521,7 @@ class Homepage extends Component {
 
   render() {
     // console.log("homepage props ==>", this.props);
-    // console.log("homepage STATE +", this.state);
+    console.log("homepage STATE +", this.state);
     return (
       <React.Fragment>
         <Userbar username={this.state.username} />
@@ -565,6 +589,8 @@ class Homepage extends Component {
         />
         <HuntingModal
           show={this.state.huntShow}
+          food={this.state.randomFood}
+          bullets={this.state.randomBullets}
           handleClose={this.handleHuntClose.bind(this)}
         />
         <EventModal

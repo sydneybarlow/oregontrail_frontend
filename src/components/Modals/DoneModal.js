@@ -7,7 +7,9 @@ class DoneModal extends Component {
     return (
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>You made it to Oregon City, Oregon!</Modal.Title>
+          <Modal.Title>
+            <h2>You made it to Oregon City, Oregon!</h2>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Footer>
           <Button onClick={handleClose}>Start Over</Button>

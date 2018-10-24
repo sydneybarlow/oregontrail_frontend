@@ -128,7 +128,7 @@ class FamilyForm extends Component {
     })
       .then(r => r.json())
       .then(userData => {
-        console.log("famForm userdata", userData);
+        // console.log("famForm userdata", userData);
         this.props.updateFormType("supplyForm");
         this.props.updateFamilyMembers(userData);
       });

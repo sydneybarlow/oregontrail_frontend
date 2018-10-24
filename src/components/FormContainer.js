@@ -13,7 +13,8 @@ class FormContainer extends Component {
     form: null,
     userId: null,
     supplies: [],
-    family_members: []
+    family_members: [],
+    events: []
   };
 
   updateUserInfo = userInfo => this.setState({ userInfo });
@@ -23,6 +24,8 @@ class FormContainer extends Component {
   updateUserIdType = userId => this.setState({ userId });
 
   updateSupplies = supplies => this.setState({ supplies });
+
+  updateEvents = events => this.setState({ events });
 
   updateFamilyMembers = familyMembers =>
     this.setState({ family_members: familyMembers });
@@ -96,6 +99,7 @@ class FormContainer extends Component {
                     updateFormType={this.updateFormType}
                     family_members={this.state.family_members}
                     supplies={this.state.supplies}
+                    events={this.state.events}
                   />
                 ) : (
                   <Redirect to="/login" />
@@ -112,6 +116,7 @@ class FormContainer extends Component {
                     updateFormType={this.updateFormType}
                     updateUserInfo={this.updateUserInfo}
                     updateUserIdType={this.updateUserIdType}
+                    updateEvents={this.updateEvents}
                   />
                 ) : this.state.form === "familyForm" ? (
                   <FamilyForm
