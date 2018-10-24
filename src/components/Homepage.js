@@ -259,9 +259,7 @@ class Homepage extends Component {
   invokeEventModals = () => {};
 
   randomAliveFamMember = () => {
-    let aliveFam = this.state.family_members.filter(
-      fm => fm.status === "alive"
-    );
+    let aliveFam = this.state.familyMem.filter(fm => fm.status === "alive");
     return aliveFam[Math.floor(Math.random() * aliveFam.length)];
   };
 
@@ -271,7 +269,7 @@ class Homepage extends Component {
       console.log("1: dysentery");
       this.setState({
         ...this.state,
-        family_members: this.state.family_members.map(famMem => {
+        familyMem: this.state.familyMem.map(famMem => {
           if (famMem.id === randAliveFamObj.id) {
             return {
               ...famMem,
@@ -287,7 +285,7 @@ class Homepage extends Component {
       console.log("2: broken arm");
       this.setState({
         ...this.state,
-        family_members: this.state.family_members.map(fammem => {
+        familyMem: this.state.familyMem.map(fammem => {
           if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
@@ -320,7 +318,7 @@ class Homepage extends Component {
       console.log("4: dinosuars");
       this.setState({
         ...this.state,
-        family_members: this.state.family_members.map(famMem => {
+        familyMem: this.state.familyMem.map(famMem => {
           if (famMem.id === randAliveFamObj.id) {
             return {
               ...famMem,
@@ -338,7 +336,7 @@ class Homepage extends Component {
       console.log("5: anthrax");
       this.setState({
         ...this.state,
-        family_members: this.state.family_members.map(famMem => {
+        familyMem: this.state.familyMem.map(famMem => {
           if (famMem.id === randAliveFamObj.id) {
             return {
               ...famMem,
@@ -354,7 +352,7 @@ class Homepage extends Component {
       console.log("6: flight");
       this.setState({
         ...this.state,
-        family_members: this.state.family_members.map(fammem => {
+        familyMem: this.state.familyMem.map(fammem => {
           if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
@@ -372,7 +370,7 @@ class Homepage extends Component {
       console.log("7: small pox");
       this.setState({
         ...this.state,
-        family_members: this.state.family_members.map(fammem => {
+        familyMem: this.state.familyMem.map(fammem => {
           if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
@@ -388,7 +386,7 @@ class Homepage extends Component {
       console.log("8: zombie");
       this.setState({
         ...this.state,
-        family_members: this.state.family_members.map(fammem => {
+        familyMem: this.state.familyMem.map(fammem => {
           if (fammem.id === randAliveFamObj.id) {
             return {
               ...fammem,
@@ -442,7 +440,7 @@ class Homepage extends Component {
           return supply;
         }
       }),
-      family_members: this.state.family_members.map(family => {
+      familyMem: this.state.familyMem.map(family => {
         if (family.health === "bad") {
           return {
             ...family,
@@ -468,9 +466,7 @@ class Homepage extends Component {
   };
 
   allDead = () => {
-    let allAliveFam = this.state.family_members.filter(
-      fm => fm.status === "alive"
-    );
+    let allAliveFam = this.state.familyMem.filter(fm => fm.status === "alive");
     if (allAliveFam.length === 0) {
       this.gameOver();
     }
