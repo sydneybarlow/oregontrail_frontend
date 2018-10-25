@@ -268,11 +268,16 @@ class Homepage extends Component {
       {
         ...this.state,
         supplies: this.state.supplies.map(supply => {
-          if (supply.name === "food") {
+          if (supply.name === "food" && supply.amount > 21) {
             let newFoodAmount = supply.amount - 21;
             return {
               ...supply,
               amount: newFoodAmount
+            };
+          } else if (supply.name === "food" && supply.amount < 21) {
+            return {
+              ...supply,
+              amount: 0
             };
           } else {
             return supply;
@@ -283,24 +288,12 @@ class Homepage extends Component {
     );
   };
 
-  // stopAtNoFood = () => {
-  //   this.state.supplies.map(supply => {
-  //     if (supply.name === "bullets" && supply.amount <= 0) {
-  //       this.setState({
-  //         ...supply,
-  //         amount: 0
-  //       });
-  //     }
-  //   });
-  //   this.getRandomEvents();
-  // };
-
   getRandomEvents = () => {
     const eventIndexNumber =
       Math.floor(Math.random() * this.props.events.length) + 1;
-    console.log("eventindexNumber ***", eventIndexNumber);
+    // console.log("eventindexNumber ***", eventIndexNumber);
     if (eventIndexNumber <= 7) {
-      console.log("modals");
+      // console.log("modals");
       this.setState(
         {
           eventIndex: eventIndexNumber,
@@ -312,8 +305,6 @@ class Homepage extends Component {
       this.stopIntervalOnly();
     }
   };
-
-  invokeEventModals = () => {};
 
   randomAliveFamMember = () => {
     let aliveFam = this.state.family_members.filter(
@@ -362,10 +353,15 @@ class Homepage extends Component {
         ...this.state,
         supplies: this.state.supplies.map(supply => {
           let newFoodAmount = supply.amount - 150;
-          if (supply.name === "food") {
+          if (supply.name === "food" && supply.amount > 150) {
             return {
               ...supply,
               amount: newFoodAmount
+            };
+          } else if (supply.name === "food" && supply.amount < 150) {
+            return {
+              ...supply,
+              amount: 0
             };
           } else {
             return supply;
@@ -493,11 +489,16 @@ class Homepage extends Component {
       ...this.state,
       days: daysToRest,
       supplies: this.state.supplies.map(supply => {
-        let newAmount = supply.amount - 80;
-        if (supply.name === "food") {
+        if (supply.name === "food" && supply.amount > 80) {
+          let newAmount = supply.amount - 80;
           return {
             ...supply,
             amount: newAmount
+          };
+        } else if (supply.name === "food" && supply.amount < 80) {
+          return {
+            ...supply,
+            amount: 0
           };
         } else {
           return supply;
