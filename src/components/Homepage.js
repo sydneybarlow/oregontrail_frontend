@@ -19,6 +19,7 @@ import WYModal from "./Modals/WYModal";
 import IDModal from "./Modals/IDModal";
 import HuntingModal from "./Modals/HuntingModal";
 import EventModal from "./Modals/EventModal";
+import FamMemberDead from "./Modals/FamMemberDead";
 import GameOver from "./Modals/GameOver";
 import "../App.css";
 
@@ -125,16 +126,19 @@ class Homepage extends Component {
   }
 
   handleGameClose = () => {
-    this.setState({
-      ...this.state,
-      intervalId: null,
-      eventInfo: null,
-      days: 0,
-      miles: 1795,
-      gameShow: false,
-      milesTraveled: null,
-      mapNum: 1
-    });
+    this.setState(
+      {
+        ...this.state,
+        intervalId: null,
+        eventInfo: null,
+        days: 0,
+        miles: 1795,
+        gameShow: false,
+        milesTraveled: null,
+        mapNum: 1
+      },
+      this.props.updateFormType("familyForm")
+    );
   };
 
   handleGameStart = () => {
@@ -148,7 +152,7 @@ class Homepage extends Component {
   handleDeadClose() {
     this.setState({ deadShow: false });
     this.handleGameStart();
-    this.props.updateFormType("familyForm");
+    // this.props.updateFormType("familyForm");
   }
 
   handleDeadShow() {
@@ -562,10 +566,11 @@ class Homepage extends Component {
       gameShow: true
     });
     this.stopIntervalOnly();
+    // this.props.updateFormType("familyForm");
   };
 
   render() {
-    // console.log("homepage props ==>", this.props.events);
+    console.log("homepage props ==>", this.props);
     // console.log("homepage STATE +", this.state.randomFood);
     return (
       <React.Fragment>
@@ -653,7 +658,7 @@ class Homepage extends Component {
           show={this.state.gameShow}
           handleClose={this.handleGameClose.bind(this)}
         />
-        <GameOver
+        <FamMemberDead
           show={this.state.deadShow}
           handleClose={this.handleDeadClose.bind(this)}
         />
