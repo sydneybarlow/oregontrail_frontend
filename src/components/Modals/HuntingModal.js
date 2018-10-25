@@ -3,7 +3,7 @@ import { Fragment, Modal, Button } from "react-bootstrap";
 
 class HuntingModal extends Component {
   render() {
-    // console.log("HUNTING props", this.props);
+    console.log("HUNTING props", this.props);
     return (
       <Modal show={this.props.show} onHide={this.props.handleClose}>
         <Modal.Header closeButton>

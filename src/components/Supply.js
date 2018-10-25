@@ -44,19 +44,19 @@ class Supply extends Component {
               supply =>
                 supply.name === "food" ? (
                   <Col lg={2}>
-                    <h4>{supply.amount} lbs</h4>
+                    <h2>{supply.amount} lbs</h2>
                   </Col>
                 ) : (
                   <Col lg={2}>
-                    <h4>{supply.amount} bullets</h4>
+                    <h2>{supply.amount} bullets</h2>
                   </Col>
                 )
             )}
             <Col lg={2}>
-              <h4>${this.props.money}</h4>
+              <h2>${this.props.money}</h2>
             </Col>
             <Col lg={2}>
-              <h4>{this.props.days}</h4>
+              <h2>{this.props.days}</h2>
             </Col>
           </Row>
         </Grid>

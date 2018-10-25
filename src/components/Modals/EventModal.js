@@ -41,7 +41,7 @@ class EventModal extends Component {
               alt="emoji"
               src={`${filePath}${this.props.eventInfo.name}.png`}
             />
-            <h4>One of your family members has a brokan arm!!!</h4>
+            <h4>One of your family members has a broken arm!!!</h4>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.props.handleEventClose}>Next</Button>
@@ -62,7 +62,7 @@ class EventModal extends Component {
               src={`${filePath}${this.props.eventInfo.name}.png`}
             />
             <h4>
-              Your caravan has been attacked by indians!!! Lose 400 pounds of
+              Your caravan has been attacked by indians!!! Lose 150 pounds of
               food.
             </h4>
           </Modal.Body>
@@ -154,7 +154,7 @@ class EventModal extends Component {
           </Modal.Footer>
         </Modal>
       );
-    } else if (this.props.eventInfo.name === "zombie") {
+    } else if (this.props.eventInfo.name === "zombies") {
       return (
         <Modal show={this.props.show} onHide={this.props.handleEventClose}>
           <Modal.Header closeButton>

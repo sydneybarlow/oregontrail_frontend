@@ -77,7 +77,10 @@ class Homepage extends Component {
   }
 
   handleWYClose() {
-    this.setState({ locWYShow: false });
+    this.setState({
+      locWYShow: false,
+      miles: this.state.miles - 10
+    });
     this.handleGameStart();
   }
 
@@ -91,7 +94,10 @@ class Homepage extends Component {
   }
 
   handleIDClose() {
-    this.setState({ locIDShow: false });
+    this.setState({
+      locIDShow: false,
+      miles: this.state.miles - 10
+    });
     this.handleGameStart();
   }
 
@@ -157,11 +163,17 @@ class Homepage extends Component {
 
   handleDeadClose() {
     this.setState({ deadShow: false });
+    this.handleGameStart();
     this.props.updateFormType("familyForm");
   }
 
   handleDeadShow() {
-    this.setState({ deadShow: true });
+    clearInterval(this.state.intervalId);
+    this.setState({
+      ...this.state,
+      intervalId: null,
+      deadShow: true
+    });
   }
 
   randomFood = () => {
@@ -232,17 +244,11 @@ class Homepage extends Component {
       this.handleDoneShow();
     } else if (this.state.miles === 725) {
       clearInterval(this.state.intervalId);
-      this.tooManyDays();
-      this.allDead();
-      this.decrementMiles();
-      this.incrementDays();
+      this.setState({ intervalId: null });
       this.setState({ locIDShow: true });
     } else if (this.state.miles === 1155) {
       clearInterval(this.state.intervalId);
-      this.tooManyDays();
-      this.allDead();
-      this.decrementMiles();
-      this.incrementDays();
+      this.setState({ intervalId: null });
       this.setState({ locWYShow: true });
     } else {
       this.tooManyDays();
@@ -300,6 +306,7 @@ class Homepage extends Component {
   getRandomEvents = () => {
     const eventIndexNumber =
       Math.floor(Math.random() * this.props.events.length) + 1;
+    console.log("eventindexNumber ***", eventIndexNumber);
     if (eventIndexNumber <= 7) {
       console.log("modals");
       this.setState(
@@ -323,9 +330,9 @@ class Homepage extends Component {
     return aliveFam[Math.floor(Math.random() * aliveFam.length)];
   };
 
-  eventLogic = eventIndex => {
+  eventLogic = eventIndexNumber => {
     let randAliveFamObj = this.randomAliveFamMember();
-    if (eventIndex === 0) {
+    if (eventIndexNumber === 0) {
       console.log("1: dysentery");
       this.setState({
         ...this.state,
@@ -341,7 +348,7 @@ class Homepage extends Component {
           }
         })
       });
-    } else if (eventIndex === 1) {
+    } else if (eventIndexNumber === 1) {
       console.log("2: broken arm");
       this.setState({
         ...this.state,
@@ -357,12 +364,12 @@ class Homepage extends Component {
           }
         })
       });
-    } else if (eventIndex === 2) {
+    } else if (eventIndexNumber === 2) {
       console.log("3: indians");
       this.setState({
         ...this.state,
         supplies: this.state.supplies.map(supply => {
-          let newFoodAmount = supply.amount - 400;
+          let newFoodAmount = supply.amount - 150;
           if (supply.name === "food") {
             return {
               ...supply,
@@ -374,7 +381,7 @@ class Homepage extends Component {
           }
         })
       });
-    } else if (eventIndex === 3) {
+    } else if (eventIndexNumber === 3) {
       console.log("4: dinosuars");
       this.setState({
         ...this.state,
@@ -392,7 +399,7 @@ class Homepage extends Component {
           }
         })
       });
-    } else if (eventIndex === 4) {
+    } else if (eventIndexNumber === 4) {
       console.log("5: anthrax");
       this.setState({
         ...this.state,
@@ -408,7 +415,7 @@ class Homepage extends Component {
           }
         })
       });
-    } else if (eventIndex === 5) {
+    } else if (eventIndexNumber === 5) {
       console.log("6: flight");
       this.setState({
         ...this.state,
@@ -426,7 +433,7 @@ class Homepage extends Component {
           }
         })
       });
-    } else if (eventIndex === 6) {
+    } else if (eventIndexNumber === 6) {
       console.log("7: small pox");
       this.setState({
         ...this.state,
@@ -442,7 +449,7 @@ class Homepage extends Component {
           }
         })
       });
-    } else {
+    } else if (eventIndexNumber === 7) {
       console.log("8: zombie");
       this.setState({
         ...this.state,
@@ -460,6 +467,8 @@ class Homepage extends Component {
           }
         })
       });
+    } else {
+      return null;
     }
   };
 
@@ -503,7 +512,7 @@ class Homepage extends Component {
         }
       }),
       family_members: this.state.family_members.map(family => {
-        console.log(family);
+        // console.log(family);
         if (family.status === "dead") {
           return family;
         } else if (family.health === "bad") {
@@ -584,7 +593,7 @@ class Homepage extends Component {
             </Col>
           </Row>
         </Grid>
-        <h1>{this.state.miles} miles from Oregon City</h1>
+        <h1> {this.state.miles} miles from Oregon City </h1>
         <Grid>
           <Row>
             <Col lg={10}>
