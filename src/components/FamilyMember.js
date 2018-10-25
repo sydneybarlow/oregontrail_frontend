@@ -26,7 +26,7 @@ class FamilyMember extends Component {
             <tr>
               {this.props.family_members.map(fm => (
                 <td>
-                  <h4>{fm.name}</h4>
+                  <h3>{fm.name}</h3>
                 </td>
               ))}
             </tr>
@@ -35,19 +35,19 @@ class FamilyMember extends Component {
                 fm =>
                   fm.health === "good" ? (
                     <td>
-                      <h5>❤️ {fm.health}</h5>
+                      <h4>❤️ {fm.health}</h4>
                     </td>
                   ) : fm.health === "fair" ? (
                     <td>
-                      <h5>🧡 {fm.health}</h5>
+                      <h4>🧡 {fm.health}</h4>
                     </td>
                   ) : fm.health === "poor" ? (
                     <td>
-                      <h5>💛 {fm.health}</h5>
+                      <h4>💛 {fm.health}</h4>
                     </td>
                   ) : (
                     <td>
-                      <h5>🖤 {fm.health}</h5>
+                      <h4>🖤 {fm.health}</h4>
                     </td>
                   )
               )}
@@ -55,7 +55,7 @@ class FamilyMember extends Component {
             <tr>
               {this.props.family_members.map(fm => (
                 <td>
-                  <h5>{fm.status}</h5>
+                  <h4>{fm.status}</h4>
                 </td>
               ))}
             </tr>

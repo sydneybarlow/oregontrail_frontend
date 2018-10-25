@@ -29,14 +29,14 @@ class Supply extends Component {
           <Row>
             {this.props.supplies.map(supply => (
               <Col lg={2}>
-                <h4>{supply.name}</h4>
+                <h3>{supply.name}</h3>
               </Col>
             ))}
             <Col lg={2}>
-              <h4>money</h4>
+              <h3>money</h3>
             </Col>
             <Col lg={2}>
-              <h4>days</h4>
+              <h3>days</h3>
             </Col>
           </Row>
           <Row>
@@ -44,19 +44,19 @@ class Supply extends Component {
               supply =>
                 supply.name === "food" ? (
                   <Col lg={2}>
-                    <h5>{supply.amount} lbs</h5>
+                    <h4>{supply.amount} lbs</h4>
                   </Col>
                 ) : (
                   <Col lg={2}>
-                    <h5>{supply.amount} boxes</h5>
+                    <h4>{supply.amount} bullets</h4>
                   </Col>
                 )
             )}
             <Col lg={2}>
-              <h5>${this.props.money}</h5>
+              <h4>${this.props.money}</h4>
             </Col>
             <Col lg={2}>
-              <h5>{this.props.days}</h5>
+              <h4>{this.props.days}</h4>
             </Col>
           </Row>
         </Grid>

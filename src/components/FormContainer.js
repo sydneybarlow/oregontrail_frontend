@@ -46,15 +46,25 @@ class FormContainer extends Component {
       })
         .then(r => r.json())
         .then(response => {
-          console.log("homepage response", response);
+          // console.log("homepage response", response);
           this.updateUserInfo(response.user);
           this.updateFamilyMembers(response.user.family_members);
           this.updateSupplies(response.user.supplies);
-          this.updateEvents(response.user.events);
+          this.getTheEvents();
           this.props.history.push("/homepage");
         });
     }
   }
+
+  getTheEvents = () => {
+    // console.log("getting events");
+    fetch(`http://localhost:3000/events`)
+      .then(r => r.json())
+      .then(eventData => {
+        // console.log(eventData);
+        this.updateEvents(eventData);
+      });
+  };
 
   logout = () => {
     console.log("logout");
@@ -64,7 +74,7 @@ class FormContainer extends Component {
   };
 
   render() {
-    console.log("FORMS Cont state", this.state);
+    // console.log("FORMS Cont state", this.state);
     // console.log("FORMS Cont props ==>", this.props);
     return (
       <React.Fragment>
@@ -92,7 +102,7 @@ class FormContainer extends Component {
               exact
               path="/homepage"
               render={() =>
-                this.state.userInfo ? (
+                this.state.userInfo && this.state.events ? (
                   <Homepage
                     {...this.state.userInfo}
                     logout={this.logout}

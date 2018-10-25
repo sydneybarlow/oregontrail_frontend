@@ -68,32 +68,54 @@ class Homepage extends Component {
   }
 
   handleDoneShow() {
-    this.setState({ doneShow: true });
+    clearInterval(this.state.intervalId);
+    this.setState({
+      ...this.state,
+      intervalId: null,
+      doneShow: true
+    });
   }
 
   handleWYClose() {
     this.setState({ locWYShow: false });
+    this.handleGameStart();
   }
 
   handleWYShow() {
-    this.setState({ locWYShow: true });
+    clearInterval(this.state.intervalId);
+    this.setState({
+      ...this.state,
+      intervalId: null,
+      locWYShow: true
+    });
   }
 
   handleIDClose() {
     this.setState({ locIDShow: false });
+    this.handleGameStart();
   }
 
   handleIDShow() {
-    this.setState({ locIDShow: true });
+    clearInterval(this.state.intervalId);
+    this.setState({
+      ...this.state,
+      intervalId: null,
+      locIDShow: true
+    });
   }
 
   handleHuntClose = () => {
+    this.handleGameStart();
     this.setState({ huntShow: false });
   };
 
   handleHuntShow = () => {
-    console.log("huntshow!!!");
-    this.setState({ huntShow: true });
+    clearInterval(this.state.intervalId);
+    this.setState({
+      ...this.state,
+      intervalId: null,
+      huntShow: true
+    });
   };
 
   allHuntFunctions = () => {
@@ -208,14 +230,14 @@ class Homepage extends Component {
     if (this.state.miles <= 0) {
       clearInterval(this.state.intervalId);
       this.handleDoneShow();
-    } else if (this.state.miles === 720) {
+    } else if (this.state.miles === 725) {
       clearInterval(this.state.intervalId);
       this.tooManyDays();
       this.allDead();
       this.decrementMiles();
       this.incrementDays();
       this.setState({ locIDShow: true });
-    } else if (this.state.miles === 1150) {
+    } else if (this.state.miles === 1155) {
       clearInterval(this.state.intervalId);
       this.tooManyDays();
       this.allDead();
@@ -223,6 +245,7 @@ class Homepage extends Component {
       this.incrementDays();
       this.setState({ locWYShow: true });
     } else {
+      this.tooManyDays();
       this.allDead();
       this.decrementMiles();
       this.incrementDays();
@@ -251,7 +274,7 @@ class Homepage extends Component {
         ...this.state,
         supplies: this.state.supplies.map(supply => {
           if (supply.name === "food") {
-            let newFoodAmount = supply.amount - 4;
+            let newFoodAmount = supply.amount - 21;
             return {
               ...supply,
               amount: newFoodAmount
@@ -261,19 +284,28 @@ class Homepage extends Component {
           }
         })
       },
-      this.getRandomEvents
+      this.stopAtNoFood
     );
+  };
+
+  stopAtNoFood = () => {
+    this.state.supplies.map(supply => {
+      if (supply.amount < 0) {
+        return "0";
+      }
+    });
+    this.getRandomEvents();
   };
 
   getRandomEvents = () => {
     const eventIndexNumber =
-      Math.floor(Math.random() * this.state.events.length) + 1;
+      Math.floor(Math.random() * this.props.events.length) + 1;
     if (eventIndexNumber <= 7) {
       console.log("modals");
       this.setState(
         {
           eventIndex: eventIndexNumber,
-          eventInfo: this.state.events[eventIndexNumber],
+          eventInfo: this.props.events[eventIndexNumber],
           eventShow: true
         },
         this.eventLogic(eventIndexNumber)
@@ -432,7 +464,7 @@ class Homepage extends Component {
   };
 
   incrementDays = () => {
-    let newDays = this.state.days + 50;
+    let newDays = this.state.days + 1;
     this.setState({
       ...this.state,
       days: newDays
@@ -453,12 +485,14 @@ class Homepage extends Component {
   daysToRest = () => {
     // console.log("sick Fam Mem ===>", sickFamMember);
     let daysToRest = this.state.days + 4;
-    // this.betterHealth();
+    let aliveFam = this.state.family_members.filter(
+      fm => fm.status === "alive"
+    );
     this.setState({
       ...this.state,
       days: daysToRest,
       supplies: this.state.supplies.map(supply => {
-        let newAmount = supply.amount - 400;
+        let newAmount = supply.amount - 80;
         if (supply.name === "food") {
           return {
             ...supply,
@@ -469,7 +503,10 @@ class Homepage extends Component {
         }
       }),
       family_members: this.state.family_members.map(family => {
-        if (family.health === "bad") {
+        console.log(family);
+        if (family.status === "dead") {
+          return family;
+        } else if (family.health === "bad") {
           return {
             ...family,
             health: "poor"
@@ -528,8 +565,8 @@ class Homepage extends Component {
   };
 
   render() {
-    // console.log("homepage props ==>", this.props);
-    console.log("homepage STATE +", this.state);
+    // console.log("homepage props ==>", this.props.events);
+    // console.log("homepage STATE +", this.state.events);
     return (
       <React.Fragment>
         <Userbar username={this.state.username} />
@@ -557,16 +594,32 @@ class Homepage extends Component {
             </Col>
             <Col lg={2} lgPush={1}>
               <ButtonGroup vertical bsSize="large">
-                <Button bsStyle="primary" onClick={this.handleGameStart}>
+                <Button
+                  bsStyle="primary"
+                  bsSize="large"
+                  onClick={this.handleGameStart}
+                >
                   Get Goin!
                 </Button>
-                <Button bsStyle="info" onClick={this.allHuntFunctions}>
+                <Button
+                  bsStyle="info"
+                  bsSize="large"
+                  onClick={this.allHuntFunctions}
+                >
                   Hunt
                 </Button>
-                <Button bsStyle="success" onClick={this.handleRest}>
+                <Button
+                  bsStyle="success"
+                  bsSize="large"
+                  onClick={this.handleRest}
+                >
                   Rest
                 </Button>
-                <Button bsStyle="default" onClick={this.props.logout}>
+                <Button
+                  bsStyle="default"
+                  bsSize="large"
+                  onClick={this.props.logout}
+                >
                   Logout
                 </Button>
               </ButtonGroup>
