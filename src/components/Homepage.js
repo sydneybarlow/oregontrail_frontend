@@ -115,22 +115,6 @@ class Homepage extends Component {
     this.setState({ huntShow: false });
   };
 
-  handleHuntShow = () => {
-    clearInterval(this.state.intervalId);
-    this.setState({
-      ...this.state,
-      intervalId: null,
-      huntShow: true
-    });
-  };
-
-  allHuntFunctions = () => {
-    // console.log("HUNTING!!");
-    this.randomFood();
-    // this.decrementBullets();
-    this.handleHuntShow();
-  };
-
   handleEventClose() {
     this.setState({
       eventShow: false,
@@ -176,11 +160,16 @@ class Homepage extends Component {
     });
   }
 
-  randomFood = () => {
+  allHuntFunctions = () => {
     // console.log("food!!!");
+    clearInterval(this.state.intervalId);
     let pounds = Math.floor(Math.random() * 100);
+    console.log("rand pounds", pounds);
     this.setState(
       {
+        ...this.state,
+        intervalId: null,
+        huntShow: true,
         randomFood: pounds
       },
       this.incrementFood
@@ -242,11 +231,11 @@ class Homepage extends Component {
     if (this.state.miles <= 0) {
       clearInterval(this.state.intervalId);
       this.handleDoneShow();
-    } else if (this.state.miles === 725) {
+    } else if (this.state.miles === 720) {
       clearInterval(this.state.intervalId);
       this.setState({ intervalId: null });
       this.setState({ locIDShow: true });
-    } else if (this.state.miles === 1155) {
+    } else if (this.state.miles === 1150) {
       clearInterval(this.state.intervalId);
       this.setState({ intervalId: null });
       this.setState({ locWYShow: true });
@@ -290,18 +279,21 @@ class Homepage extends Component {
           }
         })
       },
-      this.stopAtNoFood
+      this.getRandomEvents
     );
   };
 
-  stopAtNoFood = () => {
-    this.state.supplies.map(supply => {
-      if (supply.amount < 0) {
-        return "0";
-      }
-    });
-    this.getRandomEvents();
-  };
+  // stopAtNoFood = () => {
+  //   this.state.supplies.map(supply => {
+  //     if (supply.name === "bullets" && supply.amount <= 0) {
+  //       this.setState({
+  //         ...supply,
+  //         amount: 0
+  //       });
+  //     }
+  //   });
+  //   this.getRandomEvents();
+  // };
 
   getRandomEvents = () => {
     const eventIndexNumber =
@@ -565,8 +557,6 @@ class Homepage extends Component {
   };
 
   gameOver = () => {
-    // TODO: this should open modal or redirect
-    console.log("game over");
     this.setState({
       gameShow: true
     });
@@ -575,7 +565,7 @@ class Homepage extends Component {
 
   render() {
     // console.log("homepage props ==>", this.props.events);
-    // console.log("homepage STATE +", this.state.events);
+    // console.log("homepage STATE +", this.state.randomFood);
     return (
       <React.Fragment>
         <Userbar username={this.state.username} />

@@ -45,7 +45,7 @@ class SignUpForm extends Component {
       username: this.state.username,
       password: this.state.password,
       money: 1000,
-      miles: 1795,
+      miles: 1800,
       days: 0
     };
     fetch(`http://localhost:3000/users`, {
@@ -58,7 +58,7 @@ class SignUpForm extends Component {
     })
       .then(r => r.json())
       .then(userData => {
-        console.log("SignUP ---->>>", userData);
+        // console.log("SignUP ---->>>", userData);
         localStorage.setItem("token", userData.token);
         this.props.updateUserInfo(userData.user);
         this.props.updateUserIdType(userData.user.id);
@@ -68,17 +68,17 @@ class SignUpForm extends Component {
   };
 
   fetchEvents = () => {
-    console.log("fetching events!!");
+    // console.log("fetching events!!");
     fetch(`http://localhost:3000/events`)
       .then(r => r.json())
       .then(eventData => {
-        console.log("eventdata +++", eventData);
+        // console.log("eventdata +++", eventData);
         this.props.updateEvents(eventData);
       });
   };
 
   render() {
-    console.log("sign up props", this.props);
+    // console.log("sign up props", this.props);
     return (
       <React.Fragment>
         <Image alt="oregon trail logo" src={`${filePath}OregonTrailLogo.png`} />
