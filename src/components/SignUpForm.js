@@ -48,7 +48,7 @@ class SignUpForm extends Component {
       miles: 1800,
       days: 0
     };
-    fetch(`http://localhost:3000/users`, {
+    fetch(`http://localhost:3001/users`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -69,7 +69,7 @@ class SignUpForm extends Component {
 
   fetchEvents = () => {
     // console.log("fetching events!!");
-    fetch(`http://localhost:3000/events`)
+    fetch(`http://localhost:3001/events`)
       .then(r => r.json())
       .then(eventData => {
         // console.log("eventdata +++", eventData);

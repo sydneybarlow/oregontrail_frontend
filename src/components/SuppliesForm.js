@@ -50,7 +50,7 @@ class SuppliesForm extends Component {
         }
       ]
     };
-    fetch(`http://localhost:3000/supplies`, {
+    fetch(`http://localhost:3001/supplies`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

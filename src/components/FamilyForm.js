@@ -118,7 +118,7 @@ class FamilyForm extends Component {
         }
       ]
     };
-    fetch(`http://localhost:3000/family_members`, {
+    fetch(`http://localhost:3001/family_members`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -140,141 +140,179 @@ class FamilyForm extends Component {
       <React.Fragment>
         <Image alt="oregon trail logo" src={`${filePath}OregonTrailLogo.png`} />
         <h3>Make Your Family</h3>
-        <Grid>
-          <Row>
-            <Col lg={10} lgPush={2}>
-              <Form onSubmit={this.handleSignInSubmit}>
-                <FormGroup>
-                  <ControlLabel>Name 1:</ControlLabel>
-                  <FormControl
-                    type="text"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.handleNameOne}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <ControlLabel>Pick Avatar 1</ControlLabel>
-                  <ToggleButtonGroup
-                    name="options"
-                    type="radio"
-                    value={this.state.role1}
-                    onChange={this.handleAvatarOne}
-                  >
-                    <ToggleButton value={"pops"}>
-                      <Image alt="father avatar" src={`${filePath}pops.png`} />
-                    </ToggleButton>
-                    <ToggleButton value={"momma"}>
-                      <Image alt="father avatar" src={`${filePath}momma.png`} />
-                    </ToggleButton>
-                    <ToggleButton value={"boy"}>
-                      <Image alt="father avatar" src={`${filePath}boy.png`} />
-                    </ToggleButton>
-                    <ToggleButton value={"girl"}>
-                      <Image alt="father avatar" src={`${filePath}girl.png`} />
-                    </ToggleButton>
-                  </ToggleButtonGroup>
-                </FormGroup>
-                <FormGroup>
-                  <ControlLabel>Name 2:</ControlLabel>
-                  <FormControl
-                    type="text"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.handleNameTwo}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <ControlLabel>Pick Avatar 2</ControlLabel>
-                  <ToggleButtonGroup
-                    name="options"
-                    type="radio"
-                    value={this.state.role2}
-                    onChange={this.handleAvatarTwo}
-                  >
-                    <ToggleButton value={"pops"}>
-                      <Image alt="father avatar" src={`${filePath}pops.png`} />
-                    </ToggleButton>
-                    <ToggleButton value={"momma"}>
-                      <Image alt="father avatar" src={`${filePath}momma.png`} />
-                    </ToggleButton>
-                    <ToggleButton value={"boy"}>
-                      <Image alt="father avatar" src={`${filePath}boy.png`} />
-                    </ToggleButton>
-                    <ToggleButton value={"girl"}>
-                      <Image alt="father avatar" src={`${filePath}girl.png`} />
-                    </ToggleButton>
-                  </ToggleButtonGroup>
-                </FormGroup>
-                <FormGroup>
-                  <ControlLabel>Name 3:</ControlLabel>
-                  <FormControl
-                    type="text"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.handleNameThree}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <ControlLabel>Pick Avatar 3</ControlLabel>
-                  <ToggleButtonGroup
-                    name="options"
-                    type="radio"
-                    value={this.state.role3}
-                    onChange={this.handleAvatarThree}
-                  >
-                    <ToggleButton value={"pops"}>
-                      <Image alt="father avatar" src={`${filePath}pops.png`} />
-                    </ToggleButton>
-                    <ToggleButton value={"momma"}>
-                      <Image alt="father avatar" src={`${filePath}momma.png`} />
-                    </ToggleButton>
-                    <ToggleButton value={"boy"}>
-                      <Image alt="father avatar" src={`${filePath}boy.png`} />
-                    </ToggleButton>
-                    <ToggleButton value={"girl"}>
-                      <Image alt="father avatar" src={`${filePath}girl.png`} />
-                    </ToggleButton>
-                  </ToggleButtonGroup>
-                </FormGroup>
-                <FormGroup>
-                  <ControlLabel>Name 4:</ControlLabel>
-                  <FormControl
-                    type="text"
-                    name="name"
-                    value={this.state.name}
-                    onChange={this.handleNameFour}
-                  />
-                </FormGroup>
-                <FormGroup>
-                  <ControlLabel>Pick Avatar 4</ControlLabel>
-                  <ToggleButtonGroup
-                    name="options"
-                    type="radio"
-                    value={this.state.role4}
-                    onChange={this.handleAvatarFour}
-                  >
-                    <ToggleButton value={"pops"}>
-                      <Image alt="father avatar" src={`${filePath}pops.png`} />
-                    </ToggleButton>
-                    <ToggleButton value={"momma"}>
-                      <Image alt="father avatar" src={`${filePath}momma.png`} />
-                    </ToggleButton>
-                    <ToggleButton value={"boy"}>
-                      <Image alt="father avatar" src={`${filePath}boy.png`} />
-                    </ToggleButton>
-                    <ToggleButton value={"girl"}>
-                      <Image alt="father avatar" src={`${filePath}girl.png`} />
-                    </ToggleButton>
-                  </ToggleButtonGroup>
-                </FormGroup>
-                <Button type="submit" bsStyle="info">
-                  Enter
-                </Button>
-              </Form>
-            </Col>
-          </Row>
-        </Grid>
+        <div className="familyForm">
+          <Grid>
+            <Row>
+              <Col lg={10} lgPush={1}>
+                <Form onSubmit={this.handleSignInSubmit}>
+                  <FormGroup>
+                    <ControlLabel>Name 1:</ControlLabel>
+                    <FormControl
+                      type="text"
+                      name="name"
+                      value={this.state.name}
+                      onChange={this.handleNameOne}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <ControlLabel>Pick Avatar 1 </ControlLabel>
+                    <ToggleButtonGroup
+                      name="options"
+                      type="radio"
+                      value={this.state.role1}
+                      onChange={this.handleAvatarOne}
+                    >
+                      <ToggleButton value={"pops"}>
+                        <Image
+                          alt="father avatar"
+                          src={`${filePath}pops.png`}
+                        />
+                      </ToggleButton>
+                      <ToggleButton value={"momma"}>
+                        <Image
+                          alt="father avatar"
+                          src={`${filePath}momma.png`}
+                        />
+                      </ToggleButton>
+                      <ToggleButton value={"boy"}>
+                        <Image alt="father avatar" src={`${filePath}boy.png`} />
+                      </ToggleButton>
+                      <ToggleButton value={"girl"}>
+                        <Image
+                          alt="father avatar"
+                          src={`${filePath}girl.png`}
+                        />
+                      </ToggleButton>
+                    </ToggleButtonGroup>
+                  </FormGroup>
+                  <FormGroup>
+                    <ControlLabel>Name 2:</ControlLabel>
+                    <FormControl
+                      type="text"
+                      name="name"
+                      value={this.state.name}
+                      onChange={this.handleNameTwo}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <ControlLabel>Pick Avatar 2 </ControlLabel>
+                    <ToggleButtonGroup
+                      name="options"
+                      type="radio"
+                      value={this.state.role2}
+                      onChange={this.handleAvatarTwo}
+                    >
+                      <ToggleButton value={"pops"}>
+                        <Image
+                          alt="father avatar"
+                          src={`${filePath}pops.png`}
+                        />
+                      </ToggleButton>
+                      <ToggleButton value={"momma"}>
+                        <Image
+                          alt="father avatar"
+                          src={`${filePath}momma.png`}
+                        />
+                      </ToggleButton>
+                      <ToggleButton value={"boy"}>
+                        <Image alt="father avatar" src={`${filePath}boy.png`} />
+                      </ToggleButton>
+                      <ToggleButton value={"girl"}>
+                        <Image
+                          alt="father avatar"
+                          src={`${filePath}girl.png`}
+                        />
+                      </ToggleButton>
+                    </ToggleButtonGroup>
+                  </FormGroup>
+                  <FormGroup>
+                    <ControlLabel>Name 3:</ControlLabel>
+                    <FormControl
+                      type="text"
+                      name="name"
+                      value={this.state.name}
+                      onChange={this.handleNameThree}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <ControlLabel>Pick Avatar 3 </ControlLabel>
+                    <ToggleButtonGroup
+                      name="options"
+                      type="radio"
+                      value={this.state.role3}
+                      onChange={this.handleAvatarThree}
+                    >
+                      <ToggleButton value={"pops"}>
+                        <Image
+                          alt="father avatar"
+                          src={`${filePath}pops.png`}
+                        />
+                      </ToggleButton>
+                      <ToggleButton value={"momma"}>
+                        <Image
+                          alt="father avatar"
+                          src={`${filePath}momma.png`}
+                        />
+                      </ToggleButton>
+                      <ToggleButton value={"boy"}>
+                        <Image alt="father avatar" src={`${filePath}boy.png`} />
+                      </ToggleButton>
+                      <ToggleButton value={"girl"}>
+                        <Image
+                          alt="father avatar"
+                          src={`${filePath}girl.png`}
+                        />
+                      </ToggleButton>
+                    </ToggleButtonGroup>
+                  </FormGroup>
+                  <FormGroup>
+                    <ControlLabel>Name 4:</ControlLabel>
+                    <FormControl
+                      type="text"
+                      name="name"
+                      value={this.state.name}
+                      onChange={this.handleNameFour}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <ControlLabel>Pick Avatar 4 </ControlLabel>
+                    <ToggleButtonGroup
+                      name="options"
+                      type="radio"
+                      value={this.state.role4}
+                      onChange={this.handleAvatarFour}
+                    >
+                      <ToggleButton value={"pops"}>
+                        <Image
+                          alt="father avatar"
+                          src={`${filePath}pops.png`}
+                        />
+                      </ToggleButton>
+                      <ToggleButton value={"momma"}>
+                        <Image
+                          alt="father avatar"
+                          src={`${filePath}momma.png`}
+                        />
+                      </ToggleButton>
+                      <ToggleButton value={"boy"}>
+                        <Image alt="father avatar" src={`${filePath}boy.png`} />
+                      </ToggleButton>
+                      <ToggleButton value={"girl"}>
+                        <Image
+                          alt="father avatar"
+                          src={`${filePath}girl.png`}
+                        />
+                      </ToggleButton>
+                    </ToggleButtonGroup>
+                  </FormGroup>
+                  <Button type="submit" bsStyle="info">
+                    Enter
+                  </Button>
+                </Form>
+              </Col>
+            </Row>
+          </Grid>
+        </div>
       </React.Fragment>
     );
   }

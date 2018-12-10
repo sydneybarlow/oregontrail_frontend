@@ -19,7 +19,7 @@ import WYModal from "./Modals/WYModal";
 import IDModal from "./Modals/IDModal";
 import HuntingModal from "./Modals/HuntingModal";
 import EventModal from "./Modals/EventModal";
-import FamMemberDead from "./Modals/FamMemberDead";
+// import NoMoreHunting from "./Modals/NoMoreHunting";
 import GameOver from "./Modals/GameOver";
 import "../App.css";
 
@@ -46,6 +46,7 @@ class Homepage extends Component {
       eventShow: false,
       gameShow: false,
       deadShow: false,
+      noHuntShow: false,
       eventIndex: null,
       intervalId: null,
       milesTraveled: null,
@@ -217,17 +218,48 @@ class Homepage extends Component {
     this.setState({
       ...this.state,
       supplies: this.state.supplies.map(supply => {
-        if (supply.name === "bullets") {
+        if (
+          supply.name === "bullets" &&
+          supply.amount > this.state.randomBullets
+        ) {
           let newBulletAmount = supply.amount - this.state.randomBullets;
           return {
             ...supply,
             amount: newBulletAmount
+          };
+        } else if (
+          supply.name === "bullets" &&
+          supply.amount < this.state.randomBullets
+        ) {
+          return {
+            ...supply,
+            amount: 0
           };
         } else {
           return supply;
         }
       })
     });
+  };
+
+  // noMoreHunting = () => {
+  //   console.log("no more hunting");
+  //   clearInterval(this.state.intervalId);
+  //   this.state.supplies.map(supply => {
+  //     if (supply.name === "bullets" && supply.amount <= 0) {
+  //       this.setState({
+  //         noHuntShow: true,
+  //         intervalId: null
+  //       });
+  //     }
+  //   });
+  // };
+
+  handleNoHuntClose = () => {
+    this.setState({
+      noHuntShow: true
+    });
+    this.handleGameStart();
   };
 
   travelingWithCityStops = () => {
@@ -246,6 +278,7 @@ class Homepage extends Component {
     } else {
       this.tooManyDays();
       this.allDead();
+      // this.noMoreHunting();
       this.decrementMiles();
       this.incrementDays();
     }
@@ -657,10 +690,6 @@ class Homepage extends Component {
         <GameOver
           show={this.state.gameShow}
           handleClose={this.handleGameClose.bind(this)}
-        />
-        <FamMemberDead
-          show={this.state.deadShow}
-          handleClose={this.handleDeadClose.bind(this)}
         />
       </React.Fragment>
     );

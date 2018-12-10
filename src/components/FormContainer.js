@@ -36,7 +36,7 @@ class FormContainer extends Component {
   };
 
   componentDidMount() {
-    const url = "http://localhost:3000/users/homepage";
+    const url = "http://localhost:3001/users/homepage";
     const token = localStorage.getItem("token");
     if (token) {
       fetch(url, {
@@ -58,7 +58,7 @@ class FormContainer extends Component {
 
   getTheEvents = () => {
     // console.log("getting events");
-    fetch(`http://localhost:3000/events`)
+    fetch(`http://localhost:3001/events`)
       .then(r => r.json())
       .then(eventData => {
         // console.log(eventData);
