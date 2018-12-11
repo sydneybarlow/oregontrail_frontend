@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import Homepage from "./components/Homepage";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -12,4 +13,8 @@ it("renders without crashing", () => {
     div
   );
   ReactDOM.unmountComponentAtNode(div);
+});
+
+test("First Test", () => {
+  expect(true).toBeTruthy();
 });
