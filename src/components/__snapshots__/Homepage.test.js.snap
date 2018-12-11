@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Game Start 1`] = `
+<button
+  className="btn btn-default"
+  disabled={false}
+  type="button"
+>
+  Get Goin!
+</button>
+`;
