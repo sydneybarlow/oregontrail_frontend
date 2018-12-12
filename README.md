@@ -17,7 +17,18 @@ When the user makes it to Oregon City, Oregon it initiates a 'Game Over' and the
 
 --------------------------------------------------------------------------------------------------------------
 
+First you have to clone the back-end and when you have the back-end going in your terminal on port 3000, THEN you can clone this repo and use this repo on any port other than 3000. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+After you clone from the repo you then have to put the following into your terminal:
+
+$ npm install
+
+then 
+
+$ npm start
+
+With the back-end running on the 3000 port, you will then be asked to run the front-end on the 3001 port. You will say 'yes' to that.
+
+The url will then say 'localhost:3001' -> you HAVE to add 'login' to the end of that url to find the Oregon Trail signin page. Therefore the url will be 'http://localhost:3001/login'.
 
 
