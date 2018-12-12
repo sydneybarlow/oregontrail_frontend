@@ -48,4 +48,9 @@ With the back-end running on the 3000 port, you will then be asked to run the fr
 
 The url will then say 'localhost:3001' -> you HAVE to add 'login' to the end of that url to find the Oregon Trail signin page. Therefore the url will be 'http://localhost:3001/login'.
 
+You will then click the signup button and Signup to start the game. 
+
+When you get to the Supplies form. Put in 3000 for the food and 300 for the ammunition.
+
+Thanks!
 
