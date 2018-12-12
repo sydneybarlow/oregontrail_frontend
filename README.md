@@ -1,3 +1,4 @@
+# README
 
 Oregon Trail is a game that I built using React.js.
 
