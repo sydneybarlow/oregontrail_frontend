@@ -118,7 +118,7 @@ class FamilyForm extends Component {
         }
       ]
     };
-    fetch(`http://localhost:3001/family_members`, {
+    fetch(`http://localhost:3000/family_members`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
