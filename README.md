@@ -34,9 +34,9 @@ then
 
 $ rails s
 
-When you have the back-end going in your terminal on port 3000, THEN you can clone this repo. 
+When you have the back-end going in your terminal on port 3000, THEN will open up another tab in your terminal to create another task for the front-end code. 
 
-After you clone from THIS repo, you then have to put the following into your terminal:
+After you clone THIS repo, you then have to put the following into the second terminal tab:
 
 $ npm install
 
