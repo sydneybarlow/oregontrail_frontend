@@ -24,25 +24,25 @@ First you have to clone the back-end.
 
 You will then type into your terminal:
 
-$ rake db:drop db:create db:migrate
+* rake db:drop db:create db:migrate
 
 then
 
-$ rake db:seed
+* rake db:seed
 
 then
 
-$ rails s
+* rails s
 
 When you have the back-end going in your terminal on port 3000, THEN will open up another tab in your terminal to create another task for the front-end code. 
 
 After you clone THIS repo, you then have to put the following into the second terminal tab:
 
-$ npm install
+* npm install
 
 then 
 
-$ npm start
+* npm start
 
 With the back-end running on the 3000 port, you will then be asked to run the front-end on the 3001 port. You will say 'yes' to that.
 
