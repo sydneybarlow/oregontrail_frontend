@@ -18,9 +18,25 @@ When the user makes it to Oregon City, Oregon it initiates a 'Game Over' and the
 
 --------------------------------------------------------------------------------------------------------------
 
-First you have to clone the back-end and when you have the back-end going in your terminal on port 3000, THEN you can clone this repo and use this repo on any port other than 3000. 
+The backiend code is at this link: 'https://github.com/sydneybarlow/oregontrail_backend'
 
-After you clone from the repo you then have to put the following into your terminal:
+First you have to clone the back-end.
+
+You will then type into your terminal:
+
+$ rake db:drop db:create db:migrate
+
+then
+
+$ rake db:seed
+
+then
+
+$ rails s
+
+When you have the back-end going in your terminal on port 3000, THEN you can clone this repo. 
+
+After you clone from THIS repo, you then have to put the following into your terminal:
 
 $ npm install
 
